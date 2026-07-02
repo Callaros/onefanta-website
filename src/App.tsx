@@ -24,7 +24,7 @@ function App() {
 
     try {
       const { error } = await supabase
-        .from('email_signups')
+        .from('waitlist_signups')
         .insert([{ email: email.toLowerCase() }]);
 
       if (error) {
