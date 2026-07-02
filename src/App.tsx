@@ -23,7 +23,10 @@ function App() {
     fetchWaitlistCount();
   }, []);
 
-  const formattedWaitlistCount = waitlistCount?.toLocaleString('it-IT');
+  const visibleWaitlistCount = waitlistCount !== null && waitlistCount >= 100
+    ? Math.floor(waitlistCount / 100) * 100
+    : null;
+  const formattedWaitlistCount = visibleWaitlistCount?.toLocaleString('it-IT');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,11 +183,11 @@ function App() {
               {formattedWaitlistCount ? (
                 <>
                   Unisciti a{' '}
-                  <span className="text-electric-400 font-semibold">{formattedWaitlistCount}</span>{' '}
-                  {waitlistCount === 1 ? 'giocatore già' : 'giocatori già'} in lista d'attesa
+                  <span className="text-electric-400 font-semibold">{formattedWaitlistCount}+</span>{' '}
+                  giocatori già in lista d'attesa
                 </>
               ) : (
-                "Unisciti alla lista d'attesa"
+                "Sii tra i primi a entrare nella lista d'attesa"
               )}
             </p>
           </div>
