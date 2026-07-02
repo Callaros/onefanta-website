@@ -385,124 +385,109 @@ function App() {
 function PrivacyPolicy() {
   return (
     <div className="space-y-6">
-      <p className="text-dark-400">Last updated: July 1, 2026</p>
+      <p className="text-dark-400">Ultimo aggiornamento: 2 luglio 2026</p>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">1. Introduction</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">1. Titolare del trattamento</h3>
         <p>
-          OneFanta (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy
-          explains how we collect, use, disclose, and safeguard your information when you visit our
-          website or use our mobile application. Please read this policy carefully. By using our services,
-          you consent to the practices described in this policy.
+          OneFanta tratta i dati personali raccolti tramite questo sito web. Per domande o richieste
+          relative alla protezione dei dati puoi scrivere a{' '}
+          <span className="text-electric-400">privacy@onefanta.app</span>.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">2. Information We Collect</h3>
-        <p className="mb-3">We collect information that you provide directly to us, including:</p>
+        <h3 className="text-lg font-semibold text-white mb-3">2. Dati raccolti</h3>
+        <p className="mb-3">Quando ti iscrivi alla lista d'attesa raccogliamo:</p>
         <ul className="list-disc list-inside space-y-2 ml-4">
-          <li><strong className="text-white">Email Address:</strong> When you sign up for our waitlist, we collect your email address to notify you about our app launch.</li>
-          <li><strong className="text-white">Usage Data:</strong> Information about how you interact with our website and app, including pages viewed and features used.</li>
-          <li><strong className="text-white">Device Information:</strong> Browser type, operating system, device identifiers, and mobile network information.</li>
+          <li><strong className="text-white">Indirizzo email:</strong> necessario per avvisarti del lancio e degli aggiornamenti relativi a OneFanta.</li>
+          <li><strong className="text-white">Data di iscrizione:</strong> registrata automaticamente per documentare quando hai richiesto l'iscrizione.</li>
+          <li><strong className="text-white">Fonte dell'iscrizione:</strong> ad esempio il sito web, per distinguere eventuali canali futuri.</li>
         </ul>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">3. Legal Basis for Processing (GDPR)</h3>
-        <p className="mb-3">Under the General Data Protection Regulation (GDPR), we process your personal data based on:</p>
+        <h3 className="text-lg font-semibold text-white mb-3">3. Finalità e base giuridica</h3>
+        <p className="mb-3">Usiamo i dati per:</p>
         <ul className="list-disc list-inside space-y-2 ml-4">
-          <li><strong className="text-white">Consent:</strong> You have given explicit consent to receive marketing communications about our app launch.</li>
-          <li><strong className="text-white">Legitimate Interest:</strong> We have a legitimate interest in analyzing usage patterns to improve our services.</li>
-          <li><strong className="text-white">Contract Performance:</strong> When you use our services, processing is necessary to provide the requested functionality.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">4. How We Use Your Information</h3>
-        <p className="mb-3">We use the information we collect to:</p>
-        <ul className="list-disc list-inside space-y-2 ml-4">
-          <li>Send you notifications about our app launch and updates</li>
-          <li>Analyze and improve our website and services</li>
-          <li>Respond to your inquiries and support requests</li>
-          <li>Protect against fraud and unauthorized access</li>
-        </ul>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">5. Data Sharing and Disclosure</h3>
-        <p>
-          We do not sell your personal information. We may share your information with third-party
-          service providers who assist us in operating our website and app, subject to confidentiality
-          obligations. These providers include email delivery services, analytics platforms, and cloud
-          hosting services.
-        </p>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">6. Your Rights Under GDPR</h3>
-        <p className="mb-3">You have the following rights regarding your personal data:</p>
-        <ul className="list-disc list-inside space-y-2 ml-4">
-          <li><strong className="text-white">Right to Access:</strong> Request a copy of your personal data.</li>
-          <li><strong className="text-white">Right to Rectification:</strong> Request correction of inaccurate data.</li>
-          <li><strong className="text-white">Right to Erasure:</strong> Request deletion of your personal data (&quot;right to be forgotten&quot;).</li>
-          <li><strong className="text-white">Right to Restriction:</strong> Request limited processing of your data.</li>
-          <li><strong className="text-white">Right to Data Portability:</strong> Receive your data in a portable format.</li>
-          <li><strong className="text-white">Right to Object:</strong> Object to processing based on legitimate interest.</li>
-          <li><strong className="text-white">Right to Withdraw Consent:</strong> Withdraw consent at any time.</li>
+          <li>gestire la lista d'attesa;</li>
+          <li>inviarti comunicazioni sul lancio di OneFanta e aggiornamenti strettamente collegati alla tua iscrizione;</li>
+          <li>prevenire iscrizioni duplicate e abusi del modulo.</li>
         </ul>
         <p className="mt-3">
-          To exercise these rights, contact us at <span className="text-electric-400">privacy@onefanta.app</span>.
+          La base giuridica principale è il consenso che presti inviando il modulo di iscrizione.
+          Puoi revocarlo in qualsiasi momento.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">7. Data Retention</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">4. Servizi e destinatari</h3>
         <p>
-          We retain your email address until you request deletion or withdraw your consent. We may
-          retain anonymized, aggregated data indefinitely for analytical purposes.
+          I dati sono conservati tramite Supabase, il servizio usato per il database della lista
+          d'attesa. In futuro potremmo usare un fornitore email per inviare comunicazioni agli
+          iscritti. Non vendiamo i tuoi dati e non pubblichiamo l'elenco degli iscritti.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">8. International Data Transfers</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">5. Trasferimenti fuori dallo SEE</h3>
         <p>
-          Your information may be transferred to and stored on servers located outside your country
-          of residence. We implement appropriate safeguards to ensure your data is protected in
-          accordance with this policy and applicable law.
+          Alcuni fornitori tecnici possono trattare dati anche fuori dallo Spazio Economico Europeo.
+          In tal caso il trattamento deve avvenire sulla base di garanzie adeguate previste dal GDPR,
+          come clausole contrattuali standard o altri meccanismi riconosciuti dalla normativa.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">9. Security</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">6. Conservazione</h3>
         <p>
-          We implement appropriate technical and organizational measures to protect your personal
-          data against unauthorized access, alteration, disclosure, or destruction. However, no
-          internet transmission is completely secure.
+          Conserviamo il tuo indirizzo email fino alla revoca del consenso, alla richiesta di cancellazione
+          o fino a quando la lista d'attesa non sarà più necessaria. Possiamo conservare dati aggregati
+          e non identificativi per statistiche interne.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">10. Children&apos;s Privacy</h3>
-        <p>
-          Our service is not directed to children under 16. We do not knowingly collect personal
-          information from children under 16. If you believe we have collected such information,
-          please contact us immediately.
-        </p>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">11. Changes to This Policy</h3>
-        <p>
-          We may update this policy periodically. We will notify you of material changes by posting
-          the updated policy on this page and updating the &quot;Last updated&quot; date.
-        </p>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">12. Contact Us</h3>
-        <p>
-          For questions about this Privacy Policy or our data practices, contact us at{' '}
+        <h3 className="text-lg font-semibold text-white mb-3">7. I tuoi diritti</h3>
+        <p className="mb-3">Nei limiti previsti dal GDPR puoi chiedere:</p>
+        <ul className="list-disc list-inside space-y-2 ml-4">
+          <li>accesso ai tuoi dati;</li>
+          <li>rettifica dei dati inesatti;</li>
+          <li>cancellazione dei dati;</li>
+          <li>limitazione del trattamento;</li>
+          <li>portabilità dei dati;</li>
+          <li>opposizione, quando applicabile;</li>
+          <li>revoca del consenso.</li>
+        </ul>
+        <p className="mt-3">
+          Puoi esercitare questi diritti scrivendo a{' '}
           <span className="text-electric-400">privacy@onefanta.app</span>.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="text-lg font-semibold text-white mb-3">8. Sicurezza</h3>
+        <p>
+          Applichiamo misure tecniche e organizzative ragionevoli per proteggere i dati. In particolare,
+          il sito consente l'inserimento pubblico nella lista d'attesa, ma non espone pubblicamente
+          gli indirizzi email degli iscritti.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="text-lg font-semibold text-white mb-3">9. Reclamo</h3>
+        <p>
+          Se ritieni che il trattamento violi la normativa sulla protezione dei dati, puoi proporre
+          reclamo all'autorità di controllo competente. In Italia è il Garante per la protezione dei
+          dati personali.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="text-lg font-semibold text-white mb-3">10. Modifiche</h3>
+        <p>
+          Potremo aggiornare questa informativa. La versione pubblicata su questa pagina indica la
+          data dell'ultimo aggiornamento.
         </p>
       </section>
     </div>
@@ -512,122 +497,49 @@ function PrivacyPolicy() {
 function CookiePolicy() {
   return (
     <div className="space-y-6">
-      <p className="text-dark-400">Last updated: July 1, 2026</p>
+      <p className="text-dark-400">Ultimo aggiornamento: 2 luglio 2026</p>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">1. What Are Cookies?</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">1. Cosa sono i cookie</h3>
         <p>
-          Cookies are small text files stored on your device when you visit a website. They are
-          widely used to make websites work more efficiently and provide information to website owners.
+          I cookie sono piccoli file o informazioni salvate sul dispositivo dell'utente dal sito web
+          o da servizi terzi. Tecnologie simili possono includere local storage, pixel e altri strumenti
+          di tracciamento.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">2. Types of Cookies We Use</h3>
-
-        <div className="space-y-4">
-          <div className="bg-dark-800/50 rounded-lg p-4">
-            <h4 className="font-semibold text-electric-400 mb-2">Essential Cookies</h4>
-            <p className="text-dark-300">
-              These cookies are necessary for the website to function properly. They enable basic
-              functions like page navigation and access to secure areas. The website cannot function
-              properly without these cookies. We do not currently use essential cookies beyond
-              those required for basic site operation.
-            </p>
-          </div>
-
-          <div className="bg-dark-800/50 rounded-lg p-4">
-            <h4 className="font-semibold text-electric-400 mb-2">Analytics Cookies</h4>
-            <p className="text-dark-300">
-              These cookies help us understand how visitors interact with our website by collecting
-              and reporting information anonymously. This helps us improve our website and services.
-              We may use services like Google Analytics to gather this data.
-            </p>
-          </div>
-
-          <div className="bg-dark-800/50 rounded-lg p-4">
-            <h4 className="font-semibold text-electric-400 mb-2">Marketing Cookies</h4>
-            <p className="text-dark-300">
-              These cookies are used to track visitors across websites. The intention is to display
-              ads that are relevant and engaging for the individual user. We do not currently use
-              marketing cookies, but may implement them in the future with your consent.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">3. How We Use Cookies</h3>
-        <p className="mb-3">We use cookies for the following purposes:</p>
-        <ul className="list-disc list-inside space-y-2 ml-4">
-          <li>To ensure our website functions correctly</li>
-          <li>To analyze website traffic and usage patterns</li>
-          <li>To remember your preferences and settings</li>
-          <li>To provide personalized content (with your consent)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">4. Third-Party Cookies</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">2. Cookie usati da questo sito</h3>
         <p>
-          Some cookies are placed by third-party services that appear on our pages. We do not
-          control these cookies. The third-party services we may use include analytics providers
-          and social media platforms. Each third-party has its own cookie policy.
+          Questo sito non usa cookie di profilazione, cookie marketing o cookie analytics. Non usiamo
+          Google Analytics, Meta Pixel o strumenti simili. Il modulo di iscrizione invia direttamente
+          l'indirizzo email a Supabase quando premi il pulsante di invio.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">5. Managing Cookies</h3>
-        <p className="mb-3">You can control cookies through your browser settings. Most browsers allow you to:</p>
-        <ul className="list-disc list-inside space-y-2 ml-4">
-          <li>View cookies stored on your device and delete them individually</li>
-          <li>Block third-party cookies</li>
-          <li>Block all cookies from specific sites</li>
-          <li>Block all cookies from all sites</li>
-          <li>Delete all cookies when you close your browser</li>
-        </ul>
-        <p className="mt-3">
-          Please note that blocking all cookies may impact your experience on our website and
-          prevent certain features from functioning properly.
+        <h3 className="text-lg font-semibold text-white mb-3">3. Banner cookie</h3>
+        <p>
+          Poiché il sito non usa cookie o strumenti di tracciamento che richiedono consenso preventivo,
+          non mostriamo un banner di accettazione o rifiuto. Se in futuro aggiungeremo analytics,
+          marketing, pixel o altri strumenti non necessari, aggiorneremo questa policy e mostreremo
+          un meccanismo di consenso adeguato prima dell'attivazione.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">6. Browser Cookie Settings</h3>
-        <p className="mb-3">Here are links to manage cookies in popular browsers:</p>
-        <ul className="space-y-2 ml-4">
-          <li>
-            <span className="text-electric-400">Google Chrome:</span>{' '}
-            <span className="text-dark-300">Settings → Privacy and security → Cookies and other site data</span>
-          </li>
-          <li>
-            <span className="text-electric-400">Mozilla Firefox:</span>{' '}
-            <span className="text-dark-300">Settings → Privacy & Security → Cookies and Site Data</span>
-          </li>
-          <li>
-            <span className="text-electric-400">Safari:</span>{' '}
-            <span className="text-dark-300">Preferences → Privacy</span>
-          </li>
-          <li>
-            <span className="text-electric-400">Microsoft Edge:</span>{' '}
-            <span className="text-dark-300">Settings → Cookies and site permissions → Cookies and site data</span>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-white mb-3">7. Updates to This Policy</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">4. Gestione dal browser</h3>
         <p>
-          We may update this Cookie Policy from time to time to reflect changes in technology,
-          legislation, or our data practices. Any changes will be posted on this page with an
-          updated revision date.
+          Puoi comunque controllare o cancellare cookie e dati dei siti dalle impostazioni del tuo
+          browser. Questa operazione riguarda eventuali dati salvati da altri siti o da configurazioni
+          future.
         </p>
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold text-white mb-3">8. Contact Us</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">5. Contatti</h3>
         <p>
-          If you have questions about our use of cookies, please contact us at{' '}
+          Per domande su cookie o strumenti di tracciamento puoi scrivere a{' '}
           <span className="text-electric-400">privacy@onefanta.app</span>.
         </p>
       </section>
