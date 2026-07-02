@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Star, Users, BarChart3, Lock, ChevronDown, Mail, CheckCircle, AlertCircle, X, Shield, Cookie } from 'lucide-react';
 import { supabase } from './lib/supabase';
 
@@ -9,6 +9,21 @@ function App() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [activeModal, setActiveModal] = useState<ModalType>(null);
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  const fetchWaitlistCount = async () => {
+    const { data, error } = await supabase.rpc('get_waitlist_signup_count');
+
+    if (!error && typeof data === 'number') {
+      setWaitlistCount(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchWaitlistCount();
+  }, []);
+
+  const formattedWaitlistCount = waitlistCount?.toLocaleString('it-IT');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +50,7 @@ function App() {
         }
       } else {
         setStatus('success');
+        setWaitlistCount((count) => count === null ? count : count + 1);
       }
     } catch {
       setStatus('error');
@@ -161,7 +177,15 @@ function App() {
             )}
 
             <p className="text-dark-500 text-xs text-center mt-4">
-              Unisciti a <span className="text-electric-400 font-semibold">2.500+</span> giocatori già in lista d'attesa
+              {formattedWaitlistCount ? (
+                <>
+                  Unisciti a{' '}
+                  <span className="text-electric-400 font-semibold">{formattedWaitlistCount}</span>{' '}
+                  {waitlistCount === 1 ? 'giocatore già' : 'giocatori già'} in lista d'attesa
+                </>
+              ) : (
+                "Unisciti alla lista d'attesa"
+              )}
             </p>
           </div>
 
