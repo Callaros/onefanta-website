@@ -3,6 +3,7 @@ import {
   AlertCircle,
   ArrowRight,
   CheckCircle2,
+  Circle,
   KeyRound,
   Loader2,
   Lock,
@@ -13,6 +14,33 @@ import { supabase } from '../lib/supabase';
 
 type RecoveryStatus = 'preparing' | 'ready' | 'missing' | 'success';
 type SubmitStatus = 'idle' | 'loading';
+
+const getErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  return '';
+};
+
+const getPasswordChecks = (value: string) => [
+  {
+    label: 'Almeno 6 caratteri',
+    isValid: value.length >= 6,
+  },
+  {
+    label: 'Almeno una lettera minuscola',
+    isValid: /[a-z]/.test(value),
+  },
+  {
+    label: 'Almeno una lettera maiuscola',
+    isValid: /[A-Z]/.test(value),
+  },
+  {
+    label: 'Almeno un numero',
+    isValid: /[0-9]/.test(value),
+  },
+];
 
 function ResetPasswordPage() {
   const [recoveryStatus, setRecoveryStatus] = useState<RecoveryStatus>('preparing');
@@ -48,11 +76,20 @@ function ResetPasswordPage() {
         const refreshToken = hashParams.get('refresh_token');
 
         if (tokenHash && type === 'recovery') {
-          const { error } = await supabase.auth.verifyOtp({
+          const { data, error } = await supabase.auth.verifyOtp({
             token_hash: tokenHash,
             type: 'recovery',
           });
           if (error) throw error;
+
+          if (data.session) {
+            const { error: sessionError } = await supabase.auth.setSession({
+              access_token: data.session.access_token,
+              refresh_token: data.session.refresh_token,
+            });
+            if (sessionError) throw sessionError;
+          }
+
           cleanRecoveryUrl();
         } else if (code) {
           const { error } = await supabase.auth.exchangeCodeForSession(code);
@@ -92,13 +129,16 @@ function ResetPasswordPage() {
     };
   }, []);
 
+  const passwordChecks = getPasswordChecks(password);
+  const isPasswordValid = passwordChecks.every((check) => check.isValid);
+
   const validateForm = () => {
     if (!password) {
       return 'Inserisci la nuova password.';
     }
 
-    if (password.length < 6) {
-      return 'La password deve contenere almeno 6 caratteri.';
+    if (!isPasswordValid) {
+      return 'La password deve rispettare tutti i requisiti indicati.';
     }
 
     if (password !== confirmPassword) {
@@ -129,7 +169,12 @@ function ResetPasswordPage() {
       setConfirmPassword('');
     } catch (error) {
       console.error('Reset password update failed', error);
-      setErrorMessage('Aggiornamento non riuscito. Verifica il link ricevuto via email e riprova.');
+      const authMessage = getErrorMessage(error);
+      setErrorMessage(
+        authMessage
+          ? `Aggiornamento non riuscito: ${authMessage}`
+          : 'Aggiornamento non riuscito. Verifica il link ricevuto via email e riprova.'
+      );
     } finally {
       setSubmitStatus('idle');
     }
@@ -217,6 +262,24 @@ function ResetPasswordPage() {
                       />
                     </div>
                   </label>
+
+                  <div className="grid gap-2 rounded-xl border border-white/10 bg-dark-900/40 p-4">
+                    {passwordChecks.map((check) => (
+                      <div
+                        key={check.label}
+                        className={`flex items-center gap-2 text-sm transition-colors ${
+                          check.isValid ? 'text-green-400' : 'text-white'
+                        }`}
+                      >
+                        {check.isValid ? (
+                          <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                        ) : (
+                          <Circle className="w-4 h-4 flex-shrink-0 text-white/70" />
+                        )}
+                        <span>{check.label}</span>
+                      </div>
+                    ))}
+                  </div>
 
                   {errorMessage && (
                     <div className="flex items-start gap-2 text-red-400 text-sm">
