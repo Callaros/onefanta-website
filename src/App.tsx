@@ -3,6 +3,7 @@ import AppPrivacyPage from './pages/AppPrivacyPage';
 import ContactPage from './pages/ContactPage';
 import DeleteAccountPage from './pages/DeleteAccountPage';
 import WaitlistPrivacyPage from './pages/WaitlistPrivacyPage';
+import AuthConfirmedPage from './pages/AuthConfirmedPage';
 
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
@@ -21,6 +22,10 @@ function App() {
 
   if (path === '/contact') {
     return <ContactPage />;
+  }
+
+  if (path === '/auth/confirmed') {
+    return <AuthConfirmedPage />;
   }
 
   return <LandingPage />;
