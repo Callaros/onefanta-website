@@ -41,11 +41,20 @@ function ResetPasswordPage() {
       }
 
       try {
+        const tokenHash = queryParams.get('token_hash');
+        const type = queryParams.get('type');
         const code = queryParams.get('code');
         const accessToken = hashParams.get('access_token');
         const refreshToken = hashParams.get('refresh_token');
 
-        if (code) {
+        if (tokenHash && type === 'recovery') {
+          const { error } = await supabase.auth.verifyOtp({
+            token_hash: tokenHash,
+            type: 'recovery',
+          });
+          if (error) throw error;
+          cleanRecoveryUrl();
+        } else if (code) {
           const { error } = await supabase.auth.exchangeCodeForSession(code);
           if (error) throw error;
           cleanRecoveryUrl();
@@ -68,7 +77,8 @@ function ResetPasswordPage() {
           setErrorMessage('Link non valido o scaduto. Richiedi un nuovo reset password dall app.');
           setRecoveryStatus('missing');
         }
-      } catch {
+      } catch (error) {
+        console.error('Reset password recovery failed', error);
         if (!isMounted) return;
         setErrorMessage('Non siamo riusciti a verificare il link di reset. Richiedi un nuovo reset password dall app.');
         setRecoveryStatus('missing');
@@ -117,7 +127,8 @@ function ResetPasswordPage() {
       setRecoveryStatus('success');
       setPassword('');
       setConfirmPassword('');
-    } catch {
+    } catch (error) {
+      console.error('Reset password update failed', error);
       setErrorMessage('Aggiornamento non riuscito. Verifica il link ricevuto via email e riprova.');
     } finally {
       setSubmitStatus('idle');
