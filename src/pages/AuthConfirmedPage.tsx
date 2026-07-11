@@ -31,11 +31,11 @@ function AuthConfirmedPage() {
             </h1>
 
             <p className="text-dark-300 text-lg leading-relaxed mb-8">
-              Grazie per aver confermato il tuo account OneFanta. Ora puoi tornare al sito e continuare da dove eri rimasto.
+              Grazie per aver confermato il tuo account OneFanta. Ora puoi tornare nell’app e continuare da dove eri rimasto.
             </p>
 
             <a
-              href="/"
+              href="https://open.onefanta.com/auth/confirmed"
               className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
             >
               Torna a OneFanta

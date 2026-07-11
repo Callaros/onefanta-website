@@ -312,7 +312,7 @@ function ResetPasswordPage() {
                   {errorMessage}
                 </p>
                 <a
-                  href="/"
+                  href="https://open.onefanta.com/auth/reset-password"
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
                 >
                   Torna a OneFanta
@@ -327,7 +327,7 @@ function ResetPasswordPage() {
                   La tua password e stata aggiornata. Ora puoi tornare nell app e accedere con le nuove credenziali.
                 </p>
                 <a
-                  href="/"
+                  href="https://open.onefanta.com/auth/reset-password"
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
                 >
                   Torna a OneFanta
