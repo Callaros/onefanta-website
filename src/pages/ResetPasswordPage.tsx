@@ -4,6 +4,8 @@ import {
   ArrowRight,
   CheckCircle2,
   Circle,
+  Eye,
+  EyeOff,
   KeyRound,
   Loader2,
   Lock,
@@ -47,6 +49,8 @@ function ResetPasswordPage() {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -236,14 +240,24 @@ function ResetPasswordPage() {
                     <div className="relative">
                       <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
                       <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
+                        className="w-full pl-12 pr-12 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
                         placeholder="Almeno 6 caratteri"
                         autoComplete="new-password"
                         disabled={isSubmitting}
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((isVisible) => !isVisible)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none focus:text-electric-300 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                        aria-label={showPassword ? 'Nascondi nuova password' : 'Mostra nuova password'}
+                        aria-pressed={showPassword}
+                        disabled={isSubmitting}
+                      >
+                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      </button>
                     </div>
                   </label>
 
@@ -252,14 +266,24 @@ function ResetPasswordPage() {
                     <div className="relative">
                       <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
                       <input
-                        type="password"
+                        type={showConfirmPassword ? 'text' : 'password'}
                         value={confirmPassword}
                         onChange={(event) => setConfirmPassword(event.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
+                        className="w-full pl-12 pr-12 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
                         placeholder="Ripeti la password"
                         autoComplete="new-password"
                         disabled={isSubmitting}
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword((isVisible) => !isVisible)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none focus:text-electric-300 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                        aria-label={showConfirmPassword ? 'Nascondi conferma password' : 'Mostra conferma password'}
+                        aria-pressed={showConfirmPassword}
+                        disabled={isSubmitting}
+                      >
+                        {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      </button>
                     </div>
                   </label>
 
