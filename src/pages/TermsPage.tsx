@@ -52,12 +52,15 @@ function TermsPage({ locale }: { locale: Locale }) {
         <PolicySection title="3. Il Servizio OneFanta">
           <p className="mb-3">
             OneFanta consente, a seconda delle funzionalità disponibili, di creare o partecipare a leghe private, gestire squadre
-            e rose, consultare voti e statistiche, calcolare punteggi e seguire classifiche e aggiornamenti in tempo reale.
+            e rose, consultare voti e statistiche, calcolare punteggi e seguire classifiche e aggiornamenti in tempo reale. Al lancio,
+            il Servizio supporta il fantacalcio basato sulla Premier League.
           </p>
           <p>
             Il Servizio è destinato all'intrattenimento. Non è un servizio di scommesse, non garantisce vincite o risultati sportivi
-            e non è ufficialmente affiliato a club, leghe, federazioni, calciatori o competizioni, salvo quando ciò sia dichiarato
-            espressamente. Nomi e segni di terzi appartengono ai rispettivi titolari.
+            ed è indipendente: non è affiliato, approvato, sponsorizzato o autorizzato da The Football Association Premier League
+            Limited, né da club, federazioni, calciatori o altre competizioni, salvo quando ciò sia dichiarato espressamente. Il nome
+            “Premier League” è usato esclusivamente per identificare la competizione attualmente supportata. Nomi e segni di terzi
+            appartengono ai rispettivi titolari.
           </p>
         </PolicySection>
 

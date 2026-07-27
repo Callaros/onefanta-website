@@ -27,6 +27,8 @@ function LandingPage({ locale }: { locale: Locale }) {
   const t = isItalian ? {
     notify: 'Avvisami', available: 'Presto disponibile su iOS & Android', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
     intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
+    competitionFocus: 'Al lancio, OneFanta supporta il fantacalcio basato sulla Premier League.',
+    affiliationNotice: 'OneFanta è un servizio indipendente e non è affiliato, approvato, sponsorizzato o autorizzato da The Football Association Premier League Limited. Il nome “Premier League” identifica esclusivamente la competizione attualmente supportata.',
     joined: 'Sei nella lista!', joinedBody: 'Ti avvisiamo non appena OneFanta sarà disponibile.',
     formIntro: 'Lascia la tua email: ti avvisiamo il giorno del lancio. Niente spam, mai.', emailPlaceholder: 'Inserisci la tua email',
     privacyPrefix: 'Premendo “Avvisami” chiedi di ricevere aggiornamenti strettamente collegati al lancio di OneFanta e presti il consenso al relativo trattamento della tua email. Puoi revocare il consenso e chiedere la cancellazione in qualsiasi momento. ',
@@ -42,6 +44,8 @@ function LandingPage({ locale }: { locale: Locale }) {
   } : {
     notify: 'Notify me', available: 'Coming soon to iOS & Android', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
     intro: 'Live ratings, private leagues with friends and real-time standings.', introAccent: ' Fantasy football done right.',
+    competitionFocus: 'At launch, OneFanta supports fantasy football based on the Premier League.',
+    affiliationNotice: 'OneFanta is an independent service and is not affiliated with, endorsed, sponsored or authorised by The Football Association Premier League Limited. The name “Premier League” is used solely to identify the competition currently supported.',
     joined: "You're on the list!", joinedBody: "We'll let you know as soon as OneFanta is available.",
     formIntro: 'Leave your email and we’ll notify you on launch day. No spam, ever.', emailPlaceholder: 'Enter your email',
     privacyPrefix: 'By selecting “Notify me”, you ask to receive updates strictly related to the OneFanta launch and consent to the processing of your email. You may withdraw consent and request deletion at any time. ',
@@ -162,6 +166,10 @@ function LandingPage({ locale }: { locale: Locale }) {
           <p className="text-lg md:text-xl text-dark-300 max-w-xl mx-auto mb-10 leading-relaxed">
             {t.intro}
             <span className="text-electric-400">{t.introAccent}</span>
+          </p>
+
+          <p className="inline-flex items-center px-4 py-2 mb-8 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-white">
+            {t.competitionFocus}
           </p>
 
           <div className="bg-gradient-to-br from-dark-800/80 to-dark-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl shadow-electric-500/5 mb-8">
@@ -316,50 +324,56 @@ function LandingPage({ locale }: { locale: Locale }) {
       </section>
 
       <footer className="py-12 px-6 border-t border-white/5">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <a href={localizedPath(locale, '/')} className="flex items-center" aria-label="OneFanta home">
-            <img
-              src="/onefanta-logo.png"
-              alt="OneFanta"
-              className="h-8 w-auto rounded-lg"
-            />
-          </a>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <a href={localizedPath(locale, '/')} className="flex items-center" aria-label="OneFanta home">
+              <img
+                src="/onefanta-logo.png"
+                alt="OneFanta"
+                className="h-8 w-auto rounded-lg"
+              />
+            </a>
 
-          <div className="flex flex-wrap items-center justify-center gap-5 text-dark-400 text-sm">
-            <a href={localizedPath(locale, '/terms')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
-              <ScrollText className="w-4 h-4" />
-              {t.terms}
-            </a>
-            <a href={localizedPath(locale, '/privacy')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
-              <Shield className="w-4 h-4" />
-              App Privacy
-            </a>
-            <button
-              onClick={() => openModal('waitlistPrivacy')}
-              className="hover:text-electric-400 transition-colors flex items-center gap-2"
-            >
-              <Mail className="w-4 h-4" />
-              Waitlist Privacy
-            </button>
-            <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
-              <Trash2 className="w-4 h-4" />
-              {t.deleteAccount}
-            </a>
-            <a href={localizedPath(locale, '/contact')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              {t.contact}
-            </a>
-            <button
-              onClick={() => openModal('cookie')}
-              className="hover:text-electric-400 transition-colors flex items-center gap-2"
-            >
-              <Cookie className="w-4 h-4" />
-              Cookie Policy
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-5 text-dark-400 text-sm">
+              <a href={localizedPath(locale, '/terms')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <ScrollText className="w-4 h-4" />
+                {t.terms}
+              </a>
+              <a href={localizedPath(locale, '/privacy')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <Shield className="w-4 h-4" />
+                App Privacy
+              </a>
+              <button
+                onClick={() => openModal('waitlistPrivacy')}
+                className="hover:text-electric-400 transition-colors flex items-center gap-2"
+              >
+                <Mail className="w-4 h-4" />
+                Waitlist Privacy
+              </button>
+              <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <Trash2 className="w-4 h-4" />
+                {t.deleteAccount}
+              </a>
+              <a href={localizedPath(locale, '/contact')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                {t.contact}
+              </a>
+              <button
+                onClick={() => openModal('cookie')}
+                className="hover:text-electric-400 transition-colors flex items-center gap-2"
+              >
+                <Cookie className="w-4 h-4" />
+                Cookie Policy
+              </button>
+            </div>
+
+            <p className="text-dark-400 text-sm">
+              © 2026 OneFanta. {t.rights}
+            </p>
           </div>
 
-          <p className="text-dark-400 text-sm">
-            © 2026 OneFanta. {t.rights}
+          <p className="max-w-4xl mx-auto mt-8 pt-6 border-t border-white/5 text-center text-xs leading-relaxed text-dark-500">
+            {t.affiliationNotice}
           </p>
         </div>
       </footer>

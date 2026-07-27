@@ -18,10 +18,10 @@ function App() {
     rememberLocale(locale);
     document.documentElement.lang = locale;
     const isItalian = locale === 'it';
-    const title = isItalian ? 'OneFanta - Domina la tua Lega di Fantacalcio' : 'OneFanta - Rule Your Fantasy Football League';
+    const title = isItalian ? 'OneFanta - Fantacalcio per la Premier League' : 'OneFanta - Premier League Fantasy Football';
     const description = isItalian
-      ? 'Voti live, leghe private e classifiche in tempo reale. Il fantacalcio fatto bene.'
-      : 'Live ratings, private leagues and real-time standings. Fantasy football done right.';
+      ? 'Voti live, leghe private e classifiche in tempo reale per il fantacalcio basato sulla Premier League.'
+      : 'Live ratings, private leagues and real-time standings for fantasy football based on the Premier League.';
     document.title = title;
 
     const setMeta = (selector: string, content: string) => {

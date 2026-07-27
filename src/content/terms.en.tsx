@@ -17,8 +17,8 @@ export default function TermsEn() {
         <p>Personal-data processing is described in the <a href="/en/privacy" className={linkClass}>App Privacy Policy</a>. Separate notices in the footer cover the website, waitlist and cookies.</p>
       </PolicySection>
       <PolicySection title="3. The OneFanta Service">
-        <p className="mb-3">Depending on available features, OneFanta lets users create or join private leagues, manage teams and rosters, view ratings and statistics, calculate scores and follow live standings and updates.</p>
-        <p>The Service is for entertainment. It is not a betting service, does not guarantee winnings or sporting outcomes, and is not officially affiliated with clubs, leagues, federations, players or competitions unless expressly stated. Third-party names and marks belong to their owners.</p>
+        <p className="mb-3">Depending on available features, OneFanta lets users create or join private leagues, manage teams and rosters, view ratings and statistics, calculate scores and follow live standings and updates. At launch, the Service supports fantasy football based on the Premier League.</p>
+        <p>The Service is for entertainment. It is not a betting service, does not guarantee winnings or sporting outcomes, and is independent: it is not affiliated with, endorsed, sponsored or authorised by The Football Association Premier League Limited, or by any club, federation, player or other competition, unless expressly stated. The name “Premier League” is used solely to identify the competition currently supported. Third-party names and marks belong to their owners.</p>
       </PolicySection>
       <PolicySection title="4. Age requirements">
         <p className="mb-3">Free features may also be used by minors. If you cannot independently accept these Terms under applicable law, use must be authorised and supervised by a parent or guardian, who should read these Terms and the privacy notices.</p>
