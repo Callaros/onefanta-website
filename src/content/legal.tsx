@@ -1,7 +1,8 @@
 import PolicySection from '../components/PolicySection';
 
 export const CONTACT_EMAIL = 'privacy@onefanta.app';
-export const LAST_UPDATED = '4 luglio 2026';
+export const LAST_UPDATED = '27 luglio 2026';
+const APP_PRIVACY_LAST_UPDATED = '27 luglio 2026';
 
 export function EmailLink() {
   return (
@@ -18,53 +19,66 @@ export function WaitlistPrivacyPolicy() {
 
       <PolicySection title="1. Titolare del trattamento">
         <p>
-          One Fanta tratta i dati personali raccolti tramite la landing page e il modulo di iscrizione alla lista d'attesa.
-          Per domande o richieste relative alla protezione dei dati puoi scrivere a <EmailLink />.
+          Il titolare del trattamento è <strong className="text-white">Luca Antonelli</strong>, residente in{' '}
+          <strong className="text-white">Contrada Addolorata 49/A, Recanati (MC), Italia</strong>. Per domande o richieste
+          relative alla protezione dei dati puoi scrivere a <EmailLink />.
         </p>
       </PolicySection>
 
       <PolicySection title="2. Dati raccolti">
         <p className="mb-3">Quando ti iscrivi alla waitlist raccogliamo:</p>
         <ul className="list-disc list-inside space-y-2 ml-4">
-          <li><strong className="text-white">Indirizzo email:</strong> necessario per avvisarti del lancio di One Fanta.</li>
+          <li><strong className="text-white">Indirizzo email:</strong> necessario per avvisarti del lancio di OneFanta.</li>
           <li><strong className="text-white">Data di iscrizione:</strong> registrata per documentare quando hai richiesto l'iscrizione.</li>
-          <li><strong className="text-white">Fonte dell'iscrizione:</strong> ad esempio il sito web, per distinguere eventuali canali futuri.</li>
+          <li><strong className="text-white">Dati tecnici:</strong> indirizzo IP, user-agent, data e ora della richiesta e altri dati di rete trattati dai sistemi necessari a ricevere il modulo, proteggere il servizio e prevenire abusi.</li>
         </ul>
       </PolicySection>
 
       <PolicySection title="3. Finalità e base giuridica">
         <p>
           Usiamo la tua email solo per gestire la lista d'attesa, comunicarti il lancio dell'app e inviarti aggiornamenti
-          strettamente collegati alla disponibilità di One Fanta. La base giuridica è il consenso che presti inviando il modulo.
-          Puoi revocarlo in qualsiasi momento.
+          strettamente collegati alla disponibilità di OneFanta. La base giuridica è il consenso che presti inviando il modulo.
+          Puoi revocarlo in qualsiasi momento, senza pregiudicare la liceità del trattamento svolto prima della revoca. I dati
+          tecnici sono trattati per il legittimo interesse a rendere disponibile e sicuro il sito e a prevenire usi abusivi.
         </p>
       </PolicySection>
 
       <PolicySection title="4. Servizi e destinatari">
         <p>
-          I dati sono conservati tramite Supabase, il servizio usato per il database della waitlist. Potremmo usare un
-          fornitore email per inviare comunicazioni agli iscritti. Non vendiamo i tuoi dati e non li usiamo per marketing
-          generico, sponsor o comunicazioni non legate al rilascio, salvo un consenso separato e specifico.
+          Supabase tratta i dati necessari per ricevere e conservare le iscrizioni alla waitlist e per proteggere il relativo
+          database, collocato nella regione Europa centrale (Francoforte). Cloudflare fornisce l'infrastruttura di hosting, storage,
+          distribuzione e sicurezza del sito nella regione europea e può trattare i dati tecnici necessari a erogarlo e proteggerlo.
+          Prima dell'invio delle comunicazioni, questa informativa sarà aggiornata con il fornitore email effettivamente utilizzato.
+          Non vendiamo i tuoi dati e non li usiamo per marketing generico, sponsor o comunicazioni non legate al rilascio, salvo un
+          consenso separato e specifico.
         </p>
       </PolicySection>
 
       <PolicySection title="5. Trasferimenti fuori dallo SEE">
         <p>
-          Alcuni fornitori tecnici possono trattare dati anche fuori dallo Spazio Economico Europeo. In tal caso il trattamento
-          deve avvenire sulla base di garanzie adeguate previste dal GDPR, come clausole contrattuali standard o altri meccanismi
-          riconosciuti dalla normativa.
+          Il database Supabase è configurato nella regione Europa centrale (Francoforte) e i servizi Cloudflare usati dal sito sono
+          configurati nella regione europea. Qualora i fornitori o i loro sub-responsabili effettuino trattamenti fuori dallo Spazio
+          Economico Europeo, gli eventuali trasferimenti avvengono mediante i meccanismi riconosciuti dalla normativa applicabile,
+          come decisioni di adeguatezza, Data Privacy Framework o clausole contrattuali standard. Puoi chiedere informazioni sulle
+          garanzie applicabili scrivendo a <EmailLink />.
+        </p>
+        <p className="mt-3">
+          Puoi consultare le informative di{' '}
+          <a href="https://supabase.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Supabase</a> e{' '}
+          <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cloudflare</a>.
         </p>
       </PolicySection>
 
       <PolicySection title="6. Conservazione">
         <p>
-          Conserviamo il tuo indirizzo email fino alla revoca del consenso, alla richiesta di cancellazione o fino a quando la
-          lista d'attesa non sarà più necessaria. Possiamo conservare dati aggregati e non identificativi per statistiche interne.
+          Conserviamo il tuo indirizzo email fino alla revoca del consenso, alla richiesta di cancellazione o, al più tardi, per 30
+          giorni dopo il lancio di OneFanta. I dati tecnici sono conservati per un massimo di 12 mesi e vengono anonimizzati se chiedi
+          la cancellazione dei dati a te associati. Possiamo conservare dati aggregati e non identificativi per statistiche interne.
         </p>
       </PolicySection>
 
       <PolicySection title="7. I tuoi diritti">
-        <p className="mb-3">Nei limiti previsti dal GDPR puoi chiedere accesso, rettifica, cancellazione, limitazione del trattamento, portabilità, opposizione quando applicabile e revoca del consenso.</p>
+        <p className="mb-3">Nei limiti previsti dal GDPR puoi chiedere accesso, rettifica, cancellazione, limitazione del trattamento, portabilità, opposizione quando applicabile e revoca del consenso. Non sono svolti processi decisionali automatizzati che producono effetti giuridici o analogamente significativi sulla base dei dati della waitlist.</p>
         <p>Puoi esercitare questi diritti scrivendo a <EmailLink />.</p>
       </PolicySection>
 
@@ -81,6 +95,13 @@ export function WaitlistPrivacyPolicy() {
           controllo competente. In Italia è il Garante per la protezione dei dati personali.
         </p>
       </PolicySection>
+
+      <PolicySection title="10. Conferimento dei dati">
+        <p>
+          L'iscrizione alla waitlist è facoltativa. Se non fornisci l'indirizzo email e non chiedi di ricevere gli aggiornamenti,
+          potrai comunque usare il sito ma non potremo avvisarti del lancio di OneFanta.
+        </p>
+      </PolicySection>
     </div>
   );
 }
@@ -88,84 +109,190 @@ export function WaitlistPrivacyPolicy() {
 export function AppPrivacyPolicy() {
   return (
     <div className="space-y-6">
-      <p className="text-dark-400">Ultimo aggiornamento: {LAST_UPDATED}</p>
+      <p className="text-dark-400">Ultimo aggiornamento: {APP_PRIVACY_LAST_UPDATED}</p>
 
-      <PolicySection title="1. Ambito">
+      <PolicySection title="1. Titolare del trattamento e ambito">
+        <p className="mb-3">
+          Il titolare del trattamento è <strong className="text-white">Luca Antonelli</strong>, residente in{' '}
+          <strong className="text-white">Contrada Addolorata 49/A, Recanati (MC), Italia</strong>. Per domande o richieste
+          relative alla protezione dei dati puoi scrivere a <EmailLink />.
+        </p>
         <p>
-          Questa informativa descrive il trattamento dei dati personali nell'app mobile One Fanta. La landing page e la waitlist
+          Questa informativa descrive il trattamento dei dati personali nell'app mobile OneFanta. La landing page e la waitlist
           sono coperte dalla <a href="/waitlist-privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Waitlist Privacy Policy</a>.
         </p>
       </PolicySection>
 
-      <PolicySection title="2. Dati che l'app può raccogliere">
+      <PolicySection title="2. Dati trattati">
         <ul className="list-disc list-inside space-y-2 ml-4">
           <li><strong className="text-white">Account e contatti:</strong> email, identificativo utente, informazioni di accesso e preferenze.</li>
           <li><strong className="text-white">Dati di gioco:</strong> leghe, squadre, rose, classifiche, punteggi, statistiche e impostazioni di lega.</li>
-          <li><strong className="text-white">Dati tecnici:</strong> dispositivo, sistema operativo, versione app, log diagnostici e crash report.</li>
-          <li><strong className="text-white">Notifiche:</strong> token push e preferenze di notifica, se abilitate.</li>
-          <li><strong className="text-white">Analytics e ads:</strong> dati aggregati o pseudonimizzati per misurare uso, performance e funzionalità pubblicitarie se presenti nell'app.</li>
+          <li><strong className="text-white">Contenuti forniti dall'utente:</strong> nomi di squadre e leghe e immagini personalizzate selezionate tramite il dispositivo.</li>
+          <li><strong className="text-white">Assistenza:</strong> indirizzo email, contenuto della richiesta ed eventuali informazioni che scegli di comunicarci quando contatti il supporto.</li>
+          <li><strong className="text-white">Dati tecnici del servizio:</strong> indirizzo IP, user-agent, data e ora delle richieste e log necessari per autenticazione, sicurezza e funzionamento del backend.</li>
+          <li><strong className="text-white">Dati locali:</strong> preferenze, impostazioni, cache e dati di gioco salvati sul dispositivo.</li>
+          <li><strong className="text-white">Notifiche:</strong> token push, piattaforma e preferenze di notifica, solo se decidi di abilitarle.</li>
+          <li><strong className="text-white">Diagnostica:</strong> errori, eccezioni, stack trace, breadcrumb tecnici, schermata o operazione interessata, modello del dispositivo, sistema operativo, versione dell'app, data e ora dell'evento e indirizzo IP.</li>
+          <li><strong className="text-white">Pubblicità:</strong> identificatori pubblicitari o dell'installazione, indirizzo IP, informazioni sul dispositivo e sull'app, interazioni con gli annunci, dati diagnostici e scelte relative al consenso, secondo le opzioni disponibili.</li>
         </ul>
       </PolicySection>
 
-      <PolicySection title="3. Finalità">
+      <PolicySection title="3. Finalità e basi giuridiche">
+        <ul className="list-disc list-inside space-y-2 ml-4">
+          <li><strong className="text-white">Erogazione del servizio:</strong> creazione e gestione dell'account, autenticazione, salvataggio dei dati di gioco, leghe, squadre, classifiche e contenuti richiesti. La base giuridica è l'esecuzione del servizio richiesto dall'utente.</li>
+          <li><strong className="text-white">Sicurezza e prevenzione degli abusi:</strong> protezione di account, utenti e sistemi. La base giuridica è il legittimo interesse del titolare a mantenere OneFanta sicuro e affidabile.</li>
+          <li><strong className="text-white">Diagnostica:</strong> individuazione e correzione di crash, errori e malfunzionamenti tramite Sentry. La base giuridica è il legittimo interesse a garantire stabilità, sicurezza e corretto funzionamento dell'app.</li>
+          <li><strong className="text-white">Notifiche:</strong> invio delle notifiche di servizio che scegli di abilitare. La base giuridica è l'esecuzione della funzione richiesta; l'attivazione è facoltativa e può essere revocata disabilitando le notifiche nell'app o nelle impostazioni del dispositivo.</li>
+          <li><strong className="text-white">Assistenza:</strong> gestione e risposta alle richieste inviate dall'utente. La base giuridica è l'esecuzione del servizio o di misure richieste dall'utente e, quando applicabile, l'adempimento di obblighi legali.</li>
+          <li><strong className="text-white">Pubblicità:</strong> visualizzazione, misurazione e, quando autorizzata, personalizzazione degli annunci tramite Google Mobile Ads. I trattamenti che richiedono consenso sono eseguiti secondo le scelte espresse nell'app.</li>
+          <li><strong className="text-white">Obblighi legali:</strong> adempimento di obblighi previsti dalla legge o di richieste legittime delle autorità competenti.</li>
+        </ul>
+      </PolicySection>
+
+      <PolicySection title="4. Supabase">
         <p>
-          Usiamo i dati per creare e gestire account, fornire le funzionalità dell'app, salvare backup e progressi, mostrare
-          statistiche e classifiche, inviare notifiche richieste, migliorare stabilità e sicurezza, prevenire abusi e rispettare
-          obblighi legali. Eventuali analytics, advertising o comunicazioni promozionali saranno dichiarati nell'app e negli store
-          secondo le impostazioni disponibili.
+          Usiamo Supabase per database, autenticazione, gestione dell'account, archiviazione e sincronizzazione dei dati
+          necessari al funzionamento di OneFanta. A seconda delle funzioni utilizzate, Supabase tratta dati dell'account, dati di
+          gioco, contenuti caricati e informazioni tecniche necessarie a fornire e proteggere il servizio. OneFanta non utilizza una
+          funzione di backup separata per questi dati. Il database è collocato nella regione Europa centrale (Francoforte).
+        </p>
+        <p className="mt-3">
+          Le immagini personalizzate delle squadre sono conservate in un bucket privato di Supabase Storage. Non sono pubblicamente
+          accessibili e possono essere visualizzate soltanto dai membri autorizzati della relativa lega privata.
         </p>
       </PolicySection>
 
-      <PolicySection title="4. Base giuridica">
+      <PolicySection title="5. Sentry e dati diagnostici">
+        <p className="mb-3">
+          Usiamo Sentry per ricevere segnalazioni tecniche di crash, errori e malfunzionamenti. Gli eventi possono contenere errori,
+          eccezioni, stack trace, breadcrumb tecnici, schermata o operazione interessata, modello del dispositivo, sistema operativo,
+          versione dell'app, data e ora dell'evento e indirizzo IP.
+        </p>
         <p>
-          Il trattamento può basarsi su esecuzione del servizio richiesto, consenso per funzionalità facoltative, legittimo
-          interesse per sicurezza e miglioramento tecnico, e obblighi legali quando applicabili.
+          OneFanta non invia a Sentry l'identificativo dell'account o l'indirizzo email dell'utente. Non utilizziamo le funzioni di
+          tracing delle prestazioni né di profiling di Sentry. I dati diagnostici sono usati esclusivamente per stabilità, sicurezza
+          e correzione degli errori, sono trattati nella regione Unione europea e sono conservati in Sentry per 30 giorni.
         </p>
       </PolicySection>
 
-      <PolicySection title="5. Condivisione con fornitori">
+      <PolicySection title="6. Notifiche">
         <p>
-          Possiamo condividere dati con fornitori tecnici necessari per database, autenticazione, backup, notifiche push, hosting,
-          analytics, crash reporting, advertising e assistenza. I fornitori trattano i dati secondo istruzioni contrattuali e misure
-          di sicurezza adeguate. Non vendiamo dati personali degli utenti.
+          Le notifiche non sono attivate automaticamente. Se scegli di abilitarle, usiamo Firebase Cloud Messaging e i servizi di
+          notifica del sistema operativo per associare all'installazione un token push e consegnare le notifiche richieste. Puoi
+          disabilitarle in qualsiasi momento dall'app o dalle impostazioni del dispositivo; in tal caso non riceverai più notifiche,
+          senza perdere l'accesso alle altre funzionalità di OneFanta.
         </p>
       </PolicySection>
 
-      <PolicySection title="6. Conservazione">
+      <PolicySection title="7. Pubblicità e gestione del consenso">
+        <p className="mb-3">
+          OneFanta usa Google Mobile Ads per mostrare annunci. Al primo avvio l'app presenta il meccanismo di gestione del consenso
+          previsto per la pubblicità e raccoglie le scelte dell'utente prima di richiedere i trattamenti pubblicitari soggetti a
+          consenso. Le scelte espresse determinano le modalità con cui Google e i fornitori pubblicitari autorizzati possono trattare
+          dati per archiviazione, misurazione e personalizzazione degli annunci.
+        </p>
         <p>
-          Conserviamo i dati per il tempo necessario a fornire l'app, mantenere l'account, adempiere a obblighi legali, gestire
-          sicurezza e risolvere controversie. I dati eliminati possono restare per un periodo limitato nei backup tecnici prima della
-          cancellazione definitiva.
+          I dati pubblicitari possono includere identificatori pubblicitari o dell'installazione, indirizzo IP, caratteristiche del
+          dispositivo e dell'app, interazioni con gli annunci, dati diagnostici e informazioni relative al consenso. OneFanta non
+          vende i dati personali degli utenti. Se non presti il consenso alla personalizzazione, l'app può continuare a mostrare
+          annunci non personalizzati, nel rispetto delle scelte espresse nel meccanismo di gestione del consenso.
         </p>
       </PolicySection>
 
-      <PolicySection title="7. Cancellazione account e dati">
+      <PolicySection title="8. Destinatari e trasferimenti internazionali">
         <p>
-          Puoi richiedere cancellazione dell'account e dei dati personali dalla pagina{' '}
-          <a href="/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Account and Data Deletion</a>
-          {' '}o scrivendo a <EmailLink />.
+          I dati possono essere trattati, nei limiti necessari alle finalità descritte, dai partecipanti alle leghe private per i dati
+          di gioco e i contenuti condivisi nella lega, da Supabase per backend, autenticazione e archiviazione nella regione Europa
+          centrale (Francoforte),
+          Functional Software, Inc. (Sentry) per la diagnostica, Google e i relativi fornitori autorizzati per Firebase Cloud Messaging
+          e Google Mobile Ads, nonché dai fornitori di email. Sentry tratta gli eventi nella regione Unione europea. Qualora i
+          fornitori o i loro sub-responsabili effettuino trattamenti fuori dallo
+          Spazio Economico Europeo, i trasferimenti avvengono sulla base dei meccanismi riconosciuti dalla normativa applicabile, come
+          decisioni di adeguatezza, Data Privacy Framework o clausole contrattuali standard.
+        </p>
+        <p className="mt-3">
+          Puoi consultare le informative dei principali fornitori sui siti di{' '}
+          <a href="https://supabase.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Supabase</a>,{' '}
+          <a href="https://sentry.io/privacy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Sentry</a> e{' '}
+          <a href="https://policies.google.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Google</a>.
         </p>
       </PolicySection>
 
-      <PolicySection title="8. Sicurezza">
+      <PolicySection title="9. Conservazione">
+        <p>
+          I dati dell'account e di gioco sono conservati per il tempo necessario a fornire il servizio e fino alla cancellazione
+          dell'account, salvo obblighi di legge o esigenze di tutela dei diritti. I token e le preferenze di notifica sono conservati
+          finché necessari a gestire la scelta dell'utente e vengono rimossi quando non sono più necessari o quando l'account viene
+          eliminato. I log tecnici e di sicurezza sono conservati per un massimo di 12 mesi; se l'account viene eliminato, i log ancora
+          necessari vengono anonimizzati e non sono più associati all'utente. I dati diagnostici restano in Sentry per 30 giorni. I
+          dati pubblicitari sono conservati secondo le impostazioni di consenso e i periodi applicati dai fornitori coinvolti. Le
+          richieste di assistenza sono conservate fino alla loro definizione e, se necessario, per il periodo successivo richiesto da
+          obblighi di legge o dalla tutela dei diritti.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="10. Cancellazione account e dati">
+        <p className="mb-3">
+          Puoi eliminare direttamente l'account dall'app aprendo la sezione <strong className="text-white">Profilo</strong>,
+          premendo il pulsante rosso <strong className="text-white">Elimina account</strong> e confermando la scelta. La
+          cancellazione è definitiva e non può essere annullata.
+        </p>
+        <p>
+          La pagina <a href="/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cancellazione dell'account e dei dati</a>
+          {' '}contiene ulteriori informazioni. Resta possibile esercitare i diritti previsti dal GDPR scrivendo a <EmailLink />;
+          questa possibilità è distinta dalla procedura ordinaria e immediata disponibile nell'app.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="11. Conferimento dei dati e funzioni facoltative">
+        <p>
+          Email, credenziali e dati di gioco necessari sono indispensabili per creare l'account e fornire le relative funzionalità;
+          senza di essi non è possibile usare le aree riservate. Il caricamento di immagini, le notifiche e i trattamenti
+          pubblicitari basati sul consenso sono facoltativi. Il loro mancato conferimento o la revoca del consenso non impediscono
+          l'uso delle altre funzioni dell'app, salvo quelle che dipendono direttamente dal dato o dal permesso rifiutato. L'invio di
+          una richiesta di assistenza è facoltativo, ma senza i dati necessari non potremo rispondere.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="12. Minori">
+        <p>
+          OneFanta può essere utilizzata anche da utenti minorenni secondo quanto previsto nei Termini. In Italia, quando un
+          trattamento relativo a un servizio online si basa sul consenso, l'utente che ha compiuto 14 anni può esprimerlo
+          autonomamente; per gli utenti di età inferiore a 14 anni il consenso deve essere prestato o autorizzato da chi esercita la
+          responsabilità genitoriale. Le funzioni facoltative basate sul consenso, inclusa l'eventuale personalizzazione
+          pubblicitaria, non devono essere attivate da un utente infraquattordicenne senza tale autorizzazione.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="13. Sicurezza">
         <p>
           Usiamo misure tecniche e organizzative ragionevoli per proteggere i dati, incluse limitazioni di accesso e controlli sui
           sistemi usati per erogare il servizio. Nessun sistema può garantire sicurezza assoluta, ma lavoriamo per ridurre i rischi.
         </p>
       </PolicySection>
 
-      <PolicySection title="9. I tuoi diritti">
-        <p>
+      <PolicySection title="14. I tuoi diritti e reclamo">
+        <p className="mb-3">
           Nei limiti previsti dal GDPR puoi chiedere accesso, rettifica, cancellazione, limitazione del trattamento, portabilità,
           opposizione quando applicabile e revoca del consenso. Per esercitare i diritti scrivi a <EmailLink />.
         </p>
+        <p>
+          Se ritieni che il trattamento violi la normativa sulla protezione dei dati, puoi proporre reclamo all'autorità di controllo
+          competente. In Italia è il Garante per la protezione dei dati personali.
+        </p>
+        <p className="mt-3">
+          OneFanta non adotta decisioni basate unicamente su trattamenti automatizzati che producano effetti giuridici o analogamente
+          significativi sull'utente. L'eventuale personalizzazione pubblicitaria avviene secondo le scelte espresse nel meccanismo di
+          consenso dell'app.
+        </p>
       </PolicySection>
 
-      <PolicySection title="10. Store disclosure">
+      <PolicySection title="15. Informazioni negli store e aggiornamenti">
         <p>
           Le informazioni dichiarate in Google Play Console e App Store Connect devono riflettere i dati effettivamente raccolti
-          dall'app. Questa policy offre dettagli aggiuntivi e deve essere aggiornata se cambiano funzionalità, fornitori o categorie
-          di dati trattati.
+          dall'app. Questa policy offre dettagli aggiuntivi e sarà aggiornata se cambiano funzionalità, fornitori o categorie di dati
+          trattati. Le modifiche sostanziali saranno comunicate nell'app o attraverso un altro canale idoneo prima che producano
+          effetto, quando richiesto dalla normativa.
         </p>
       </PolicySection>
     </div>
@@ -185,9 +312,19 @@ export function CookiePolicy() {
       </PolicySection>
 
       <PolicySection title="2. Cookie usati da questo sito">
-        <p>
+        <p className="mb-3">
           Questo sito non usa cookie di profilazione, cookie marketing o cookie analytics. Non usiamo Google Analytics, Meta Pixel
           o strumenti simili. Il modulo di iscrizione invia direttamente l'indirizzo email a Supabase quando premi il pulsante di invio.
+        </p>
+        <p>
+          Le pagine di conferma dell'account e recupero password possono usare memoria locale o di sessione strettamente necessaria a
+          verificare il collegamento ricevuto, mantenere per il tempo necessario la sessione di autenticazione e completare l'operazione
+          richiesta. Queste tecnologie non sono usate per profilazione o pubblicità.
+        </p>
+        <p className="mt-3">
+          Cloudflare fornisce hosting, storage, distribuzione e protezione del sito nella regione europea e può utilizzare tecnologie
+          strettamente necessarie alla sicurezza, alla gestione del traffico e alla disponibilità del servizio. I relativi log tecnici
+          sono conservati per un massimo di 12 mesi.
         </p>
       </PolicySection>
 
@@ -199,7 +336,14 @@ export function CookiePolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="4. Contatti">
+      <PolicySection title="4. App mobile">
+        <p>
+          Questa Cookie Policy riguarda il sito web. La gestione del consenso pubblicitario e degli identificatori nell'app mobile è
+          descritta nella <a href="/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="5. Contatti">
         <p>Per domande su cookie o strumenti di tracciamento puoi scrivere a <EmailLink />.</p>
       </PolicySection>
     </div>

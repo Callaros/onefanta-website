@@ -3,7 +3,7 @@ import { WaitlistPrivacyPolicy } from '../content/legal';
 
 function WaitlistPrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy - One Fanta Waitlist" subtitle="Informativa per la lista d'attesa del sito One Fanta.">
+    <LegalPage title="Privacy Policy - OneFanta Waitlist" subtitle="Informativa per la lista d'attesa del sito OneFanta.">
       <WaitlistPrivacyPolicy />
     </LegalPage>
   );

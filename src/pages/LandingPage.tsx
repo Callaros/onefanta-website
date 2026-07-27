@@ -7,6 +7,7 @@ import {
   Cookie,
   Lock,
   Mail,
+  ScrollText,
   Shield,
   Star,
   Trash2,
@@ -140,7 +141,7 @@ function LandingPage() {
                   <CheckCircle className="w-7 h-7 text-electric-400" />
                 </div>
                 <p className="text-xl font-semibold text-electric-300">Sei nella lista!</p>
-                <p className="text-dark-400">Ti avvisiamo non appena One Fanta sarà disponibile.</p>
+                <p className="text-dark-400">Ti avvisiamo non appena OneFanta sarà disponibile.</p>
               </div>
             ) : (
               <>
@@ -152,9 +153,13 @@ function LandingPage() {
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
                     <input
                       type="email"
+                      name="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Inserisci la tua email"
+                      autoComplete="email"
+                      aria-describedby="waitlist-privacy-notice"
+                      required
                       className="w-full pl-12 pr-4 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
                       disabled={status === 'loading'}
                     />
@@ -179,9 +184,10 @@ function LandingPage() {
                   </div>
                 )}
 
-                <p className="text-dark-400 text-xs leading-relaxed mt-4">
-                  Iscrivendoti alla waitlist accetti di ricevere aggiornamenti sul lancio di One Fanta.
-                  Puoi richiedere la cancellazione della tua email in qualsiasi momento.{' '}
+                <p id="waitlist-privacy-notice" className="text-dark-400 text-xs leading-relaxed mt-4">
+                  Premendo “Avvisami” chiedi di ricevere aggiornamenti strettamente collegati al lancio di OneFanta e presti il
+                  consenso al relativo trattamento della tua email. Puoi revocare il consenso e chiedere la cancellazione in qualsiasi
+                  momento.{' '}
                   <a href="/waitlist-privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">
                     Leggi la Waitlist Privacy Policy
                   </a>
@@ -292,6 +298,10 @@ function LandingPage() {
           </a>
 
           <div className="flex flex-wrap items-center justify-center gap-5 text-dark-400 text-sm">
+            <a href="/terms" className="hover:text-electric-400 transition-colors flex items-center gap-2">
+              <ScrollText className="w-4 h-4" />
+              Termini e condizioni
+            </a>
             <a href="/privacy" className="hover:text-electric-400 transition-colors flex items-center gap-2">
               <Shield className="w-4 h-4" />
               App Privacy
@@ -321,7 +331,7 @@ function LandingPage() {
           </div>
 
           <p className="text-dark-400 text-sm">
-            © 2026 One Fanta. All rights reserved.
+            © 2026 OneFanta. All rights reserved.
           </p>
         </div>
       </footer>

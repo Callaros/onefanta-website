@@ -29,7 +29,7 @@ function LegalPage({ title, subtitle, children }: LegalPageProps) {
               alt="OneFanta"
               className="h-12 w-auto rounded-xl mb-8"
             />
-            <p className="text-electric-300 text-sm font-medium mb-3">One Fanta</p>
+            <p className="text-electric-300 text-sm font-medium mb-3">OneFanta</p>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
             <p className="text-dark-300 text-lg">{subtitle}</p>
           </header>

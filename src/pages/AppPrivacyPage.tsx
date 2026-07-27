@@ -3,7 +3,7 @@ import { AppPrivacyPolicy } from '../content/legal';
 
 function AppPrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy - One Fanta App" subtitle="Informativa per l'app mobile One Fanta.">
+    <LegalPage title="Privacy Policy - OneFanta App" subtitle="Informativa per l'app mobile OneFanta.">
       <AppPrivacyPolicy />
     </LegalPage>
   );

@@ -5,6 +5,7 @@ import DeleteAccountPage from './pages/DeleteAccountPage';
 import WaitlistPrivacyPage from './pages/WaitlistPrivacyPage';
 import AuthConfirmedPage from './pages/AuthConfirmedPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import TermsPage from './pages/TermsPage';
 
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
@@ -23,6 +24,10 @@ function App() {
 
   if (path === '/contact') {
     return <ContactPage />;
+  }
+
+  if (path === '/terms') {
+    return <TermsPage />;
   }
 
   if (path === '/auth/confirmed') {

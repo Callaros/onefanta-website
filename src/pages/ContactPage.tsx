@@ -14,7 +14,7 @@ function ContactPage() {
 
         <PolicySection title="Supporto">
           <p>
-            Per richieste generali su One Fanta puoi usare lo stesso indirizzo email. Quando l'app sarà disponibile, questa pagina potrà
+            Per richieste generali su OneFanta puoi usare lo stesso indirizzo email. Quando l'app sarà disponibile, questa pagina potrà
             includere canali di supporto dedicati.
           </p>
         </PolicySection>
