@@ -16,10 +16,45 @@ import {
 import Background from '../components/Background';
 import FeatureCard from '../components/FeatureCard';
 import LegalModal, { type LegalModalType } from '../components/LegalModal';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import { CookiePolicy, WaitlistPrivacyPolicy } from '../content/legal';
+import { CookiePolicyEn, WaitlistPrivacyPolicyEn } from '../content/legal.en';
+import { localizedPath, type Locale } from '../lib/i18n';
 import { supabase } from '../lib/supabase';
 
-function LandingPage() {
+function LandingPage({ locale }: { locale: Locale }) {
+  const isItalian = locale === 'it';
+  const t = isItalian ? {
+    notify: 'Avvisami', available: 'Presto disponibile su iOS & Android', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
+    intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
+    joined: 'Sei nella lista!', joinedBody: 'Ti avvisiamo non appena OneFanta sarà disponibile.',
+    formIntro: 'Lascia la tua email: ti avvisiamo il giorno del lancio. Niente spam, mai.', emailPlaceholder: 'Inserisci la tua email',
+    privacyPrefix: 'Premendo “Avvisami” chiedi di ricevere aggiornamenti strettamente collegati al lancio di OneFanta e presti il consenso al relativo trattamento della tua email. Puoi revocare il consenso e chiedere la cancellazione in qualsiasi momento. ',
+    privacyLink: 'Leggi la Waitlist Privacy Policy', first: "Sii tra i primi a entrare nella lista d'attesa", joinCount: 'Unisciti a', players: "giocatori già in lista d'attesa",
+    soon: 'Prossimamente', featuresLabel: 'Vai alle funzionalità', featuresBefore: 'Tutto ciò che ti serve per ', featuresAccent: 'vincere',
+    featuresIntro: 'Costruito da appassionati di fantacalcio, per appassionati di fantacalcio. Ogni funzione pensata per darti il vantaggio decisivo.',
+    liveTitle: 'Voti Live', liveBody: 'Segui i voti dei tuoi giocatori in tempo reale, aggiornati minuto per minuto durante le partite.',
+    leaguesTitle: 'Leghe Private', leaguesBody: 'Crea la tua lega, invita gli amici e sfidatevi nella vostra competizione personalizzata.',
+    statsTitle: 'Statistiche Giocatori', statsBody: 'Analizza le performance di ogni calciatore con dati dettagliati e storici di ogni stagione.',
+    ranksTitle: 'Classifiche in Tempo Reale', ranksBody: 'Guarda la tua posizione aggiornata live durante ogni giornata di campionato.',
+    ready: 'Pronto a dominare?', ctaBody: 'Iscriviti ora e sii il primo a sapere quando lanciamo.', cta: "Unisciti alla lista d'attesa",
+    terms: 'Termini e condizioni', deleteAccount: 'Cancella account', contact: 'Contatti', rights: 'Tutti i diritti riservati.', invalidEmail: 'Inserisci un indirizzo email valido', genericError: 'Qualcosa è andato storto. Riprova.',
+  } : {
+    notify: 'Notify me', available: 'Coming soon to iOS & Android', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
+    intro: 'Live ratings, private leagues with friends and real-time standings.', introAccent: ' Fantasy football done right.',
+    joined: "You're on the list!", joinedBody: "We'll let you know as soon as OneFanta is available.",
+    formIntro: 'Leave your email and we’ll notify you on launch day. No spam, ever.', emailPlaceholder: 'Enter your email',
+    privacyPrefix: 'By selecting “Notify me”, you ask to receive updates strictly related to the OneFanta launch and consent to the processing of your email. You may withdraw consent and request deletion at any time. ',
+    privacyLink: 'Read the Waitlist Privacy Policy', first: 'Be among the first to join the waitlist', joinCount: 'Join', players: 'players already on the waitlist',
+    soon: 'Coming soon', featuresLabel: 'Go to features', featuresBefore: 'Everything you need to ', featuresAccent: 'win',
+    featuresIntro: 'Built by fantasy football fans, for fantasy football fans. Every feature is designed to give you the winning edge.',
+    liveTitle: 'Live Ratings', liveBody: 'Follow your players’ ratings in real time, updated minute by minute during matches.',
+    leaguesTitle: 'Private Leagues', leaguesBody: 'Create your league, invite friends and compete in your own custom competition.',
+    statsTitle: 'Player Statistics', statsBody: 'Analyse every player with detailed performance data and season history.',
+    ranksTitle: 'Real-Time Standings', ranksBody: 'See your live position throughout every matchday.',
+    ready: 'Ready to take control?', ctaBody: 'Join now and be the first to know when we launch.', cta: 'Join the waitlist',
+    terms: 'Terms and conditions', deleteAccount: 'Delete account', contact: 'Contact', rights: 'All rights reserved.', invalidEmail: 'Enter a valid email address', genericError: 'Something went wrong. Please try again.',
+  };
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -41,14 +76,14 @@ function LandingPage() {
   const visibleWaitlistCount = waitlistCount !== null && waitlistCount >= 100
     ? Math.floor(waitlistCount / 100) * 100
     : null;
-  const formattedWaitlistCount = visibleWaitlistCount?.toLocaleString('it-IT');
+  const formattedWaitlistCount = visibleWaitlistCount?.toLocaleString(locale === 'it' ? 'it-IT' : 'en-US');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !email.includes('@')) {
       setStatus('error');
-      setErrorMessage('Inserisci un indirizzo email valido');
+      setErrorMessage(t.invalidEmail);
       return;
     }
 
@@ -72,7 +107,7 @@ function LandingPage() {
       }
     } catch {
       setStatus('error');
-      setErrorMessage('Qualcosa è andato storto. Riprova.');
+      setErrorMessage(t.genericError);
     }
   };
 
@@ -96,19 +131,14 @@ function LandingPage() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-950/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center" aria-label="OneFanta home">
+          <a href={localizedPath(locale, '/')} className="flex items-center" aria-label="OneFanta home">
             <img
               src="/onefanta-logo.png"
               alt="OneFanta"
               className="h-10 w-auto rounded-xl"
             />
           </a>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="px-5 py-2 bg-electric-500 hover:bg-electric-400 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
-          >
-            Avvisami
-          </button>
+          <LanguageSwitcher locale={locale} compact />
         </div>
       </nav>
 
@@ -116,22 +146,22 @@ function LandingPage() {
         <div className="max-w-3xl mx-auto text-center w-full">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-electric-500/10 border border-electric-500/25 rounded-full mb-8 animate-float">
             <span className="w-2 h-2 bg-electric-400 rounded-full animate-pulse" />
-            <span className="text-electric-300 text-sm font-medium">Presto disponibile su iOS & Android</span>
+            <span className="text-electric-300 text-sm font-medium">{t.available}</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-5 leading-tight">
             <span className="bg-gradient-to-r from-white via-electric-100 to-electric-300 bg-clip-text text-transparent">
-              Domina la tua
+              {t.heroTop}
             </span>
             <br />
             <span className="bg-gradient-to-r from-electric-400 to-electric-600 bg-clip-text text-transparent">
-              Lega di Fantacalcio
+              {t.heroBottom}
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-dark-300 max-w-xl mx-auto mb-10 leading-relaxed">
-            Voti live, leghe private con gli amici e classifiche in tempo reale.
-            <span className="text-electric-400"> Il fantacalcio fatto bene.</span>
+            {t.intro}
+            <span className="text-electric-400">{t.introAccent}</span>
           </p>
 
           <div className="bg-gradient-to-br from-dark-800/80 to-dark-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl shadow-electric-500/5 mb-8">
@@ -140,13 +170,13 @@ function LandingPage() {
                 <div className="w-14 h-14 bg-electric-500/20 rounded-full flex items-center justify-center animate-pulse-glow">
                   <CheckCircle className="w-7 h-7 text-electric-400" />
                 </div>
-                <p className="text-xl font-semibold text-electric-300">Sei nella lista!</p>
-                <p className="text-dark-400">Ti avvisiamo non appena OneFanta sarà disponibile.</p>
+                <p className="text-xl font-semibold text-electric-300">{t.joined}</p>
+                <p className="text-dark-400">{t.joinedBody}</p>
               </div>
             ) : (
               <>
                 <p className="text-dark-300 mb-4">
-                  Lascia la tua email: ti avvisiamo il giorno del lancio. Niente spam, mai.
+                  {t.formIntro}
                 </p>
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative">
@@ -156,7 +186,7 @@ function LandingPage() {
                       name="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Inserisci la tua email"
+                      placeholder={t.emailPlaceholder}
                       autoComplete="email"
                       aria-describedby="waitlist-privacy-notice"
                       required
@@ -172,7 +202,7 @@ function LandingPage() {
                     {status === 'loading' ? (
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
-                      'Avvisami'
+                      t.notify
                     )}
                   </button>
                 </form>
@@ -185,11 +215,9 @@ function LandingPage() {
                 )}
 
                 <p id="waitlist-privacy-notice" className="text-dark-400 text-xs leading-relaxed mt-4">
-                  Premendo “Avvisami” chiedi di ricevere aggiornamenti strettamente collegati al lancio di OneFanta e presti il
-                  consenso al relativo trattamento della tua email. Puoi revocare il consenso e chiedere la cancellazione in qualsiasi
-                  momento.{' '}
-                  <a href="/waitlist-privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">
-                    Leggi la Waitlist Privacy Policy
+                  {t.privacyPrefix}
+                  <a href={localizedPath(locale, '/waitlist-privacy')} className="text-electric-300 hover:text-electric-200 underline underline-offset-4">
+                    {t.privacyLink}
                   </a>
                   .
                 </p>
@@ -199,12 +227,12 @@ function LandingPage() {
             <p className="text-dark-500 text-xs text-center mt-4">
               {formattedWaitlistCount ? (
                 <>
-                  Unisciti a{' '}
+                  {t.joinCount}{' '}
                   <span className="text-electric-400 font-semibold">{formattedWaitlistCount}+</span>{' '}
-                  giocatori già in lista d'attesa
+                  {t.players}
                 </>
               ) : (
-                "Sii tra i primi a entrare nella lista d'attesa"
+                t.first
               )}
             </p>
           </div>
@@ -215,7 +243,7 @@ function LandingPage() {
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
               <div className="text-left">
-                <div className="text-xs text-dark-400">Prossimamente</div>
+                <div className="text-xs text-dark-400">{t.soon}</div>
                 <div className="font-semibold">App Store</div>
               </div>
             </button>
@@ -224,7 +252,7 @@ function LandingPage() {
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
               </svg>
               <div className="text-left">
-                <div className="text-xs text-dark-400">Prossimamente</div>
+                <div className="text-xs text-dark-400">{t.soon}</div>
                 <div className="font-semibold">Google Play</div>
               </div>
             </button>
@@ -233,7 +261,7 @@ function LandingPage() {
           <button
             onClick={scrollToFeatures}
             className="animate-bounce text-dark-400 hover:text-electric-400 transition-colors"
-            aria-label="Vai alle funzionalità"
+            aria-label={t.featuresLabel}
           >
             <ChevronDown className="w-8 h-8 mx-auto" />
           </button>
@@ -244,25 +272,25 @@ function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Tutto ciò che ti serve per <span className="text-electric-400">vincere</span>
+              {t.featuresBefore}<span className="text-electric-400">{t.featuresAccent}</span>
             </h2>
             <p className="text-dark-300 text-lg max-w-2xl mx-auto">
-              Costruito da appassionati di fantacalcio, per appassionati di fantacalcio. Ogni funzione pensata per darti il vantaggio decisivo.
+              {t.featuresIntro}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <FeatureCard icon={<Star className="w-7 h-7 text-electric-400" />} title="Voti Live">
-              Segui i voti dei tuoi giocatori in tempo reale, aggiornati minuto per minuto durante le partite.
+            <FeatureCard icon={<Star className="w-7 h-7 text-electric-400" />} title={t.liveTitle}>
+              {t.liveBody}
             </FeatureCard>
-            <FeatureCard icon={<Lock className="w-7 h-7 text-electric-400" />} title="Leghe Private">
-              Crea la tua lega, invita gli amici e sfidatevi nella vostra competizione personalizzata.
+            <FeatureCard icon={<Lock className="w-7 h-7 text-electric-400" />} title={t.leaguesTitle}>
+              {t.leaguesBody}
             </FeatureCard>
-            <FeatureCard icon={<BarChart3 className="w-7 h-7 text-electric-400" />} title="Statistiche Giocatori">
-              Analizza le performance di ogni calciatore con dati dettagliati e storici di ogni stagione.
+            <FeatureCard icon={<BarChart3 className="w-7 h-7 text-electric-400" />} title={t.statsTitle}>
+              {t.statsBody}
             </FeatureCard>
-            <FeatureCard icon={<Users className="w-7 h-7 text-electric-400" />} title="Classifiche in Tempo Reale">
-              Guarda la tua posizione aggiornata live durante ogni giornata di campionato.
+            <FeatureCard icon={<Users className="w-7 h-7 text-electric-400" />} title={t.ranksTitle}>
+              {t.ranksBody}
             </FeatureCard>
           </div>
         </div>
@@ -272,16 +300,16 @@ function LandingPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gradient-to-r from-electric-500/10 via-electric-600/15 to-electric-500/10 border border-electric-500/20 rounded-3xl p-8 md:p-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Pronto a dominare?
+              {t.ready}
             </h2>
             <p className="text-dark-300 text-lg mb-8">
-              Iscriviti ora e sii il primo a sapere quando lanciamo.
+              {t.ctaBody}
             </p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="px-8 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
             >
-              Unisciti alla lista d'attesa
+              {t.cta}
             </button>
           </div>
         </div>
@@ -289,7 +317,7 @@ function LandingPage() {
 
       <footer className="py-12 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <a href="/" className="flex items-center" aria-label="OneFanta home">
+          <a href={localizedPath(locale, '/')} className="flex items-center" aria-label="OneFanta home">
             <img
               src="/onefanta-logo.png"
               alt="OneFanta"
@@ -298,11 +326,11 @@ function LandingPage() {
           </a>
 
           <div className="flex flex-wrap items-center justify-center gap-5 text-dark-400 text-sm">
-            <a href="/terms" className="hover:text-electric-400 transition-colors flex items-center gap-2">
+            <a href={localizedPath(locale, '/terms')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
               <ScrollText className="w-4 h-4" />
-              Termini e condizioni
+              {t.terms}
             </a>
-            <a href="/privacy" className="hover:text-electric-400 transition-colors flex items-center gap-2">
+            <a href={localizedPath(locale, '/privacy')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
               <Shield className="w-4 h-4" />
               App Privacy
             </a>
@@ -313,13 +341,13 @@ function LandingPage() {
               <Mail className="w-4 h-4" />
               Waitlist Privacy
             </button>
-            <a href="/delete-account" className="hover:text-electric-400 transition-colors flex items-center gap-2">
+            <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
               <Trash2 className="w-4 h-4" />
-              Delete Account
+              {t.deleteAccount}
             </a>
-            <a href="/contact" className="hover:text-electric-400 transition-colors flex items-center gap-2">
+            <a href={localizedPath(locale, '/contact')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              Contact
+              {t.contact}
             </a>
             <button
               onClick={() => openModal('cookie')}
@@ -331,14 +359,16 @@ function LandingPage() {
           </div>
 
           <p className="text-dark-400 text-sm">
-            © 2026 OneFanta. All rights reserved.
+            © 2026 OneFanta. {t.rights}
           </p>
         </div>
       </footer>
 
       {activeModal && (
-        <LegalModal activeModal={activeModal} onClose={closeModal}>
-          {activeModal === 'waitlistPrivacy' ? <WaitlistPrivacyPolicy /> : <CookiePolicy />}
+        <LegalModal activeModal={activeModal} onClose={closeModal} locale={locale}>
+          {activeModal === 'waitlistPrivacy'
+            ? (isItalian ? <WaitlistPrivacyPolicy /> : <WaitlistPrivacyPolicyEn />)
+            : (isItalian ? <CookiePolicy /> : <CookiePolicyEn />)}
         </LegalModal>
       )}
     </div>

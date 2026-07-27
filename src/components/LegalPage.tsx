@@ -1,27 +1,33 @@
 import type { ReactNode } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import Background from './Background';
+import LanguageSwitcher from './LanguageSwitcher';
+import { localizedPath, type Locale } from '../lib/i18n';
 
 type LegalPageProps = {
   title: string;
   subtitle: string;
   children: ReactNode;
+  locale: Locale;
 };
 
-function LegalPage({ title, subtitle, children }: LegalPageProps) {
+function LegalPage({ title, subtitle, children, locale }: LegalPageProps) {
   return (
     <div className="min-h-screen bg-dark-950 text-white overflow-x-hidden">
       <Background />
 
       <main className="px-6 py-10 md:py-16">
         <div className="max-w-4xl mx-auto">
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 text-dark-300 hover:text-electric-300 transition-colors mb-10"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Torna al sito
-          </a>
+          <div className="mb-10 flex items-center justify-between gap-4">
+            <a
+              href={localizedPath(locale, '/')}
+              className="inline-flex items-center gap-2 text-dark-300 hover:text-electric-300 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              {locale === 'it' ? 'Torna al sito' : 'Back to website'}
+            </a>
+            <LanguageSwitcher locale={locale} compact />
+          </div>
 
           <header className="mb-10">
             <img

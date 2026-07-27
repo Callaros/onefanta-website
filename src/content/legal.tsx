@@ -119,7 +119,7 @@ export function AppPrivacyPolicy() {
         </p>
         <p>
           Questa informativa descrive il trattamento dei dati personali nell'app mobile OneFanta. La landing page e la waitlist
-          sono coperte dalla <a href="/waitlist-privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Waitlist Privacy Policy</a>.
+          sono coperte dalla <a href="/it/waitlist-privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Waitlist Privacy Policy</a>.
         </p>
       </PolicySection>
 
@@ -238,7 +238,7 @@ export function AppPrivacyPolicy() {
           cancellazione è definitiva e non può essere annullata.
         </p>
         <p>
-          La pagina <a href="/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cancellazione dell'account e dei dati</a>
+          La pagina <a href="/it/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cancellazione dell'account e dei dati</a>
           {' '}contiene ulteriori informazioni. Resta possibile esercitare i diritti previsti dal GDPR scrivendo a <EmailLink />;
           questa possibilità è distinta dalla procedura ordinaria e immediata disponibile nell'app.
         </p>
@@ -317,6 +317,10 @@ export function CookiePolicy() {
           o strumenti simili. Il modulo di iscrizione invia direttamente l'indirizzo email a Supabase quando premi il pulsante di invio.
         </p>
         <p>
+          Il sito usa inoltre il local storage strettamente necessario per ricordare la lingua scelta e mantenere la navigazione
+          nella versione italiana o inglese. Questa preferenza non è usata per profilazione o pubblicità.
+        </p>
+        <p className="mt-3">
           Le pagine di conferma dell'account e recupero password possono usare memoria locale o di sessione strettamente necessaria a
           verificare il collegamento ricevuto, mantenere per il tempo necessario la sessione di autenticazione e completare l'operazione
           richiesta. Queste tecnologie non sono usate per profilazione o pubblicità.
@@ -339,7 +343,7 @@ export function CookiePolicy() {
       <PolicySection title="4. App mobile">
         <p>
           Questa Cookie Policy riguarda il sito web. La gestione del consenso pubblicitario e degli identificatori nell'app mobile è
-          descritta nella <a href="/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
+          descritta nella <a href="/it/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
         </p>
       </PolicySection>
 

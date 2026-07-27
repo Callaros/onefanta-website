@@ -1,10 +1,26 @@
 import LegalPage from '../components/LegalPage';
 import PolicySection from '../components/PolicySection';
 import { EmailLink } from '../content/legal';
+import type { Locale } from '../lib/i18n';
 
-function ContactPage() {
+function ContactPage({ locale }: { locale: Locale }) {
+  if (locale === 'en') {
+    return (
+      <LegalPage locale={locale} title="Contact" subtitle="Official contacts for privacy, support and data requests.">
+        <div className="space-y-6">
+          <PolicySection title="Privacy and personal data">
+            <p>For GDPR requests, data deletion, withdrawal of consent or questions about our privacy notices, contact us at <EmailLink />.</p>
+          </PolicySection>
+          <PolicySection title="Support">
+            <p>For general questions about OneFanta, you can use the same email address. Once the app is available, this page may include dedicated support channels.</p>
+          </PolicySection>
+        </div>
+      </LegalPage>
+    );
+  }
+
   return (
-    <LegalPage title="Contact" subtitle="Contatti ufficiali per privacy, supporto e richieste dati.">
+    <LegalPage locale={locale} title="Contact" subtitle="Contatti ufficiali per privacy, supporto e richieste dati.">
       <div className="space-y-6">
         <PolicySection title="Privacy e dati personali">
           <p>

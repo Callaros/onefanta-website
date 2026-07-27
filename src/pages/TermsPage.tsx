@@ -1,12 +1,23 @@
 import LegalPage from '../components/LegalPage';
 import PolicySection from '../components/PolicySection';
 import { EmailLink } from '../content/legal';
+import TermsEn from '../content/terms.en';
+import type { Locale } from '../lib/i18n';
 
 const TERMS_LAST_UPDATED = '27 luglio 2026';
 
-function TermsPage() {
+function TermsPage({ locale }: { locale: Locale }) {
+  if (locale === 'en') {
+    return (
+      <LegalPage locale={locale} title="Terms and conditions of use" subtitle="Rules for using the OneFanta website, app and services.">
+        <TermsEn />
+      </LegalPage>
+    );
+  }
+
   return (
     <LegalPage
+      locale={locale}
       title="Termini e condizioni di utilizzo"
       subtitle="Le regole per usare il sito, l'app e i servizi OneFanta."
     >
@@ -33,7 +44,7 @@ function TermsPage() {
             non limita i diritti che ti spettano per legge.
           </p>
           <p>
-            Il trattamento dei dati personali è descritto nella <a href="/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
+            Il trattamento dei dati personali è descritto nella <a href="/it/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
             Per il sito, la waitlist e i cookie si applicano le rispettive informative disponibili nel footer.
           </p>
         </PolicySection>
@@ -160,7 +171,7 @@ function TermsPage() {
           <p className="mb-3">
             Le notifiche sono facoltative e possono essere disabilitate dall'utente. Per i trattamenti pubblicitari soggetti a
             consenso, l'app presenta all'avvio il relativo meccanismo di scelta prima di richiedere tali trattamenti. Maggiori dettagli
-            sono disponibili nella <a href="/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
+            sono disponibili nella <a href="/it/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
             Se l'utente non acconsente alla personalizzazione, possono essere mostrati annunci non personalizzati.
           </p>
           <p>
@@ -193,7 +204,7 @@ function TermsPage() {
             Puoi smettere di usare il Servizio ed eliminare direttamente l'account dalla sezione Profilo dell'app, premendo il pulsante
             rosso “Elimina account” e confermando la scelta. La cancellazione è definitiva e non può essere annullata. Ulteriori
             informazioni sono disponibili nella pagina{' '}
-            <a href="/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cancellazione dell'account e dei dati</a>.
+            <a href="/it/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cancellazione dell'account e dei dati</a>.
           </p>
           <p>
             Possiamo limitare o sospendere funzionalità, rimuovere contenuti o chiudere un account in caso di violazioni, rischi per

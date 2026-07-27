@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Cookie, Shield, X } from 'lucide-react';
+import type { Locale } from '../lib/i18n';
 
 export type LegalModalType = 'waitlistPrivacy' | 'cookie';
 
@@ -7,9 +8,10 @@ type LegalModalProps = {
   activeModal: LegalModalType;
   onClose: () => void;
   children: ReactNode;
+  locale: Locale;
 };
 
-function LegalModal({ activeModal, onClose, children }: LegalModalProps) {
+function LegalModal({ activeModal, onClose, children, locale }: LegalModalProps) {
   const isWaitlistPrivacy = activeModal === 'waitlistPrivacy';
 
   return (
@@ -38,7 +40,7 @@ function LegalModal({ activeModal, onClose, children }: LegalModalProps) {
           <button
             onClick={onClose}
             className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-            aria-label="Chiudi"
+            aria-label={locale === 'it' ? 'Chiudi' : 'Close'}
           >
             <X className="w-5 h-5" />
           </button>
