@@ -5,6 +5,7 @@ import {
   CheckCircle,
   ChevronDown,
   Cookie,
+  Headphones,
   Lock,
   Mail,
   ScrollText,
@@ -353,6 +354,10 @@ function LandingPage({ locale }: { locale: Locale }) {
               <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Trash2 className="w-4 h-4" />
                 {t.deleteAccount}
+              </a>
+              <a href={localizedPath(locale, '/support')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <Headphones className="w-4 h-4" />
+                {isItalian ? 'Assistenza' : 'Support'}
               </a>
               <a href={localizedPath(locale, '/contact')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Mail className="w-4 h-4" />

@@ -7,21 +7,28 @@ import WaitlistPrivacyPage from './pages/WaitlistPrivacyPage';
 import AuthConfirmedPage from './pages/AuthConfirmedPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import TermsPage from './pages/TermsPage';
+import SupportPage from './pages/SupportPage';
 import { detectPreferredLocale, getLocaleFromPath, localizedPath, rememberLocale, stripLocaleFromPath } from './lib/i18n';
 
 function App() {
   const locale = getLocaleFromPath(window.location.pathname);
   const activeLocale = locale ?? detectPreferredLocale();
+  const path = locale ? stripLocaleFromPath(window.location.pathname) : '/';
 
   useEffect(() => {
     if (!locale) return;
     rememberLocale(locale);
     document.documentElement.lang = locale;
     const isItalian = locale === 'it';
-    const title = isItalian ? 'OneFanta - Fantacalcio per la Premier League' : 'OneFanta - Premier League Fantasy Football';
-    const description = isItalian
-      ? 'Voti live, leghe private e classifiche in tempo reale per il fantacalcio basato sulla Premier League.'
-      : 'Live ratings, private leagues and real-time standings for fantasy football based on the Premier League.';
+    const isSupportPage = path === '/support';
+    const title = isSupportPage
+      ? (isItalian ? 'Assistenza OneFanta' : 'OneFanta Support')
+      : (isItalian ? 'OneFanta - Fantacalcio per la Premier League' : 'OneFanta - Premier League Fantasy Football');
+    const description = isSupportPage
+      ? (isItalian ? 'Assistenza ufficiale per account, leghe e funzionalità dell’app OneFanta.' : 'Official support for OneFanta accounts, leagues and app features.')
+      : (isItalian
+        ? 'Voti live, leghe private e classifiche in tempo reale per il fantacalcio basato sulla Premier League.'
+        : 'Live ratings, private leagues and real-time standings for fantasy football based on the Premier League.');
     document.title = title;
 
     const setMeta = (selector: string, content: string) => {
@@ -47,15 +54,13 @@ function App() {
     addLink('alternate', absolute('it'), 'it');
     addLink('alternate', absolute('en'), 'en');
     addLink('alternate', absolute('en'), 'x-default');
-  }, [locale]);
+  }, [locale, path]);
 
   if (!locale) {
     const destination = `${localizedPath(activeLocale, window.location.pathname)}${window.location.search}${window.location.hash}`;
     window.location.replace(destination);
     return null;
   }
-
-  const path = stripLocaleFromPath(window.location.pathname);
 
   if (path === '/privacy') {
     return <AppPrivacyPage locale={locale} />;
@@ -71,6 +76,10 @@ function App() {
 
   if (path === '/contact') {
     return <ContactPage locale={locale} />;
+  }
+
+  if (path === '/support') {
+    return <SupportPage locale={locale} />;
   }
 
   if (path === '/terms') {
