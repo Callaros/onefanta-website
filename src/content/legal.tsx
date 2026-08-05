@@ -1,8 +1,8 @@
 import PolicySection from '../components/PolicySection';
 
-export const CONTACT_EMAIL = 'privacy@onefanta.app';
-export const LAST_UPDATED = '27 luglio 2026';
-const APP_PRIVACY_LAST_UPDATED = '27 luglio 2026';
+export const CONTACT_EMAIL = 'privacy@onefanta.com';
+export const LAST_UPDATED = '5 agosto 2026';
+const APP_PRIVACY_LAST_UPDATED = '5 agosto 2026';
 
 export function EmailLink() {
   return (
