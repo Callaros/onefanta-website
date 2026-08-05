@@ -4,7 +4,7 @@ import { EmailLink } from '../content/legal';
 import TermsEn from '../content/terms.en';
 import type { Locale } from '../lib/i18n';
 
-const TERMS_LAST_UPDATED = '27 luglio 2026';
+const TERMS_LAST_UPDATED = '5 agosto 2026';
 
 function TermsPage({ locale }: { locale: Locale }) {
   if (locale === 'en') {

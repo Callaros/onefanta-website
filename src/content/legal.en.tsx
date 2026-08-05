@@ -1,7 +1,7 @@
 import PolicySection from '../components/PolicySection';
 import { EmailLink } from './legal';
 
-export const LAST_UPDATED_EN = 'July 27, 2026';
+export const LAST_UPDATED_EN = 'August 5, 2026';
 
 export function WaitlistPrivacyPolicyEn() {
   return (
