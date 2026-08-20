@@ -4,7 +4,7 @@ import type { Locale } from '../lib/i18n';
 
 export const CONTACT_EMAIL = 'privacy@onefanta.com';
 export const LAST_UPDATED = '20 agosto 2026';
-const APP_PRIVACY_LAST_UPDATED = '11 agosto 2026';
+const APP_PRIVACY_LAST_UPDATED = '20 agosto 2026';
 
 export function EmailLink() {
   return (
@@ -31,7 +31,7 @@ export function WebsitePrivacyPolicy() {
         <p className="mb-3">Quando visiti il sito possiamo trattare:</p>
         <ul className="list-disc list-inside space-y-2 ml-4">
           <li><strong className="text-white">Dati tecnici:</strong> indirizzo IP, user-agent, data e ora della richiesta e altri dati di rete necessari a fornire il sito, proteggerlo e prevenire abusi.</li>
-          <li><strong className="text-white">Dati di contatto:</strong> le informazioni che scegli di inviarci quando ci contatti via email.</li>
+          <li><strong className="text-white">Dati di contatto e registrazione:</strong> le informazioni che scegli di inviarci quando ci contatti via email e l'indirizzo email che invii per registrarti o richiedere email relative all'account.</li>
         </ul>
       </PolicySection>
 
@@ -46,21 +46,27 @@ export function WebsitePrivacyPolicy() {
       <PolicySection title="4. Servizi e destinatari">
         <p>
           Cloudflare fornisce l'infrastruttura di hosting, storage, distribuzione e sicurezza del sito nella regione europea e può
-          trattare i dati tecnici necessari a erogarlo e proteggerlo. Non vendiamo i tuoi dati e non li usiamo per marketing o
+          trattare i dati tecnici necessari a erogarlo e proteggerlo. Supabase fornisce i servizi di registrazione, autenticazione e
+          database usati dal sito e può trattare l'indirizzo email e i dati tecnici necessari a tali funzioni. Resend invia email
+          transazionali, quali email di conferma dell'account e reimpostazione della password, e può trattare l'indirizzo email del
+          destinatario, il contenuto del messaggio e i metadati di consegna. Non vendiamo i tuoi dati e non li usiamo per marketing o
           profilazione.
         </p>
       </PolicySection>
 
       <PolicySection title="5. Trasferimenti fuori dallo SEE">
         <p>
-          I servizi Cloudflare usati dal sito sono configurati nella regione europea. Qualora i fornitori o i loro sub-responsabili effettuino trattamenti fuori dallo Spazio
+          I servizi Cloudflare usati dal sito sono configurati nella regione europea. Qualora i fornitori o i loro sub-responsabili,
+          inclusi Supabase o Resend, effettuino trattamenti fuori dallo Spazio
           Economico Europeo, gli eventuali trasferimenti avvengono mediante i meccanismi riconosciuti dalla normativa applicabile,
           come decisioni di adeguatezza, Data Privacy Framework o clausole contrattuali standard. Puoi chiedere informazioni sulle
           garanzie applicabili scrivendo a <EmailLink />.
         </p>
         <p className="mt-3">
           Puoi consultare l'informativa di{' '}
-          <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cloudflare</a>.
+          <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cloudflare</a>,{' '}
+          <a href="https://supabase.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Supabase</a> e{' '}
+          <a href="https://resend.com/legal/privacy-policy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Resend</a>.
         </p>
       </PolicySection>
 
@@ -217,7 +223,10 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
           di gioco e i contenuti condivisi nella lega, da Supabase per backend, autenticazione e archiviazione nella regione Europa
           centrale (Francoforte), da Google e Apple per l'autenticazione federata scelta dall'utente,
           Functional Software, Inc. (Sentry) per la diagnostica, Google e i relativi fornitori autorizzati per Firebase Cloud Messaging
-          e Google Mobile Ads, nonché dai fornitori di email. Sentry tratta gli eventi nella regione Unione europea. Qualora i
+          e Google Mobile Ads e da Resend per le email transazionali, compresi l'indirizzo email del destinatario, il contenuto del
+          messaggio e i metadati di consegna. Sportmonks fornisce a OneFanta i dati sportivi: OneFanta li recupera lato server e non
+          invia intenzionalmente a Sportmonks dati dell'account o dati di gioco degli utenti. Sentry tratta gli eventi nella regione
+          Unione europea. Qualora i
           fornitori o i loro sub-responsabili effettuino trattamenti fuori dallo
           Spazio Economico Europeo, i trasferimenti avvengono sulla base dei meccanismi riconosciuti dalla normativa applicabile, come
           decisioni di adeguatezza, Data Privacy Framework o clausole contrattuali standard.
@@ -226,7 +235,8 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
           Puoi consultare le informative dei principali fornitori sui siti di{' '}
           <a href="https://supabase.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Supabase</a>,{' '}
           <a href="https://sentry.io/privacy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Sentry</a>,{' '}
-          <a href="https://policies.google.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Google</a> e{' '}
+          <a href="https://policies.google.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Google</a>,{' '}
+          <a href="https://resend.com/legal/privacy-policy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Resend</a> e{' '}
           <a href="https://www.apple.com/legal/privacy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Apple</a>.
         </p>
       </PolicySection>

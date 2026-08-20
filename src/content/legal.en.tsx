@@ -4,7 +4,7 @@ import { EmailLink } from './legal.it';
 import type { Locale } from '../lib/i18n';
 
 export const LAST_UPDATED_EN = 'August 20, 2026';
-const APP_PRIVACY_LAST_UPDATED_EN = 'August 11, 2026';
+const APP_PRIVACY_LAST_UPDATED_EN = 'August 20, 2026';
 
 export function WebsitePrivacyPolicyEn() {
   return (
@@ -17,18 +17,18 @@ export function WebsitePrivacyPolicyEn() {
         <p className="mb-3">When you visit the website, we may process:</p>
         <ul className="ml-4 list-inside list-disc space-y-2">
           <li><strong className="text-white">Technical data:</strong> IP address, user agent, request date and time, and other network data needed to provide, protect and prevent abuse of the website.</li>
-          <li><strong className="text-white">Contact data:</strong> information you choose to send when contacting us by email.</li>
+          <li><strong className="text-white">Contact and registration data:</strong> information you choose to send when contacting us by email and the email address you submit to register or request account-related emails.</li>
         </ul>
       </PolicySection>
       <PolicySection title="3. Purposes and legal basis">
         <p>Technical data is processed for our legitimate interest in making the website available and secure and preventing abuse. Information sent by email is processed to respond to your request and, where necessary, to meet legal obligations or protect our rights.</p>
       </PolicySection>
       <PolicySection title="4. Services and recipients">
-        <p>Cloudflare provides the website's hosting, storage, delivery and security infrastructure in the European region and may process the technical data needed to provide and protect it. We do not sell your data or use it for marketing or profiling.</p>
+        <p>Cloudflare provides the website's hosting, storage, delivery and security infrastructure in the European region and may process the technical data needed to provide and protect it. Supabase provides the registration, authentication and database services used by the website and may process the email address and technical data needed for those functions. Resend sends transactional emails, such as account confirmation and password-reset emails, and may process the recipient's email address, message content and delivery metadata. We do not sell your data or use it for marketing or profiling.</p>
       </PolicySection>
       <PolicySection title="5. Transfers outside the EEA">
-        <p>The Cloudflare services used by the website are configured in the European region. If providers or subprocessors process data outside the European Economic Area, transfers rely on safeguards recognised by applicable law, such as adequacy decisions, the Data Privacy Framework or Standard Contractual Clauses. Contact <EmailLink /> for information about applicable safeguards.</p>
-        <p className="mt-3">See the privacy notice of <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Cloudflare</a>.</p>
+        <p>The Cloudflare services used by the website are configured in the European region. If providers or subprocessors, including Supabase or Resend, process data outside the European Economic Area, transfers rely on safeguards recognised by applicable law, such as adequacy decisions, the Data Privacy Framework or Standard Contractual Clauses. Contact <EmailLink /> for information about applicable safeguards.</p>
+        <p className="mt-3">See the privacy notices of <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Cloudflare</a>, <a href="https://supabase.com/privacy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Supabase</a> and <a href="https://resend.com/legal/privacy-policy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Resend</a>.</p>
       </PolicySection>
       <PolicySection title="6. Retention">
         <p>Technical data is retained for as long as necessary for the purposes above and normally no longer than 12 months. Emails are retained for as long as needed to manage the request and meet any legal obligations. We may retain aggregated, non-identifying statistics.</p>
@@ -102,8 +102,8 @@ export function AppPrivacyPolicyEn({ locale }: { locale: Locale }) {
         <p>Advertising data may include advertising or installation identifiers, IP address, device and app characteristics, ad interactions, diagnostics and consent information. OneFanta does not sell personal data. If you do not consent to personalisation, the app may still display non-personalised ads in accordance with your choices.</p>
       </PolicySection>
       <PolicySection title="9. Recipients and international transfers">
-        <p>Where necessary, data may be processed by members of private leagues for shared game data and content; Supabase for backend, authentication and storage in Central Europe (Frankfurt); Google and Apple for the federated sign-in selected by the user; Functional Software, Inc. (Sentry) for diagnostics; Google and authorised providers for Firebase Cloud Messaging and Google Mobile Ads; and email providers. Sentry processes events in the EU region. Processing outside the EEA relies on safeguards recognised by applicable law, including adequacy decisions, the Data Privacy Framework or Standard Contractual Clauses.</p>
-        <p className="mt-3">See the privacy notices of <a href="https://supabase.com/privacy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Supabase</a>, <a href="https://sentry.io/privacy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Sentry</a>, <a href="https://policies.google.com/privacy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Google</a> and <a href="https://www.apple.com/legal/privacy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Apple</a>.</p>
+        <p>Where necessary, data may be processed by members of private leagues for shared game data and content; Supabase for backend, authentication and storage in Central Europe (Frankfurt); Google and Apple for the federated sign-in selected by the user; Functional Software, Inc. (Sentry) for diagnostics; Google and authorised providers for Firebase Cloud Messaging and Google Mobile Ads; and Resend for transactional emails, including the recipient's email address, message content and delivery metadata. Sentry processes events in the EU region. Processing outside the EEA relies on safeguards recognised by applicable law, including adequacy decisions, the Data Privacy Framework or Standard Contractual Clauses.</p>
+        <p className="mt-3">See the privacy notices of <a href="https://supabase.com/privacy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Supabase</a>, <a href="https://sentry.io/privacy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Sentry</a>, <a href="https://policies.google.com/privacy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Google</a>, <a href="https://resend.com/legal/privacy-policy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Resend</a> and <a href="https://www.apple.com/legal/privacy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Apple</a>.</p>
       </PolicySection>
       <PolicySection title="10. Retention">
         <p>Account and game data is retained while needed to provide the service and until account deletion, subject to legal obligations or the protection of rights. Notification tokens and preferences are removed when no longer required or upon account deletion. Technical and security logs are kept for up to 12 months and anonymised upon account deletion where still needed. Sentry diagnostics remain for 30 days. Advertising data follows consent settings and provider retention periods. Support requests are retained until resolved and longer where required by law or to protect rights.</p>
