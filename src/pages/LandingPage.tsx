@@ -18,13 +18,15 @@ import Background from '../components/Background';
 import FeatureCard from '../components/FeatureCard';
 import LegalModal, { type LegalModalType } from '../components/LegalModal';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import { CookiePolicy, WaitlistPrivacyPolicy } from '../content/legal';
+import { CookiePolicy, WaitlistPrivacyPolicy } from '../content/legal.it';
 import { CookiePolicyEn, WaitlistPrivacyPolicyEn } from '../content/legal.en';
+import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
 import { supabase } from '../lib/supabase';
 
 function LandingPage({ locale }: { locale: Locale }) {
   const isItalian = locale === 'it';
+  const shared = getMessages(locale).footer;
   const t = isItalian ? {
     notify: 'Avvisami', available: 'Presto disponibile su iOS & Android', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
     intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
@@ -42,6 +44,7 @@ function LandingPage({ locale }: { locale: Locale }) {
     ranksTitle: 'Classifiche in Tempo Reale', ranksBody: 'Guarda la tua posizione aggiornata live durante ogni giornata di campionato.',
     ready: 'Pronto a dominare?', ctaBody: 'Iscriviti ora e sii il primo a sapere quando lanciamo.', cta: "Unisciti alla lista d'attesa",
     terms: 'Termini e condizioni', deleteAccount: 'Cancella account', contact: 'Contatti', rights: 'Tutti i diritti riservati.', invalidEmail: 'Inserisci un indirizzo email valido', genericError: 'Qualcosa è andato storto. Riprova.',
+    homeAriaLabel: 'Home OneFanta',
   } : {
     notify: 'Notify me', available: 'Coming soon to iOS & Android', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
     intro: 'Live ratings, private leagues with friends and real-time standings.', introAccent: ' Fantasy football done right.',
@@ -59,6 +62,7 @@ function LandingPage({ locale }: { locale: Locale }) {
     ranksTitle: 'Real-Time Standings', ranksBody: 'See your live position throughout every matchday.',
     ready: 'Ready to take control?', ctaBody: 'Join now and be the first to know when we launch.', cta: 'Join the waitlist',
     terms: 'Terms and conditions', deleteAccount: 'Delete account', contact: 'Contact', rights: 'All rights reserved.', invalidEmail: 'Enter a valid email address', genericError: 'Something went wrong. Please try again.',
+    homeAriaLabel: 'OneFanta home',
   };
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -136,7 +140,7 @@ function LandingPage({ locale }: { locale: Locale }) {
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-950/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href={localizedPath(locale, '/')} className="flex items-center" aria-label="OneFanta home">
+          <a href={localizedPath(locale, '/')} className="flex items-center" aria-label={t.homeAriaLabel}>
             <img
               src="/onefanta-logo.png"
               alt="OneFanta"
@@ -327,7 +331,7 @@ function LandingPage({ locale }: { locale: Locale }) {
       <footer className="py-12 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <a href={localizedPath(locale, '/')} className="flex items-center" aria-label="OneFanta home">
+            <a href={localizedPath(locale, '/')} className="flex items-center" aria-label={t.homeAriaLabel}>
               <img
                 src="/onefanta-logo.png"
                 alt="OneFanta"
@@ -342,14 +346,14 @@ function LandingPage({ locale }: { locale: Locale }) {
               </a>
               <a href={localizedPath(locale, '/privacy')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Shield className="w-4 h-4" />
-                App Privacy
+                {shared.appPrivacy}
               </a>
               <button
                 onClick={() => openModal('waitlistPrivacy')}
                 className="hover:text-electric-400 transition-colors flex items-center gap-2"
               >
                 <Mail className="w-4 h-4" />
-                Waitlist Privacy
+                {shared.waitlistPrivacy}
               </button>
               <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Trash2 className="w-4 h-4" />
@@ -357,7 +361,7 @@ function LandingPage({ locale }: { locale: Locale }) {
               </a>
               <a href={localizedPath(locale, '/support')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Headphones className="w-4 h-4" />
-                {isItalian ? 'Assistenza' : 'Support'}
+                {shared.support}
               </a>
               <a href={localizedPath(locale, '/contact')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Mail className="w-4 h-4" />
@@ -368,7 +372,7 @@ function LandingPage({ locale }: { locale: Locale }) {
                 className="hover:text-electric-400 transition-colors flex items-center gap-2"
               >
                 <Cookie className="w-4 h-4" />
-                Cookie Policy
+                {shared.cookiePolicy}
               </button>
             </div>
 
@@ -387,7 +391,7 @@ function LandingPage({ locale }: { locale: Locale }) {
         <LegalModal activeModal={activeModal} onClose={closeModal} locale={locale}>
           {activeModal === 'waitlistPrivacy'
             ? (isItalian ? <WaitlistPrivacyPolicy /> : <WaitlistPrivacyPolicyEn />)
-            : (isItalian ? <CookiePolicy /> : <CookiePolicyEn />)}
+            : (isItalian ? <CookiePolicy locale={locale} /> : <CookiePolicyEn locale={locale} />)}
         </LegalModal>
       )}
     </div>

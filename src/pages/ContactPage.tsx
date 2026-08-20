@@ -1,12 +1,15 @@
 import LegalPage from '../components/LegalPage';
 import PolicySection from '../components/PolicySection';
-import { EmailLink } from '../content/legal';
+import { EmailLink } from '../content/legal.it';
+import { getMessages } from '../i18n/messages';
 import type { Locale } from '../lib/i18n';
 
 function ContactPage({ locale }: { locale: Locale }) {
+  const m = getMessages(locale);
+
   if (locale === 'en') {
     return (
-      <LegalPage locale={locale} title="Contact" subtitle="Official contacts for privacy, support and data requests.">
+      <LegalPage locale={locale} title={m.pages.contact.title} subtitle={m.pages.contact.subtitle}>
         <div className="space-y-6">
           <PolicySection title="Privacy and personal data">
             <p>For GDPR requests, data deletion, withdrawal of consent or questions about our privacy notices, contact us at <EmailLink />.</p>
@@ -20,7 +23,7 @@ function ContactPage({ locale }: { locale: Locale }) {
   }
 
   return (
-    <LegalPage locale={locale} title="Contact" subtitle="Contatti ufficiali per privacy, supporto e richieste dati.">
+    <LegalPage locale={locale} title={m.pages.contact.title} subtitle={m.pages.contact.subtitle}>
       <div className="space-y-6">
         <PolicySection title="Privacy e dati personali">
           <p>

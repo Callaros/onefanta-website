@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import Background from './Background';
 import LanguageSwitcher from './LanguageSwitcher';
+import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
 
 type LegalPageProps = {
@@ -12,6 +13,8 @@ type LegalPageProps = {
 };
 
 function LegalPage({ title, subtitle, children, locale }: LegalPageProps) {
+  const m = getMessages(locale);
+
   return (
     <div className="min-h-screen bg-dark-950 text-white overflow-x-hidden">
       <Background />
@@ -24,7 +27,7 @@ function LegalPage({ title, subtitle, children, locale }: LegalPageProps) {
               className="inline-flex items-center gap-2 text-dark-300 hover:text-electric-300 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              {locale === 'it' ? 'Torna al sito' : 'Back to website'}
+              {m.common.backToWebsite}
             </a>
             <LanguageSwitcher locale={locale} compact />
           </div>

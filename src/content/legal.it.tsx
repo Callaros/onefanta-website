@@ -1,8 +1,10 @@
 import PolicySection from '../components/PolicySection';
+import LocalizedLink from '../components/LocalizedLink';
+import type { Locale } from '../lib/i18n';
 
 export const CONTACT_EMAIL = 'privacy@onefanta.com';
 export const LAST_UPDATED = '5 agosto 2026';
-const APP_PRIVACY_LAST_UPDATED = '5 agosto 2026';
+const APP_PRIVACY_LAST_UPDATED = '11 agosto 2026';
 
 export function EmailLink() {
   return (
@@ -106,7 +108,7 @@ export function WaitlistPrivacyPolicy() {
   );
 }
 
-export function AppPrivacyPolicy() {
+export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
   return (
     <div className="space-y-6">
       <p className="text-dark-400">Ultimo aggiornamento: {APP_PRIVACY_LAST_UPDATED}</p>
@@ -119,13 +121,13 @@ export function AppPrivacyPolicy() {
         </p>
         <p>
           Questa informativa descrive il trattamento dei dati personali nell'app mobile OneFanta. La landing page e la waitlist
-          sono coperte dalla <a href="/it/waitlist-privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Waitlist Privacy Policy</a>.
+          sono coperte dalla <LocalizedLink locale={locale} href="/waitlist-privacy">Waitlist Privacy Policy</LocalizedLink>.
         </p>
       </PolicySection>
 
       <PolicySection title="2. Dati trattati">
         <ul className="list-disc list-inside space-y-2 ml-4">
-          <li><strong className="text-white">Account e contatti:</strong> email, identificativo utente, informazioni di accesso e preferenze.</li>
+          <li><strong className="text-white">Account e contatti:</strong> email, identificativo utente, informazioni di accesso e preferenze. Se scegli l'accesso con Google o Apple, possiamo inoltre ricevere l'identificativo assegnato dal provider e, secondo le informazioni disponibili e le tue scelte, nome, nome visualizzato, immagine del profilo o indirizzo email, compreso un eventuale indirizzo relay privato di Apple.</li>
           <li><strong className="text-white">Dati di gioco:</strong> leghe, squadre, rose, classifiche, punteggi, statistiche e impostazioni di lega.</li>
           <li><strong className="text-white">Contenuti forniti dall'utente:</strong> nomi di squadre e leghe e immagini personalizzate selezionate tramite il dispositivo.</li>
           <li><strong className="text-white">Assistenza:</strong> indirizzo email, contenuto della richiesta ed eventuali informazioni che scegli di comunicarci quando contatti il supporto.</li>
@@ -139,7 +141,7 @@ export function AppPrivacyPolicy() {
 
       <PolicySection title="3. Finalità e basi giuridiche">
         <ul className="list-disc list-inside space-y-2 ml-4">
-          <li><strong className="text-white">Erogazione del servizio:</strong> creazione e gestione dell'account, autenticazione, salvataggio dei dati di gioco, leghe, squadre, classifiche e contenuti richiesti. La base giuridica è l'esecuzione del servizio richiesto dall'utente.</li>
+          <li><strong className="text-white">Erogazione del servizio:</strong> creazione e gestione dell'account, autenticazione anche tramite Google o Apple, salvataggio dei dati di gioco, leghe, squadre, classifiche e contenuti richiesti. La base giuridica è l'esecuzione del servizio richiesto dall'utente.</li>
           <li><strong className="text-white">Sicurezza e prevenzione degli abusi:</strong> protezione di account, utenti e sistemi. La base giuridica è il legittimo interesse del titolare a mantenere OneFanta sicuro e affidabile.</li>
           <li><strong className="text-white">Diagnostica:</strong> individuazione e correzione di crash, errori e malfunzionamenti tramite Sentry. La base giuridica è il legittimo interesse a garantire stabilità, sicurezza e corretto funzionamento dell'app.</li>
           <li><strong className="text-white">Notifiche:</strong> invio delle notifiche di servizio che scegli di abilitare. La base giuridica è l'esecuzione della funzione richiesta; l'attivazione è facoltativa e può essere revocata disabilitando le notifiche nell'app o nelle impostazioni del dispositivo.</li>
@@ -162,7 +164,28 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="5. Sentry e dati diagnostici">
+      <PolicySection title="5. Accesso con Google e Apple">
+        <p className="mb-3">
+          Puoi creare un account o accedere usando Google Sign-In o Sign in with Apple. In questo caso Google o Apple autenticano
+          l'utente e trasmettono a OneFanta e a Supabase Auth un token di autenticazione e un identificativo univoco del provider.
+          Secondo il provider, la configurazione e le scelte effettuate durante l'accesso, possiamo inoltre ricevere l'indirizzo
+          email, il nome o nome visualizzato e, per Google, l'eventuale immagine del profilo. Se scegli "Nascondi la mia email" con
+          Apple, riceviamo l'indirizzo relay privato generato da Apple invece dell'indirizzo email reale. Apple può comunicare il nome
+          soltanto in occasione della prima autorizzazione.
+        </p>
+        <p className="mb-3">
+          OneFanta usa questi dati esclusivamente per creare, autenticare, collegare e proteggere l'account e non riceve né conserva
+          la password del tuo account Google o Apple. La base giuridica è l'esecuzione del servizio richiesto. Google e Apple trattano
+          autonomamente i dati necessari a fornire e proteggere i rispettivi servizi di identità, secondo le proprie informative.
+        </p>
+        <p>
+          Puoi revocare l'autorizzazione dalle impostazioni del tuo account Google o Apple. La revoca impedisce i successivi accessi
+          tramite quel provider, ma non elimina automaticamente l'account o i dati già conservati in OneFanta: per farlo devi usare
+          la funzione <strong className="text-white">Elimina account</strong> descritta nella presente informativa.
+        </p>
+      </PolicySection>
+
+      <PolicySection title="6. Sentry e dati diagnostici">
         <p className="mb-3">
           Usiamo Sentry per ricevere segnalazioni tecniche di crash, errori e malfunzionamenti. Gli eventi possono contenere errori,
           eccezioni, stack trace, breadcrumb tecnici, schermata o operazione interessata, modello del dispositivo, sistema operativo,
@@ -175,7 +198,7 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="6. Notifiche">
+      <PolicySection title="7. Notifiche">
         <p>
           Le notifiche non sono attivate automaticamente. Se scegli di abilitarle, usiamo Firebase Cloud Messaging e i servizi di
           notifica del sistema operativo per associare all'installazione un token push e consegnare le notifiche richieste. Puoi
@@ -184,7 +207,7 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="7. Pubblicità e gestione del consenso">
+      <PolicySection title="8. Pubblicità e gestione del consenso">
         <p className="mb-3">
           OneFanta usa Google Mobile Ads per mostrare annunci. Al primo avvio l'app presenta il meccanismo di gestione del consenso
           previsto per la pubblicità e raccoglie le scelte dell'utente prima di richiedere i trattamenti pubblicitari soggetti a
@@ -199,11 +222,11 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="8. Destinatari e trasferimenti internazionali">
+      <PolicySection title="9. Destinatari e trasferimenti internazionali">
         <p>
           I dati possono essere trattati, nei limiti necessari alle finalità descritte, dai partecipanti alle leghe private per i dati
           di gioco e i contenuti condivisi nella lega, da Supabase per backend, autenticazione e archiviazione nella regione Europa
-          centrale (Francoforte),
+          centrale (Francoforte), da Google e Apple per l'autenticazione federata scelta dall'utente,
           Functional Software, Inc. (Sentry) per la diagnostica, Google e i relativi fornitori autorizzati per Firebase Cloud Messaging
           e Google Mobile Ads, nonché dai fornitori di email. Sentry tratta gli eventi nella regione Unione europea. Qualora i
           fornitori o i loro sub-responsabili effettuino trattamenti fuori dallo
@@ -213,12 +236,13 @@ export function AppPrivacyPolicy() {
         <p className="mt-3">
           Puoi consultare le informative dei principali fornitori sui siti di{' '}
           <a href="https://supabase.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Supabase</a>,{' '}
-          <a href="https://sentry.io/privacy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Sentry</a> e{' '}
-          <a href="https://policies.google.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Google</a>.
+          <a href="https://sentry.io/privacy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Sentry</a>,{' '}
+          <a href="https://policies.google.com/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Google</a> e{' '}
+          <a href="https://www.apple.com/legal/privacy/" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Apple</a>.
         </p>
       </PolicySection>
 
-      <PolicySection title="9. Conservazione">
+      <PolicySection title="10. Conservazione">
         <p>
           I dati dell'account e di gioco sono conservati per il tempo necessario a fornire il servizio e fino alla cancellazione
           dell'account, salvo obblighi di legge o esigenze di tutela dei diritti. I token e le preferenze di notifica sono conservati
@@ -231,22 +255,22 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="10. Cancellazione account e dati">
+      <PolicySection title="11. Cancellazione account e dati">
         <p className="mb-3">
           Puoi eliminare direttamente l'account dall'app aprendo la sezione <strong className="text-white">Profilo</strong>,
           premendo il pulsante rosso <strong className="text-white">Elimina account</strong> e confermando la scelta. La
           cancellazione è definitiva e non può essere annullata.
         </p>
         <p>
-          La pagina <a href="/it/delete-account" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Cancellazione dell'account e dei dati</a>
+          La pagina <LocalizedLink locale={locale} href="/delete-account">Cancellazione dell'account e dei dati</LocalizedLink>
           {' '}contiene ulteriori informazioni. Resta possibile esercitare i diritti previsti dal GDPR scrivendo a <EmailLink />;
           questa possibilità è distinta dalla procedura ordinaria e immediata disponibile nell'app.
         </p>
       </PolicySection>
 
-      <PolicySection title="11. Conferimento dei dati e funzioni facoltative">
+      <PolicySection title="12. Conferimento dei dati e funzioni facoltative">
         <p>
-          Email, credenziali e dati di gioco necessari sono indispensabili per creare l'account e fornire le relative funzionalità;
+          Email o identità fornita dal provider, informazioni di autenticazione e dati di gioco necessari sono indispensabili per creare l'account e fornire le relative funzionalità;
           senza di essi non è possibile usare le aree riservate. Il caricamento di immagini, le notifiche e i trattamenti
           pubblicitari basati sul consenso sono facoltativi. Il loro mancato conferimento o la revoca del consenso non impediscono
           l'uso delle altre funzioni dell'app, salvo quelle che dipendono direttamente dal dato o dal permesso rifiutato. L'invio di
@@ -254,7 +278,7 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="12. Minori">
+      <PolicySection title="13. Minori">
         <p>
           OneFanta può essere utilizzata anche da utenti minorenni secondo quanto previsto nei Termini. In Italia, quando un
           trattamento relativo a un servizio online si basa sul consenso, l'utente che ha compiuto 14 anni può esprimerlo
@@ -264,14 +288,14 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="13. Sicurezza">
+      <PolicySection title="14. Sicurezza">
         <p>
           Usiamo misure tecniche e organizzative ragionevoli per proteggere i dati, incluse limitazioni di accesso e controlli sui
           sistemi usati per erogare il servizio. Nessun sistema può garantire sicurezza assoluta, ma lavoriamo per ridurre i rischi.
         </p>
       </PolicySection>
 
-      <PolicySection title="14. I tuoi diritti e reclamo">
+      <PolicySection title="15. I tuoi diritti e reclamo">
         <p className="mb-3">
           Nei limiti previsti dal GDPR puoi chiedere accesso, rettifica, cancellazione, limitazione del trattamento, portabilità,
           opposizione quando applicabile e revoca del consenso. Per esercitare i diritti scrivi a <EmailLink />.
@@ -287,7 +311,7 @@ export function AppPrivacyPolicy() {
         </p>
       </PolicySection>
 
-      <PolicySection title="15. Informazioni negli store e aggiornamenti">
+      <PolicySection title="16. Informazioni negli store e aggiornamenti">
         <p>
           Le informazioni dichiarate in Google Play Console e App Store Connect devono riflettere i dati effettivamente raccolti
           dall'app. Questa policy offre dettagli aggiuntivi e sarà aggiornata se cambiano funzionalità, fornitori o categorie di dati
@@ -299,7 +323,7 @@ export function AppPrivacyPolicy() {
   );
 }
 
-export function CookiePolicy() {
+export function CookiePolicy({ locale }: { locale: Locale }) {
   return (
     <div className="space-y-6">
       <p className="text-dark-400">Ultimo aggiornamento: {LAST_UPDATED}</p>
@@ -343,7 +367,7 @@ export function CookiePolicy() {
       <PolicySection title="4. App mobile">
         <p>
           Questa Cookie Policy riguarda il sito web. La gestione del consenso pubblicitario e degli identificatori nell'app mobile è
-          descritta nella <a href="/it/privacy" className="text-electric-300 hover:text-electric-200 underline underline-offset-4">Privacy Policy dell'app</a>.
+          descritta nella <LocalizedLink locale={locale} href="/privacy">Privacy Policy dell'app</LocalizedLink>.
         </p>
       </PolicySection>
 

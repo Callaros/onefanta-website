@@ -8,6 +8,7 @@ import AuthConfirmedPage from './pages/AuthConfirmedPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import TermsPage from './pages/TermsPage';
 import SupportPage from './pages/SupportPage';
+import { getSeoForRoute, pathToSeoRoute } from './i18n/messages';
 import { detectPreferredLocale, getLocaleFromPath, localizedPath, rememberLocale, stripLocaleFromPath } from './lib/i18n';
 
 function App() {
@@ -19,16 +20,7 @@ function App() {
     if (!locale) return;
     rememberLocale(locale);
     document.documentElement.lang = locale;
-    const isItalian = locale === 'it';
-    const isSupportPage = path === '/support';
-    const title = isSupportPage
-      ? (isItalian ? 'Assistenza OneFanta' : 'OneFanta Support')
-      : (isItalian ? 'OneFanta - Fantacalcio per la Premier League' : 'OneFanta - Premier League Fantasy Football');
-    const description = isSupportPage
-      ? (isItalian ? 'Assistenza ufficiale per account, leghe e funzionalità dell’app OneFanta.' : 'Official support for OneFanta accounts, leagues and app features.')
-      : (isItalian
-        ? 'Voti live, leghe private e classifiche in tempo reale per il fantacalcio basato sulla Premier League.'
-        : 'Live ratings, private leagues and real-time standings for fantasy football based on the Premier League.');
+    const { title, description } = getSeoForRoute(locale, pathToSeoRoute(path));
     document.title = title;
 
     const setMeta = (selector: string, content: string) => {

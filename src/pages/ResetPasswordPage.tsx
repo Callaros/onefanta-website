@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import Background from '../components/Background';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { getMessages } from '../i18n/messages';
 import { supabase } from '../lib/supabase';
 import { localizedPath, type Locale } from '../lib/i18n';
 
@@ -27,27 +28,28 @@ const getErrorMessage = (error: unknown) => {
   return '';
 };
 
-const getPasswordChecks = (value: string, locale: Locale) => [
+const getPasswordChecks = (value: string, labels: readonly string[]) => [
   {
-    label: locale === 'it' ? 'Almeno 6 caratteri' : 'At least 6 characters',
+    label: labels[0],
     isValid: value.length >= 6,
   },
   {
-    label: locale === 'it' ? 'Almeno una lettera minuscola' : 'At least one lowercase letter',
+    label: labels[1],
     isValid: /[a-z]/.test(value),
   },
   {
-    label: locale === 'it' ? 'Almeno una lettera maiuscola' : 'At least one uppercase letter',
+    label: labels[2],
     isValid: /[A-Z]/.test(value),
   },
   {
-    label: locale === 'it' ? 'Almeno un numero' : 'At least one number',
+    label: labels[3],
     isValid: /[0-9]/.test(value),
   },
 ];
 
 function ResetPasswordPage({ locale }: { locale: Locale }) {
-  const isItalian = locale === 'it';
+  const m = getMessages(locale);
+  const t = m.pages.resetPassword;
   const [recoveryStatus, setRecoveryStatus] = useState<RecoveryStatus>('preparing');
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
   const [password, setPassword] = useState('');
@@ -118,13 +120,13 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
         if (data.session) {
           setRecoveryStatus('ready');
         } else {
-          setErrorMessage(isItalian ? 'Link non valido o scaduto. Richiedi un nuovo reset password dall’app.' : 'Invalid or expired link. Request a new password reset from the app.');
+          setErrorMessage(t.missingLink);
           setRecoveryStatus('missing');
         }
       } catch (error) {
         console.error('Reset password recovery failed', error);
         if (!isMounted) return;
-        setErrorMessage(isItalian ? 'Non siamo riusciti a verificare il link di reset. Richiedine uno nuovo dall’app.' : 'We could not verify the reset link. Request a new one from the app.');
+        setErrorMessage(t.invalidLink);
         setRecoveryStatus('missing');
       }
     };
@@ -134,22 +136,22 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
     return () => {
       isMounted = false;
     };
-  }, [isItalian]);
+  }, [t.invalidLink, t.missingLink]);
 
-  const passwordChecks = getPasswordChecks(password, locale);
+  const passwordChecks = getPasswordChecks(password, t.passwordChecks);
   const isPasswordValid = passwordChecks.every((check) => check.isValid);
 
   const validateForm = () => {
     if (!password) {
-      return isItalian ? 'Inserisci la nuova password.' : 'Enter your new password.';
+      return t.requiredPassword;
     }
 
     if (!isPasswordValid) {
-      return isItalian ? 'La password deve rispettare tutti i requisiti indicati.' : 'The password must meet all the listed requirements.';
+      return t.invalidPassword;
     }
 
     if (password !== confirmPassword) {
-      return isItalian ? 'La conferma deve essere uguale alla nuova password.' : 'The confirmation must match the new password.';
+      return t.mismatchedPassword;
     }
 
     return '';
@@ -179,8 +181,8 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
       const authMessage = getErrorMessage(error);
       setErrorMessage(
         authMessage
-          ? `${isItalian ? 'Aggiornamento non riuscito' : 'Update failed'}: ${authMessage}`
-          : (isItalian ? 'Aggiornamento non riuscito. Verifica il link ricevuto via email e riprova.' : 'Update failed. Check the link received by email and try again.')
+          ? `${t.updateFailed}: ${authMessage}`
+          : t.updateFailedDetail
       );
     } finally {
       setSubmitStatus('idle');
@@ -197,7 +199,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
       <main className="min-h-screen px-6 py-10 flex items-center justify-center">
         <section className="w-full max-w-xl text-center">
           <div className="mb-10 flex items-center justify-between gap-4">
-          <a href={localizedPath(locale, '/')} className="inline-flex items-center justify-center" aria-label="OneFanta home">
+          <a href={localizedPath(locale, '/')} className="inline-flex items-center justify-center" aria-label={m.common.homeAriaLabel}>
             <img
               src="/onefanta-logo.png"
               alt="OneFanta"
@@ -218,18 +220,18 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
 
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-electric-500/10 border border-electric-500/25 rounded-full mb-6">
               <ShieldCheck className="w-4 h-4 text-electric-300" />
-              <span className="text-electric-300 text-sm font-medium">Reset password</span>
+              <span className="text-electric-300 text-sm font-medium">{t.badge}</span>
             </div>
 
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              {recoveryStatus === 'success' ? (isItalian ? 'Password aggiornata' : 'Password updated') : (isItalian ? 'Imposta una nuova password' : 'Set a new password')}
+              {recoveryStatus === 'success' ? t.successHeading : t.heading}
             </h1>
 
             {recoveryStatus === 'preparing' && (
               <div className="flex flex-col items-center gap-4 py-6">
                 <Loader2 className="w-8 h-8 text-electric-300 animate-spin" />
                 <p className="text-dark-300 text-lg leading-relaxed">
-                  {isItalian ? 'Stiamo verificando il link ricevuto via email.' : 'We are verifying the link you received by email.'}
+                  {t.verifying}
                 </p>
               </div>
             )}
@@ -237,12 +239,12 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
             {canShowForm && (
               <>
                 <p className="text-dark-300 text-lg leading-relaxed mb-8">
-                  {isItalian ? 'Scegli una password sicura per il tuo account OneFanta.' : 'Choose a secure password for your OneFanta account.'}
+                  {t.intro}
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4 text-left">
                   <label className="block">
-                    <span className="block text-sm font-medium text-dark-200 mb-2">{isItalian ? 'Nuova password' : 'New password'}</span>
+                    <span className="block text-sm font-medium text-dark-200 mb-2">{t.newPassword}</span>
                     <div className="relative">
                       <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
                       <input
@@ -250,7 +252,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         className="w-full pl-12 pr-12 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
-                        placeholder={isItalian ? 'Almeno 6 caratteri' : 'At least 6 characters'}
+                        placeholder={t.passwordPlaceholder}
                         autoComplete="new-password"
                         disabled={isSubmitting}
                       />
@@ -258,7 +260,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                         type="button"
                         onClick={() => setShowPassword((isVisible) => !isVisible)}
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none focus:text-electric-300 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-                        aria-label={showPassword ? (isItalian ? 'Nascondi nuova password' : 'Hide new password') : (isItalian ? 'Mostra nuova password' : 'Show new password')}
+                        aria-label={showPassword ? t.hidePassword : t.showPassword}
                         aria-pressed={showPassword}
                         disabled={isSubmitting}
                       >
@@ -268,7 +270,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                   </label>
 
                   <label className="block">
-                    <span className="block text-sm font-medium text-dark-200 mb-2">{isItalian ? 'Conferma nuova password' : 'Confirm new password'}</span>
+                    <span className="block text-sm font-medium text-dark-200 mb-2">{t.confirmPassword}</span>
                     <div className="relative">
                       <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
                       <input
@@ -276,7 +278,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                         value={confirmPassword}
                         onChange={(event) => setConfirmPassword(event.target.value)}
                         className="w-full pl-12 pr-12 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
-                        placeholder={isItalian ? 'Ripeti la password' : 'Repeat the password'}
+                        placeholder={t.confirmPasswordPlaceholder}
                         autoComplete="new-password"
                         disabled={isSubmitting}
                       />
@@ -284,7 +286,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                         type="button"
                         onClick={() => setShowConfirmPassword((isVisible) => !isVisible)}
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none focus:text-electric-300 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-                        aria-label={showConfirmPassword ? (isItalian ? 'Nascondi conferma password' : 'Hide password confirmation') : (isItalian ? 'Mostra conferma password' : 'Show password confirmation')}
+                        aria-label={showConfirmPassword ? t.hideConfirmation : t.showConfirmation}
                         aria-pressed={showConfirmPassword}
                         disabled={isSubmitting}
                       >
@@ -327,7 +329,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                       <>
-                        {isItalian ? 'Aggiorna password' : 'Update password'}
+                        {t.submit}
                         <ArrowRight className="w-5 h-5" />
                       </>
                     )}
@@ -345,7 +347,7 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
                   href="https://open.onefanta.com/auth/reset-password"
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
                 >
-                  {isItalian ? 'Torna a OneFanta' : 'Return to OneFanta'}
+                  {t.returnToApp}
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </>
@@ -354,13 +356,13 @@ function ResetPasswordPage({ locale }: { locale: Locale }) {
             {recoveryStatus === 'success' && (
               <>
                 <p className="text-dark-300 text-lg leading-relaxed mb-8">
-                  {isItalian ? 'La tua password è stata aggiornata. Ora puoi tornare nell’app e accedere con le nuove credenziali.' : 'Your password has been updated. You can now return to the app and sign in with your new credentials.'}
+                  {t.successBody}
                 </p>
                 <a
                   href="https://open.onefanta.com/auth/reset-password"
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
                 >
-                  {isItalian ? 'Torna a OneFanta' : 'Return to OneFanta'}
+                  {t.returnToApp}
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </>

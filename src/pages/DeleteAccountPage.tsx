@@ -1,13 +1,15 @@
 import LegalPage from '../components/LegalPage';
 import PolicySection from '../components/PolicySection';
-import { EmailLink, LAST_UPDATED } from '../content/legal';
+import { EmailLink, LAST_UPDATED } from '../content/legal.it';
 import { LAST_UPDATED_EN } from '../content/legal.en';
+import { getMessages } from '../i18n/messages';
 import type { Locale } from '../lib/i18n';
 
 function DeleteAccountPage({ locale }: { locale: Locale }) {
+  const m = getMessages(locale);
   if (locale === 'en') {
     return (
-      <LegalPage locale={locale} title="Account and data deletion" subtitle="How to permanently delete your account and personal data.">
+      <LegalPage locale={locale} title={m.pages.deleteAccount.title} subtitle={m.pages.deleteAccount.subtitle}>
         <div className="space-y-6">
           <p className="text-dark-400">Last updated: {LAST_UPDATED_EN}</p>
           <PolicySection title="How to delete your account in the app">
@@ -18,14 +20,14 @@ function DeleteAccountPage({ locale }: { locale: Locale }) {
           <PolicySection title="Effects and timing"><p>The process begins after in-app confirmation. OneFanta does not keep separate account-data backups. Anonymised technical and security logs may be retained for up to 12 months; diagnostic events already sent to Sentry, which do not contain the account ID or email, are deleted after 30 days.</p></PolicySection>
           <PolicySection title="Exercising GDPR rights"><p>The in-app feature is the standard self-service deletion method. Separately, contact <EmailLink /> to exercise GDPR rights, including erasure where applicable. We may request only the information necessary to verify your identity and will respond within statutory deadlines.</p></PolicySection>
           <PolicySection title="Device and third-party data"><p>Account deletion covers data managed by OneFanta and processors acting on its behalf. Exported files and data remaining on your device may need to be removed by you or by uninstalling the app. Advertising preferences can be changed in the app and device privacy settings.</p></PolicySection>
-          <PolicySection title="Waitlist"><p>To remove only your email from the waitlist, contact <EmailLink /> and specify that your request concerns the waitlist.</p></PolicySection>
+          <PolicySection title={m.pages.deleteAccount.waitlistSection}><p>To remove only your email from the waitlist, contact <EmailLink /> and specify that your request concerns the waitlist.</p></PolicySection>
         </div>
       </LegalPage>
     );
   }
 
   return (
-    <LegalPage locale={locale} title="Cancellazione dell'account e dei dati" subtitle="Come eliminare definitivamente l'account e i dati personali.">
+    <LegalPage locale={locale} title={m.pages.deleteAccount.title} subtitle={m.pages.deleteAccount.subtitle}>
       <div className="space-y-6">
         <p className="text-dark-400">Ultimo aggiornamento: {LAST_UPDATED}</p>
 
@@ -76,7 +78,7 @@ function DeleteAccountPage({ locale }: { locale: Locale }) {
           </p>
         </PolicySection>
 
-        <PolicySection title="Waitlist">
+        <PolicySection title={m.pages.deleteAccount.waitlistSection}>
           <p>
             Se vuoi cancellare solo l'email dalla lista d'attesa, scrivi a <EmailLink /> indicando che la richiesta riguarda la waitlist.
           </p>

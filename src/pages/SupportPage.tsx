@@ -1,26 +1,24 @@
 import { HelpCircle, Mail, ShieldCheck, Trash2 } from 'lucide-react';
 import LegalPage from '../components/LegalPage';
 import PolicySection from '../components/PolicySection';
-import { CONTACT_EMAIL } from '../content/legal';
+import { CONTACT_EMAIL } from '../content/legal.it';
+import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
 
 function SupportPage({ locale }: { locale: Locale }) {
-  const isItalian = locale === 'it';
-  const subject = isItalian ? 'Richiesta di assistenza OneFanta' : 'OneFanta support request';
-  const body = isItalian
-    ? 'Ciao, ho bisogno di assistenza con OneFanta.\n\nDescrizione del problema:\n\nEmail dell’account (se pertinente):\nModello del dispositivo:\nVersione iOS:\nVersione dell’app:'
-    : 'Hello, I need help with OneFanta.\n\nIssue description:\n\nAccount email (if relevant):\nDevice model:\niOS version:\nApp version:';
-  const emailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const m = getMessages(locale);
+  const t = m.pages.support;
+  const emailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(t.emailSubject)}&body=${encodeURIComponent(t.emailBody)}`;
 
   const contactCard = (
     <section className="rounded-2xl border border-electric-500/25 bg-electric-500/10 p-5 md:p-6">
       <div className="flex items-start gap-4">
         <div className="rounded-xl bg-electric-500/20 p-3 text-electric-300"><Mail className="h-6 w-6" /></div>
         <div>
-          <h2 className="mb-2 text-xl font-semibold text-white">{isItalian ? 'Contatta l’assistenza' : 'Contact support'}</h2>
-          <p className="mb-4">{isItalian ? 'Raccontaci cosa è successo e ti aiuteremo a risolvere il problema.' : 'Tell us what happened and we’ll help you resolve the issue.'}</p>
+          <h2 className="mb-2 text-xl font-semibold text-white">{t.contactTitle}</h2>
+          <p className="mb-4">{t.contactDescription}</p>
           <a href={emailHref} className="inline-flex items-center rounded-xl bg-electric-500 px-5 py-3 font-semibold text-white transition-colors hover:bg-electric-400">
-            {isItalian ? 'Scrivi a' : 'Email'} {CONTACT_EMAIL}
+            {t.emailAction} {CONTACT_EMAIL}
           </a>
         </div>
       </div>
@@ -31,20 +29,20 @@ function SupportPage({ locale }: { locale: Locale }) {
     <div className="grid gap-4 sm:grid-cols-2">
       <a href={localizedPath(locale, '/delete-account')} className="rounded-xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-electric-500/40 hover:bg-white/10">
         <Trash2 className="mb-3 h-5 w-5 text-electric-300" />
-        <h2 className="font-semibold text-white">{isItalian ? 'Cancella il tuo account' : 'Delete your account'}</h2>
-        <p className="mt-1 text-sm text-dark-300">{isItalian ? 'Istruzioni per eliminare definitivamente account e dati.' : 'Instructions for permanently deleting your account and data.'}</p>
+        <h2 className="font-semibold text-white">{t.deleteAccountTitle}</h2>
+        <p className="mt-1 text-sm text-dark-300">{t.deleteAccountDescription}</p>
       </a>
       <a href={localizedPath(locale, '/privacy')} className="rounded-xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-electric-500/40 hover:bg-white/10">
         <ShieldCheck className="mb-3 h-5 w-5 text-electric-300" />
-        <h2 className="font-semibold text-white">Privacy</h2>
-        <p className="mt-1 text-sm text-dark-300">{isItalian ? 'Scopri come OneFanta tratta i tuoi dati personali.' : 'Learn how OneFanta handles your personal data.'}</p>
+        <h2 className="font-semibold text-white">{m.pages.support.privacyCard}</h2>
+        <p className="mt-1 text-sm text-dark-300">{t.privacyDescription}</p>
       </a>
     </div>
   );
 
-  if (!isItalian) {
+  if (locale === 'en') {
     return (
-      <LegalPage locale={locale} title="OneFanta Support" subtitle="Help with your account, leagues and app features.">
+      <LegalPage locale={locale} title={m.pages.support.title} subtitle={m.pages.support.subtitle}>
         <div className="space-y-6">
           {contactCard}
           <PolicySection title="Information that helps us assist you">
@@ -71,7 +69,7 @@ function SupportPage({ locale }: { locale: Locale }) {
   }
 
   return (
-    <LegalPage locale={locale} title="Assistenza OneFanta" subtitle="Aiuto per account, leghe e funzionalità dell’app.">
+    <LegalPage locale={locale} title={m.pages.support.title} subtitle={m.pages.support.subtitle}>
       <div className="space-y-6">
         {contactCard}
         <PolicySection title="Informazioni utili per ricevere assistenza">

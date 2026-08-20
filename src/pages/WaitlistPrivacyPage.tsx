@@ -1,15 +1,14 @@
 import LegalPage from '../components/LegalPage';
-import { WaitlistPrivacyPolicy } from '../content/legal';
+import { WaitlistPrivacyPolicy } from '../content/legal.it';
 import { WaitlistPrivacyPolicyEn } from '../content/legal.en';
+import { getMessages } from '../i18n/messages';
 import type { Locale } from '../lib/i18n';
 
 function WaitlistPrivacyPage({ locale }: { locale: Locale }) {
+  const m = getMessages(locale).pages.waitlistPrivacy;
+
   return (
-    <LegalPage
-      locale={locale}
-      title="Privacy Policy - OneFanta Waitlist"
-      subtitle={locale === 'it' ? "Informativa per la lista d'attesa del sito OneFanta." : 'Privacy notice for the OneFanta website waitlist.'}
-    >
+    <LegalPage locale={locale} title={m.title} subtitle={m.subtitle}>
       {locale === 'it' ? <WaitlistPrivacyPolicy /> : <WaitlistPrivacyPolicyEn />}
     </LegalPage>
   );

@@ -1,10 +1,12 @@
 import PolicySection from '../components/PolicySection';
-import { EmailLink } from './legal';
+import LocalizedLink from '../components/LocalizedLink';
+import { EmailLink } from './legal.it';
 import { LAST_UPDATED_EN } from './legal.en';
+import type { Locale } from '../lib/i18n';
 
 const linkClass = 'text-electric-300 hover:text-electric-200 underline underline-offset-4';
 
-export default function TermsEn() {
+export default function TermsEn({ locale }: { locale: Locale }) {
   return (
     <div className="space-y-8">
       <p className="text-dark-400">Last updated: {LAST_UPDATED_EN}</p>
@@ -14,7 +16,7 @@ export default function TermsEn() {
       </PolicySection>
       <PolicySection title="2. Acceptance and related documents">
         <p className="mb-3">By creating an account or using restricted features, you confirm that you have read and accepted these Terms. If you do not accept them, do not create an account or use restricted features. Browsing public pages does not limit your statutory rights.</p>
-        <p>Personal-data processing is described in the <a href="/en/privacy" className={linkClass}>App Privacy Policy</a>. Separate notices in the footer cover the website, waitlist and cookies.</p>
+        <p>Personal-data processing is described in the <LocalizedLink locale={locale} href="/privacy" className={linkClass}>App Privacy Policy</LocalizedLink>. Separate notices in the footer cover the website, waitlist and cookies.</p>
       </PolicySection>
       <PolicySection title="3. The OneFanta Service">
         <p className="mb-3">Depending on available features, OneFanta lets users create or join private leagues, manage teams and rosters, view ratings and statistics, calculate scores and follow live standings and updates. At launch, the Service supports fantasy football based on the Premier League.</p>
@@ -49,13 +51,13 @@ export default function TermsEn() {
       <PolicySection title="10. Intellectual property"><p>OneFanta software, interface, graphics, text, databases and original content are protected by applicable intellectual-property law even though the name is not currently a registered trademark. You receive a personal, limited, revocable, non-exclusive and non-transferable right to use the Service under these Terms. Third-party content and marks remain their owners’ property.</p></PolicySection>
       <PolicySection title="11. Third-party services, stores, advertising and purchases">
         <p className="mb-3">The app is currently distributed only through Apple App Store and Google Play Store. Features may depend on Supabase, Sportmonks, Sentry, Firebase Cloud Messaging and Google Mobile Ads. The website also uses Cloudflare for hosting, storage, delivery and security. Their own terms and notices may apply.</p>
-        <p className="mb-3">Notifications are optional. For consent-based advertising, the app presents choices before requesting such processing. See the <a href="/en/privacy" className={linkClass}>App Privacy Policy</a>. Non-personalised ads may be shown if personalisation is declined.</p>
+        <p className="mb-3">Notifications are optional. For consent-based advertising, the app presents choices before requesting such processing. See the <LocalizedLink locale={locale} href="/privacy" className={linkClass}>App Privacy Policy</LocalizedLink>. Non-personalised ads may be shown if personalisation is declined.</p>
         <p>If subscriptions or purchases are offered, total price, duration, renewal, payment, withdrawal and cancellation details will be displayed before ordering under applicable law and store rules. These Terms alone activate no purchase or renewal.</p>
       </PolicySection>
       <PolicySection title="12. Territorial availability"><p>OneFanta currently imposes no general territorial restriction. Availability may depend on app-store country availability, device compatibility, third-party services and local law. You are responsible for ensuring use is permitted where you are located.</p></PolicySection>
       <PolicySection title="13. Availability, changes and updates"><p>We work to keep OneFanta available and secure, but maintenance, delays, errors or interruptions may occur. Features may change or end for technical, security, legal or product reasons. Material changes affecting an ongoing service will receive reasonable notice where possible, subject to urgent, legal or security needs. Mandatory consumer remedies remain unaffected.</p></PolicySection>
       <PolicySection title="14. Suspension, account closure and reports">
-        <p className="mb-3">You may stop using the Service and permanently delete your account from the app’s Profile section using the red “Delete account” button. See <a href="/en/delete-account" className={linkClass}>Account and data deletion</a>.</p>
+        <p className="mb-3">You may stop using the Service and permanently delete your account from the app’s Profile section using the red “Delete account” button. See <LocalizedLink locale={locale} href="/delete-account" className={linkClass}>Account and data deletion</LocalizedLink>.</p>
         <p>We may restrict features, remove content, suspend or close accounts for breaches, risks, legal obligations or prolonged inactivity. Measures will be proportionate and explained where possible; non-urgent cases will receive notice and may be challenged via <EmailLink />.</p>
       </PolicySection>
       <PolicySection title="15. Liability and consumer rights">
