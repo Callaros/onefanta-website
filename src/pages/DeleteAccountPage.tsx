@@ -20,7 +20,6 @@ function DeleteAccountPage({ locale }: { locale: Locale }) {
           <PolicySection title="Effects and timing"><p>The process begins after in-app confirmation. OneFanta does not keep separate account-data backups. Anonymised technical and security logs may be retained for up to 12 months; diagnostic events already sent to Sentry, which do not contain the account ID or email, are deleted after 30 days.</p></PolicySection>
           <PolicySection title="Exercising GDPR rights"><p>The in-app feature is the standard self-service deletion method. Separately, contact <EmailLink /> to exercise GDPR rights, including erasure where applicable. We may request only the information necessary to verify your identity and will respond within statutory deadlines.</p></PolicySection>
           <PolicySection title="Device and third-party data"><p>Account deletion covers data managed by OneFanta and processors acting on its behalf. Exported files and data remaining on your device may need to be removed by you or by uninstalling the app. Advertising preferences can be changed in the app and device privacy settings.</p></PolicySection>
-          <PolicySection title={m.pages.deleteAccount.waitlistSection}><p>To remove only your email from the waitlist, contact <EmailLink /> and specify that your request concerns the waitlist.</p></PolicySection>
         </div>
       </LegalPage>
     );
@@ -78,11 +77,6 @@ function DeleteAccountPage({ locale }: { locale: Locale }) {
           </p>
         </PolicySection>
 
-        <PolicySection title={m.pages.deleteAccount.waitlistSection}>
-          <p>
-            Se vuoi cancellare solo l'email dalla lista d'attesa, scrivi a <EmailLink /> indicando che la richiesta riguarda la waitlist.
-          </p>
-        </PolicySection>
       </div>
     </LegalPage>
   );

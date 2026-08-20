@@ -3,48 +3,47 @@ import LocalizedLink from '../components/LocalizedLink';
 import { EmailLink } from './legal.it';
 import type { Locale } from '../lib/i18n';
 
-export const LAST_UPDATED_EN = 'August 5, 2026';
+export const LAST_UPDATED_EN = 'August 20, 2026';
 const APP_PRIVACY_LAST_UPDATED_EN = 'August 11, 2026';
 
-export function WaitlistPrivacyPolicyEn() {
+export function WebsitePrivacyPolicyEn() {
   return (
     <div className="space-y-6">
       <p className="text-dark-400">Last updated: {LAST_UPDATED_EN}</p>
       <PolicySection title="1. Data controller">
         <p>The data controller is <strong className="text-white">Luca Antonelli</strong>, residing at <strong className="text-white">Contrada Addolorata 49/A, Recanati (MC), Italy</strong>. For data protection questions or requests, contact <EmailLink />.</p>
       </PolicySection>
-      <PolicySection title="2. Data we collect">
-        <p className="mb-3">When you join the waitlist, we collect:</p>
+      <PolicySection title="2. Data we process">
+        <p className="mb-3">When you visit the website, we may process:</p>
         <ul className="ml-4 list-inside list-disc space-y-2">
-          <li><strong className="text-white">Email address:</strong> required to notify you about the OneFanta launch.</li>
-          <li><strong className="text-white">Signup date:</strong> recorded to document when you requested to join.</li>
-          <li><strong className="text-white">Technical data:</strong> IP address, user agent, request date and time, and other network data processed to receive the form, protect the service and prevent abuse.</li>
+          <li><strong className="text-white">Technical data:</strong> IP address, user agent, request date and time, and other network data needed to provide, protect and prevent abuse of the website.</li>
+          <li><strong className="text-white">Contact data:</strong> information you choose to send when contacting us by email.</li>
         </ul>
       </PolicySection>
       <PolicySection title="3. Purposes and legal basis">
-        <p>We use your email only to manage the waitlist, announce the app launch and send updates closely related to OneFanta’s availability. The legal basis is your consent, which you may withdraw at any time without affecting prior processing. Technical data is processed for our legitimate interest in keeping the website available and secure and preventing abuse.</p>
+        <p>Technical data is processed for our legitimate interest in making the website available and secure and preventing abuse. Information sent by email is processed to respond to your request and, where necessary, to meet legal obligations or protect our rights.</p>
       </PolicySection>
       <PolicySection title="4. Services and recipients">
-        <p>Supabase processes the data required to receive and store waitlist signups and protect the database, hosted in the Central Europe (Frankfurt) region. Cloudflare provides hosting, storage, distribution and website security in the European region and may process the technical data necessary to deliver and protect it. Before messages are sent, this notice will be updated to identify the email provider used. We do not sell your data or use it for general marketing, sponsors or unrelated communications without separate, specific consent.</p>
+        <p>Cloudflare provides the website's hosting, storage, delivery and security infrastructure in the European region and may process the technical data needed to provide and protect it. We do not sell your data or use it for marketing or profiling.</p>
       </PolicySection>
       <PolicySection title="5. Transfers outside the EEA">
-        <p>The Supabase database is configured in Central Europe (Frankfurt), and the Cloudflare services used by the website are configured in the European region. If providers or subprocessors process data outside the European Economic Area, transfers rely on safeguards recognised by applicable law, such as adequacy decisions, the Data Privacy Framework or Standard Contractual Clauses. Contact <EmailLink /> for information about applicable safeguards.</p>
-        <p className="mt-3">See the privacy notices of <a href="https://supabase.com/privacy" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Supabase</a> and <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Cloudflare</a>.</p>
+        <p>The Cloudflare services used by the website are configured in the European region. If providers or subprocessors process data outside the European Economic Area, transfers rely on safeguards recognised by applicable law, such as adequacy decisions, the Data Privacy Framework or Standard Contractual Clauses. Contact <EmailLink /> for information about applicable safeguards.</p>
+        <p className="mt-3">See the privacy notice of <a href="https://www.cloudflare.com/privacypolicy/" className="text-electric-300 underline underline-offset-4 hover:text-electric-200">Cloudflare</a>.</p>
       </PolicySection>
       <PolicySection title="6. Retention">
-        <p>We retain your email until consent is withdrawn, deletion is requested or, at the latest, 30 days after OneFanta launches. Technical data is retained for up to 12 months and anonymised if you request deletion of associated data. We may retain aggregated, non-identifying statistics.</p>
+        <p>Technical data is retained for as long as necessary for the purposes above and normally no longer than 12 months. Emails are retained for as long as needed to manage the request and meet any legal obligations. We may retain aggregated, non-identifying statistics.</p>
       </PolicySection>
       <PolicySection title="7. Your rights">
-        <p>Within the limits of the GDPR, you may request access, correction, deletion, restriction, portability, objection where applicable, and withdrawal of consent by contacting <EmailLink />. Waitlist data is not used for automated decision-making that produces legal or similarly significant effects.</p>
+        <p>Within the limits of the GDPR, you may request access, correction, deletion, restriction, portability and objection where applicable by contacting <EmailLink />. We do not use automated decision-making that produces legal or similarly significant effects.</p>
       </PolicySection>
       <PolicySection title="8. Security">
-        <p>We use reasonable technical and organisational measures to protect data. The website allows public waitlist signup but never publicly exposes subscriber email addresses.</p>
+        <p>We use reasonable technical and organisational measures to protect data.</p>
       </PolicySection>
       <PolicySection title="9. Complaints">
         <p>If you believe the processing breaches data protection law, you may complain to the competent supervisory authority. In Italy, this is the Garante per la protezione dei dati personali.</p>
       </PolicySection>
-      <PolicySection title="10. Optional provision of data">
-        <p>Joining the waitlist is optional. You can still use the website without providing your email, but we will not be able to notify you when OneFanta launches.</p>
+      <PolicySection title="10. Cookies">
+        <p>The website does not use profiling or analytics cookies. For more information, see the Cookie Policy in the footer.</p>
       </PolicySection>
     </div>
   );
@@ -56,7 +55,7 @@ export function AppPrivacyPolicyEn({ locale }: { locale: Locale }) {
       <p className="text-dark-400">Last updated: {APP_PRIVACY_LAST_UPDATED_EN}</p>
       <PolicySection title="1. Data controller and scope">
         <p className="mb-3">The data controller is <strong className="text-white">Luca Antonelli</strong>, residing at <strong className="text-white">Contrada Addolorata 49/A, Recanati (MC), Italy</strong>. For data protection questions or requests, contact <EmailLink />.</p>
-        <p>This notice describes personal data processing in the OneFanta mobile app. The landing page and waitlist are covered by the <LocalizedLink locale={locale} href="/waitlist-privacy">Waitlist Privacy Policy</LocalizedLink>.</p>
+        <p>This notice describes personal data processing in the OneFanta mobile app. The website is covered by the <LocalizedLink locale={locale} href="/website-privacy">Website Privacy Policy</LocalizedLink>.</p>
       </PolicySection>
       <PolicySection title="2. Data we process">
         <ul className="ml-4 list-inside list-disc space-y-2">

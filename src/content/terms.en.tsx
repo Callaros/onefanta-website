@@ -16,7 +16,7 @@ export default function TermsEn({ locale }: { locale: Locale }) {
       </PolicySection>
       <PolicySection title="2. Acceptance and related documents">
         <p className="mb-3">By creating an account or using restricted features, you confirm that you have read and accepted these Terms. If you do not accept them, do not create an account or use restricted features. Browsing public pages does not limit your statutory rights.</p>
-        <p>Personal-data processing is described in the <LocalizedLink locale={locale} href="/privacy" className={linkClass}>App Privacy Policy</LocalizedLink>. Separate notices in the footer cover the website, waitlist and cookies.</p>
+        <p>Personal-data processing is described in the <LocalizedLink locale={locale} href="/privacy" className={linkClass}>App Privacy Policy</LocalizedLink>. Separate notices in the footer cover the website and cookies.</p>
       </PolicySection>
       <PolicySection title="3. The OneFanta Service">
         <p className="mb-3">Depending on available features, OneFanta lets users create or join private leagues, manage teams and rosters, view ratings and statistics, calculate scores and follow live standings and updates. At launch, the Service supports fantasy football based on the Premier League.</p>

@@ -1,9 +1,9 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-import { Cookie, Shield, X } from 'lucide-react';
+import { Cookie, X } from 'lucide-react';
 import { getMessages } from '../i18n/messages';
 import type { Locale } from '../lib/i18n';
 
-export type LegalModalType = 'waitlistPrivacy' | 'cookie';
+export type LegalModalType = 'cookie';
 
 type LegalModalProps = {
   activeModal: LegalModalType;
@@ -13,7 +13,6 @@ type LegalModalProps = {
 };
 
 function LegalModal({ activeModal, onClose, children, locale }: LegalModalProps) {
-  const isWaitlistPrivacy = activeModal === 'waitlistPrivacy';
   const m = getMessages(locale);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -86,17 +85,10 @@ function LegalModal({ activeModal, onClose, children, locale }: LegalModalProps)
       >
         <div className="sticky top-0 bg-dark-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
           <h2 id={titleId} className="text-xl font-bold flex items-center gap-3">
-            {isWaitlistPrivacy ? (
-              <>
-                <Shield className="w-5 h-5 text-electric-400" />
-                {m.legalModal.waitlistPrivacy}
-              </>
-            ) : (
-              <>
-                <Cookie className="w-5 h-5 text-electric-400" />
-                {m.legalModal.cookiePolicy}
-              </>
-            )}
+            <>
+              <Cookie className="w-5 h-5 text-electric-400" />
+              {m.legalModal.cookiePolicy}
+            </>
           </h2>
           <button
             ref={closeButtonRef}

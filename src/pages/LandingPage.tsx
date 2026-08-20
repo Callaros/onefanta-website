@@ -5,7 +5,6 @@ import {
   Cookie,
   Headphones,
   Lock,
-  Mail,
   ScrollText,
   Shield,
   Star,
@@ -38,7 +37,7 @@ function LandingPage({ locale }: { locale: Locale }) {
     statsTitle: 'Statistiche Giocatori', statsBody: 'Analizza le performance di ogni calciatore con dati dettagliati e storici di ogni stagione.',
     ranksTitle: 'Classifiche in Tempo Reale', ranksBody: 'Guarda la tua posizione aggiornata live durante ogni giornata di campionato.',
     ready: 'Pronto a dominare?', ctaBody: 'Scarica OneFanta dall’App Store e inizia a giocare.', cta: 'Scarica dall’App Store',
-    terms: 'Termini e condizioni', deleteAccount: 'Cancella account', contact: 'Contatti', rights: 'Tutti i diritti riservati.',
+    terms: 'Termini e condizioni', deleteAccount: 'Cancella account', rights: 'Tutti i diritti riservati.',
     homeAriaLabel: 'Home OneFanta',
   } : {
     available: 'Now available on iOS', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
@@ -52,7 +51,7 @@ function LandingPage({ locale }: { locale: Locale }) {
     statsTitle: 'Player Statistics', statsBody: 'Analyse every player with detailed performance data and season history.',
     ranksTitle: 'Real-Time Standings', ranksBody: 'See your live position throughout every matchday.',
     ready: 'Ready to take control?', ctaBody: 'Download OneFanta from the App Store and start playing.', cta: 'Download on the App Store',
-    terms: 'Terms and conditions', deleteAccount: 'Delete account', contact: 'Contact', rights: 'All rights reserved.',
+    terms: 'Terms and conditions', deleteAccount: 'Delete account', rights: 'All rights reserved.',
     homeAriaLabel: 'OneFanta home',
   };
   const [activeModal, setActiveModal] = useState<'cookie' | null>(null);
@@ -219,6 +218,10 @@ function LandingPage({ locale }: { locale: Locale }) {
                 <Shield className="w-4 h-4" />
                 {shared.appPrivacy}
               </a>
+              <a href={localizedPath(locale, '/website-privacy')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <Shield className="w-4 h-4" />
+                {shared.websitePrivacy}
+              </a>
               <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Trash2 className="w-4 h-4" />
                 {t.deleteAccount}
@@ -226,10 +229,6 @@ function LandingPage({ locale }: { locale: Locale }) {
               <a href={localizedPath(locale, '/support')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Headphones className="w-4 h-4" />
                 {shared.support}
-              </a>
-              <a href={localizedPath(locale, '/contact')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                {t.contact}
               </a>
               <button
                 onClick={() => openModal('cookie')}

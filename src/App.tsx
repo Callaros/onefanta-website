@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import LandingPage from './pages/LandingPage';
 import AppPrivacyPage from './pages/AppPrivacyPage';
-import ContactPage from './pages/ContactPage';
 import DeleteAccountPage from './pages/DeleteAccountPage';
-import WaitlistPrivacyPage from './pages/WaitlistPrivacyPage';
+import WebsitePrivacyPage from './pages/WebsitePrivacyPage';
 import AuthConfirmedPage from './pages/AuthConfirmedPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import TermsPage from './pages/TermsPage';
@@ -58,16 +57,12 @@ function App() {
     return <AppPrivacyPage locale={locale} />;
   }
 
-  if (path === '/waitlist-privacy') {
-    return <WaitlistPrivacyPage locale={locale} />;
+  if (path === '/website-privacy' || path === '/waitlist-privacy') {
+    return <WebsitePrivacyPage locale={locale} />;
   }
 
   if (path === '/delete-account') {
     return <DeleteAccountPage locale={locale} />;
-  }
-
-  if (path === '/contact') {
-    return <ContactPage locale={locale} />;
   }
 
   if (path === '/support') {

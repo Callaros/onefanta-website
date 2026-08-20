@@ -12,12 +12,11 @@ const messages = {
     },
     footer: {
       appPrivacy: 'Privacy app',
-      waitlistPrivacy: 'Privacy waitlist',
+      websitePrivacy: 'Privacy sito',
       cookiePolicy: 'Cookie Policy',
       support: 'Assistenza',
     },
     legalModal: {
-      waitlistPrivacy: 'Privacy Policy waitlist',
       cookiePolicy: 'Cookie Policy',
     },
     pages: {
@@ -57,18 +56,13 @@ const messages = {
         title: 'Privacy Policy - App OneFanta',
         subtitle: "Informativa per l'app mobile OneFanta.",
       },
-      waitlistPrivacy: {
-        title: 'Privacy Policy - Waitlist OneFanta',
-        subtitle: "Informativa per la lista d'attesa del sito OneFanta.",
-      },
-      contact: {
-        title: 'Contatti',
-        subtitle: 'Contatti ufficiali per privacy, supporto e richieste dati.',
+      websitePrivacy: {
+        title: 'Privacy Policy - Sito OneFanta',
+        subtitle: 'Informativa per il sito OneFanta.',
       },
       deleteAccount: {
         title: "Cancellazione dell'account e dei dati",
         subtitle: 'Come eliminare definitivamente l\'account e i dati personali.',
-        waitlistSection: 'Lista d\'attesa',
       },
       terms: {
         title: 'Termini e condizioni di utilizzo',
@@ -102,17 +96,13 @@ const messages = {
         title: 'Privacy Policy - App OneFanta',
         description: 'Informativa sul trattamento dei dati personali nell\'app mobile OneFanta.',
       },
-      waitlistPrivacy: {
-        title: 'Privacy Policy - Waitlist OneFanta',
-        description: 'Informativa sul trattamento dei dati personali per la lista d\'attesa OneFanta.',
+      websitePrivacy: {
+        title: 'Privacy Policy - Sito OneFanta',
+        description: 'Informativa sul trattamento dei dati personali sul sito OneFanta.',
       },
       deleteAccount: {
         title: 'Cancellazione account - OneFanta',
         description: 'Come eliminare definitivamente il tuo account OneFanta e i dati personali associati.',
-      },
-      contact: {
-        title: 'Contatti - OneFanta',
-        description: 'Contatti ufficiali OneFanta per privacy, supporto e richieste sui dati personali.',
       },
       terms: {
         title: 'Termini e condizioni - OneFanta',
@@ -139,12 +129,11 @@ const messages = {
     },
     footer: {
       appPrivacy: 'App Privacy',
-      waitlistPrivacy: 'Waitlist Privacy',
+      websitePrivacy: 'Website Privacy',
       cookiePolicy: 'Cookie Policy',
       support: 'Support',
     },
     legalModal: {
-      waitlistPrivacy: 'Waitlist Privacy Policy',
       cookiePolicy: 'Cookie Policy',
     },
     pages: {
@@ -184,18 +173,13 @@ const messages = {
         title: 'Privacy Policy - OneFanta App',
         subtitle: 'Privacy notice for the OneFanta mobile app.',
       },
-      waitlistPrivacy: {
-        title: 'Privacy Policy - OneFanta Waitlist',
-        subtitle: 'Privacy notice for the OneFanta website waitlist.',
-      },
-      contact: {
-        title: 'Contact',
-        subtitle: 'Official contacts for privacy, support and data requests.',
+      websitePrivacy: {
+        title: 'Privacy Policy - OneFanta Website',
+        subtitle: 'Privacy notice for the OneFanta website.',
       },
       deleteAccount: {
         title: 'Account and data deletion',
         subtitle: 'How to permanently delete your account and personal data.',
-        waitlistSection: 'Waitlist',
       },
       terms: {
         title: 'Terms and conditions of use',
@@ -229,17 +213,13 @@ const messages = {
         title: 'Privacy Policy - OneFanta App',
         description: 'Privacy notice for personal data processing in the OneFanta mobile app.',
       },
-      waitlistPrivacy: {
-        title: 'Privacy Policy - OneFanta Waitlist',
-        description: 'Privacy notice for personal data processing on the OneFanta waitlist.',
+      websitePrivacy: {
+        title: 'Privacy Policy - OneFanta Website',
+        description: 'Privacy notice for personal data processing on the OneFanta website.',
       },
       deleteAccount: {
         title: 'Account deletion - OneFanta',
         description: 'How to permanently delete your OneFanta account and associated personal data.',
-      },
-      contact: {
-        title: 'Contact - OneFanta',
-        description: 'Official OneFanta contacts for privacy, support and personal data requests.',
       },
       terms: {
         title: 'Terms and conditions - OneFanta',
@@ -267,9 +247,8 @@ export type SeoRoute =
   | 'landing'
   | 'support'
   | 'privacy'
-  | 'waitlistPrivacy'
+  | 'websitePrivacy'
   | 'deleteAccount'
-  | 'contact'
   | 'terms'
   | 'authConfirmed'
   | 'resetPassword';
@@ -284,12 +263,11 @@ export function pathToSeoRoute(path: string): SeoRoute {
       return 'support';
     case '/privacy':
       return 'privacy';
+    case '/website-privacy':
     case '/waitlist-privacy':
-      return 'waitlistPrivacy';
+      return 'websitePrivacy';
     case '/delete-account':
       return 'deleteAccount';
-    case '/contact':
-      return 'contact';
     case '/terms':
       return 'terms';
     case '/auth/confirmed':

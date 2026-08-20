@@ -29,7 +29,7 @@ function TermsIt({ locale }: { locale: Locale }) {
           </p>
           <p>
             Il trattamento dei dati personali è descritto nella <LocalizedLink locale={locale} href="/privacy">Privacy Policy dell'app</LocalizedLink>.
-            Per il sito, la waitlist e i cookie si applicano le rispettive informative disponibili nel footer.
+            Per il sito e i cookie si applicano le rispettive informative disponibili nel footer.
           </p>
         </PolicySection>
 
