@@ -1,8 +1,6 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import {
-  AlertCircle,
   BarChart3,
-  CheckCircle,
   ChevronDown,
   Cookie,
   Headphones,
@@ -16,115 +14,54 @@ import {
 } from 'lucide-react';
 import Background from '../components/Background';
 import FeatureCard from '../components/FeatureCard';
-import LegalModal, { type LegalModalType } from '../components/LegalModal';
+import LegalModal from '../components/LegalModal';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import { CookiePolicy, WaitlistPrivacyPolicy } from '../content/legal.it';
-import { CookiePolicyEn, WaitlistPrivacyPolicyEn } from '../content/legal.en';
+import { CookiePolicy } from '../content/legal.it';
+import { CookiePolicyEn } from '../content/legal.en';
 import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
-import { supabase } from '../lib/supabase';
+
+const APP_STORE_URL = 'https://apps.apple.com/it/app/onefanta-fantasy-football/id6781030562';
 
 function LandingPage({ locale }: { locale: Locale }) {
   const isItalian = locale === 'it';
   const shared = getMessages(locale).footer;
   const t = isItalian ? {
-    notify: 'Avvisami', available: 'Presto disponibile su iOS & Android', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
+    available: 'Ora disponibile su iOS', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
     intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
     competitionFocus: 'Al lancio, OneFanta supporta il fantacalcio basato sulla Premier League.',
     affiliationNotice: 'OneFanta è un servizio indipendente e non è affiliato, approvato, sponsorizzato o autorizzato da The Football Association Premier League Limited. Il nome “Premier League” identifica esclusivamente la competizione attualmente supportata.',
-    joined: 'Sei nella lista!', joinedBody: 'Ti avvisiamo non appena OneFanta sarà disponibile.',
-    formIntro: 'Lascia la tua email: ti avvisiamo il giorno del lancio. Niente spam, mai.', emailPlaceholder: 'Inserisci la tua email',
-    privacyPrefix: 'Premendo “Avvisami” chiedi di ricevere aggiornamenti strettamente collegati al lancio di OneFanta e presti il consenso al relativo trattamento della tua email. Puoi revocare il consenso e chiedere la cancellazione in qualsiasi momento. ',
-    privacyLink: 'Leggi la Waitlist Privacy Policy', first: "Sii tra i primi a entrare nella lista d'attesa", joinCount: 'Unisciti a', players: "giocatori già in lista d'attesa",
     soon: 'Prossimamente', featuresLabel: 'Vai alle funzionalità', featuresBefore: 'Tutto ciò che ti serve per ', featuresAccent: 'vincere',
     featuresIntro: 'Costruito da appassionati di fantacalcio, per appassionati di fantacalcio. Ogni funzione pensata per darti il vantaggio decisivo.',
     liveTitle: 'Voti Live', liveBody: 'Segui i voti dei tuoi giocatori in tempo reale, aggiornati minuto per minuto durante le partite.',
     leaguesTitle: 'Leghe Private', leaguesBody: 'Crea la tua lega, invita gli amici e sfidatevi nella vostra competizione personalizzata.',
     statsTitle: 'Statistiche Giocatori', statsBody: 'Analizza le performance di ogni calciatore con dati dettagliati e storici di ogni stagione.',
     ranksTitle: 'Classifiche in Tempo Reale', ranksBody: 'Guarda la tua posizione aggiornata live durante ogni giornata di campionato.',
-    ready: 'Pronto a dominare?', ctaBody: 'Iscriviti ora e sii il primo a sapere quando lanciamo.', cta: "Unisciti alla lista d'attesa",
-    terms: 'Termini e condizioni', deleteAccount: 'Cancella account', contact: 'Contatti', rights: 'Tutti i diritti riservati.', invalidEmail: 'Inserisci un indirizzo email valido', genericError: 'Qualcosa è andato storto. Riprova.',
+    ready: 'Pronto a dominare?', ctaBody: 'Scarica OneFanta dall’App Store e inizia a giocare.', cta: 'Scarica dall’App Store',
+    terms: 'Termini e condizioni', deleteAccount: 'Cancella account', contact: 'Contatti', rights: 'Tutti i diritti riservati.',
     homeAriaLabel: 'Home OneFanta',
   } : {
-    notify: 'Notify me', available: 'Coming soon to iOS & Android', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
+    available: 'Now available on iOS', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
     intro: 'Live ratings, private leagues with friends and real-time standings.', introAccent: ' Fantasy football done right.',
     competitionFocus: 'At launch, OneFanta supports fantasy football based on the Premier League.',
     affiliationNotice: 'OneFanta is an independent service and is not affiliated with, endorsed, sponsored or authorised by The Football Association Premier League Limited. The name “Premier League” is used solely to identify the competition currently supported.',
-    joined: "You're on the list!", joinedBody: "We'll let you know as soon as OneFanta is available.",
-    formIntro: 'Leave your email and we’ll notify you on launch day. No spam, ever.', emailPlaceholder: 'Enter your email',
-    privacyPrefix: 'By selecting “Notify me”, you ask to receive updates strictly related to the OneFanta launch and consent to the processing of your email. You may withdraw consent and request deletion at any time. ',
-    privacyLink: 'Read the Waitlist Privacy Policy', first: 'Be among the first to join the waitlist', joinCount: 'Join', players: 'players already on the waitlist',
     soon: 'Coming soon', featuresLabel: 'Go to features', featuresBefore: 'Everything you need to ', featuresAccent: 'win',
     featuresIntro: 'Built by fantasy football fans, for fantasy football fans. Every feature is designed to give you the winning edge.',
     liveTitle: 'Live Ratings', liveBody: 'Follow your players’ ratings in real time, updated minute by minute during matches.',
     leaguesTitle: 'Private Leagues', leaguesBody: 'Create your league, invite friends and compete in your own custom competition.',
     statsTitle: 'Player Statistics', statsBody: 'Analyse every player with detailed performance data and season history.',
     ranksTitle: 'Real-Time Standings', ranksBody: 'See your live position throughout every matchday.',
-    ready: 'Ready to take control?', ctaBody: 'Join now and be the first to know when we launch.', cta: 'Join the waitlist',
-    terms: 'Terms and conditions', deleteAccount: 'Delete account', contact: 'Contact', rights: 'All rights reserved.', invalidEmail: 'Enter a valid email address', genericError: 'Something went wrong. Please try again.',
+    ready: 'Ready to take control?', ctaBody: 'Download OneFanta from the App Store and start playing.', cta: 'Download on the App Store',
+    terms: 'Terms and conditions', deleteAccount: 'Delete account', contact: 'Contact', rights: 'All rights reserved.',
     homeAriaLabel: 'OneFanta home',
   };
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [activeModal, setActiveModal] = useState<LegalModalType | null>(null);
-  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
-
-  const fetchWaitlistCount = async () => {
-    const { data, error } = await supabase.rpc('get_waitlist_signup_count');
-
-    if (!error && typeof data === 'number') {
-      setWaitlistCount(data);
-    }
-  };
-
-  useEffect(() => {
-    fetchWaitlistCount();
-  }, []);
-
-  const visibleWaitlistCount = waitlistCount !== null && waitlistCount >= 100
-    ? Math.floor(waitlistCount / 100) * 100
-    : null;
-  const formattedWaitlistCount = visibleWaitlistCount?.toLocaleString(locale === 'it' ? 'it-IT' : 'en-US');
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    if (!email || !email.includes('@')) {
-      setStatus('error');
-      setErrorMessage(t.invalidEmail);
-      return;
-    }
-
-    setStatus('loading');
-    setErrorMessage('');
-
-    try {
-      const { error } = await supabase
-        .from('waitlist_signups')
-        .insert([{ email: email.toLowerCase() }]);
-
-      if (error) {
-        if (error.code === '23505') {
-          setStatus('success');
-        } else {
-          throw error;
-        }
-      } else {
-        setStatus('success');
-        setWaitlistCount((count) => count === null ? count : count + 1);
-      }
-    } catch {
-      setStatus('error');
-      setErrorMessage(t.genericError);
-    }
-  };
+  const [activeModal, setActiveModal] = useState<'cookie' | null>(null);
 
   const scrollToFeatures = () => {
     document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const openModal = (type: LegalModalType) => {
+  const openModal = (type: 'cookie') => {
     setActiveModal(type);
     document.body.style.overflow = 'hidden';
   };
@@ -177,89 +114,21 @@ function LandingPage({ locale }: { locale: Locale }) {
             {t.competitionFocus}
           </p>
 
-          <div className="bg-gradient-to-br from-dark-800/80 to-dark-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl shadow-electric-500/5 mb-8">
-            {status === 'success' ? (
-              <div className="flex flex-col items-center gap-3 py-4">
-                <div className="w-14 h-14 bg-electric-500/20 rounded-full flex items-center justify-center animate-pulse-glow">
-                  <CheckCircle className="w-7 h-7 text-electric-400" />
-                </div>
-                <p className="text-xl font-semibold text-electric-300">{t.joined}</p>
-                <p className="text-dark-400">{t.joinedBody}</p>
-              </div>
-            ) : (
-              <>
-                <p className="text-dark-300 mb-4">
-                  {t.formIntro}
-                </p>
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-                  <div className="flex-1 relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
-                    <input
-                      type="email"
-                      name="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder={t.emailPlaceholder}
-                      autoComplete="email"
-                      aria-describedby="waitlist-privacy-notice"
-                      required
-                      className="w-full pl-12 pr-4 py-4 bg-dark-900/60 border border-white/10 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all"
-                      disabled={status === 'loading'}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="px-8 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[140px]"
-                  >
-                    {status === 'loading' ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    ) : (
-                      t.notify
-                    )}
-                  </button>
-                </form>
-
-                {status === 'error' && (
-                  <div className="flex items-center gap-2 mt-3 text-red-400 text-sm">
-                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                    <span>{errorMessage}</span>
-                  </div>
-                )}
-
-                <p id="waitlist-privacy-notice" className="text-dark-400 text-xs leading-relaxed mt-4">
-                  {t.privacyPrefix}
-                  <a href={localizedPath(locale, '/waitlist-privacy')} className="text-electric-300 hover:text-electric-200 underline underline-offset-4">
-                    {t.privacyLink}
-                  </a>
-                  .
-                </p>
-              </>
-            )}
-
-            <p className="text-dark-500 text-xs text-center mt-4">
-              {formattedWaitlistCount ? (
-                <>
-                  {t.joinCount}{' '}
-                  <span className="text-electric-400 font-semibold">{formattedWaitlistCount}+</span>{' '}
-                  {t.players}
-                </>
-              ) : (
-                t.first
-              )}
-            </p>
-          </div>
-
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
-            <button className="flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 hover:scale-105">
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 hover:scale-105"
+            >
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
               <div className="text-left">
-                <div className="text-xs text-dark-400">{t.soon}</div>
+                <div className="text-xs text-dark-400">{t.available}</div>
                 <div className="font-semibold">App Store</div>
               </div>
-            </button>
+            </a>
             <button className="flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 hover:scale-105">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
@@ -318,12 +187,14 @@ function LandingPage({ locale }: { locale: Locale }) {
             <p className="text-dark-300 text-lg mb-8">
               {t.ctaBody}
             </p>
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noreferrer"
               className="px-8 py-4 bg-gradient-to-r from-electric-500 to-electric-600 hover:from-electric-400 hover:to-electric-500 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-electric-500/25"
             >
               {t.cta}
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -348,13 +219,6 @@ function LandingPage({ locale }: { locale: Locale }) {
                 <Shield className="w-4 h-4" />
                 {shared.appPrivacy}
               </a>
-              <button
-                onClick={() => openModal('waitlistPrivacy')}
-                className="hover:text-electric-400 transition-colors flex items-center gap-2"
-              >
-                <Mail className="w-4 h-4" />
-                {shared.waitlistPrivacy}
-              </button>
               <a href={localizedPath(locale, '/delete-account')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <Trash2 className="w-4 h-4" />
                 {t.deleteAccount}
@@ -389,9 +253,7 @@ function LandingPage({ locale }: { locale: Locale }) {
 
       {activeModal && (
         <LegalModal activeModal={activeModal} onClose={closeModal} locale={locale}>
-          {activeModal === 'waitlistPrivacy'
-            ? (isItalian ? <WaitlistPrivacyPolicy /> : <WaitlistPrivacyPolicyEn />)
-            : (isItalian ? <CookiePolicy locale={locale} /> : <CookiePolicyEn locale={locale} />)}
+          {isItalian ? <CookiePolicy locale={locale} /> : <CookiePolicyEn locale={locale} />}
         </LegalModal>
       )}
     </div>
