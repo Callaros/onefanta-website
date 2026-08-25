@@ -4,7 +4,7 @@ import type { Locale } from '../lib/i18n';
 
 export const CONTACT_EMAIL = 'privacy@onefanta.com';
 export const LAST_UPDATED = '20 agosto 2026';
-const APP_PRIVACY_LAST_UPDATED = '20 agosto 2026';
+const APP_PRIVACY_LAST_UPDATED = '25 agosto 2026';
 
 export function EmailLink() {
   return (
@@ -130,7 +130,8 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
           <li><strong className="text-white">Dati locali:</strong> preferenze, impostazioni, cache e dati di gioco salvati sul dispositivo.</li>
           <li><strong className="text-white">Notifiche:</strong> token push, piattaforma e preferenze di notifica, solo se decidi di abilitarle.</li>
           <li><strong className="text-white">Diagnostica:</strong> errori, eccezioni, stack trace, breadcrumb tecnici, schermata o operazione interessata, modello del dispositivo, sistema operativo, versione dell'app, data e ora dell'evento e indirizzo IP.</li>
-          <li><strong className="text-white">Pubblicità:</strong> identificatori pubblicitari o dell'installazione, indirizzo IP, informazioni sul dispositivo e sull'app, interazioni con gli annunci, dati diagnostici e scelte relative al consenso, secondo le opzioni disponibili.</li>
+          <li><strong className="text-white">Analytics e utilizzo dell'app:</strong> identificativo dell'istanza dell'app, eventi relativi ad avvio, sessioni, schermate e funzioni utilizzate, informazioni sul dispositivo e sull'app, posizione approssimativa derivata dall'indirizzo IP ed eventi relativi ad acquisti in-app, se presenti. L'identificativo pubblicitario può essere raccolto quando disponibile e consentito dalle impostazioni applicabili.</li>
+          <li><strong className="text-white">Pubblicità e ricavi per impressione:</strong> identificatori pubblicitari o dell'installazione, indirizzo IP, informazioni sul dispositivo e sull'app, annunci visualizzati e relative interazioni, fonte e formato dell'annuncio, valore e valuta attribuiti alla singola impressione, livello di precisione del valore, dati diagnostici e scelte relative al consenso, secondo le opzioni disponibili.</li>
         </ul>
       </PolicySection>
 
@@ -141,6 +142,7 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
           <li><strong className="text-white">Diagnostica:</strong> individuazione e correzione di crash, errori e malfunzionamenti tramite Sentry. La base giuridica è il legittimo interesse a garantire stabilità, sicurezza e corretto funzionamento dell'app.</li>
           <li><strong className="text-white">Notifiche:</strong> invio delle notifiche di servizio che scegli di abilitare. La base giuridica è l'esecuzione della funzione richiesta; l'attivazione è facoltativa e può essere revocata disabilitando le notifiche nell'app o nelle impostazioni del dispositivo.</li>
           <li><strong className="text-white">Assistenza:</strong> gestione e risposta alle richieste inviate dall'utente. La base giuridica è l'esecuzione del servizio o di misure richieste dall'utente e, quando applicabile, l'adempimento di obblighi legali.</li>
+          <li><strong className="text-white">Analisi e misurazione:</strong> comprensione dell'utilizzo dell'app, misurazione delle prestazioni delle funzioni e degli annunci, attribuzione e calcolo aggregato di metriche quali valore nel tempo e ricavi pubblicitari tramite Google Analytics for Firebase. Quando la normativa applicabile richiede il consenso, la raccolta avviene secondo le scelte espresse nell'app.</li>
           <li><strong className="text-white">Pubblicità:</strong> visualizzazione, misurazione e, quando autorizzata, personalizzazione degli annunci tramite Google Mobile Ads. I trattamenti che richiedono consenso sono eseguiti secondo le scelte espresse nell'app.</li>
           <li><strong className="text-white">Obblighi legali:</strong> adempimento di obblighi previsti dalla legge o di richieste legittime delle autorità competenti.</li>
         </ul>
@@ -202,18 +204,31 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
         </p>
       </PolicySection>
 
-      <PolicySection title="8. Pubblicità e gestione del consenso">
+      <PolicySection title="8. Analytics, pubblicità e gestione del consenso">
         <p className="mb-3">
-          OneFanta usa Google Mobile Ads per mostrare annunci. Al primo avvio l'app presenta il meccanismo di gestione del consenso
-          previsto per la pubblicità e raccoglie le scelte dell'utente prima di richiedere i trattamenti pubblicitari soggetti a
-          consenso. Le scelte espresse determinano le modalità con cui Google e i fornitori pubblicitari autorizzati possono trattare
-          dati per archiviazione, misurazione e personalizzazione degli annunci.
+          OneFanta usa Google Analytics for Firebase per comprendere come viene utilizzata l'app, misurarne le prestazioni e collegare
+          gli eventi pubblicitari alle statistiche di utilizzo. Il servizio può assegnare all'installazione un identificativo
+          dell'istanza dell'app e raccogliere automaticamente eventi relativi ad avvio, sessioni, schermate, dispositivo, versione
+          dell'app e posizione approssimativa derivata dall'indirizzo IP.
         </p>
-        <p>
+        <p className="mb-3">
+          OneFanta usa Google Mobile Ads per mostrare annunci e ha attivato la misurazione delle entrate pubblicitarie a livello di
+          impressione. Per ogni annuncio visualizzato, Google può rendere disponibili e trasmettere a Firebase e Google Analytics il
+          valore attribuito all'impressione, la valuta, la fonte e il formato dell'annuncio e il livello di precisione del valore.
+          Questi dati sono usati per report, attribuzione, misurazione dei ricavi e calcolo di metriche aggregate, quali il valore nel
+          tempo degli utenti e il ritorno della spesa pubblicitaria.
+        </p>
+        <p className="mb-3">
           I dati pubblicitari possono includere identificatori pubblicitari o dell'installazione, indirizzo IP, caratteristiche del
           dispositivo e dell'app, interazioni con gli annunci, dati diagnostici e informazioni relative al consenso. OneFanta non
           vende i dati personali degli utenti. Se non presti il consenso alla personalizzazione, l'app può continuare a mostrare
           annunci non personalizzati, nel rispetto delle scelte espresse nel meccanismo di gestione del consenso.
+        </p>
+        <p>
+          L'app presenta il meccanismo di gestione del consenso previsto per la pubblicità e l'analytics prima di avviare i trattamenti
+          soggetti a consenso. Le scelte espresse determinano le modalità con cui Google e i fornitori pubblicitari autorizzati possono
+          trattare dati per archiviazione, misurazione, analytics e personalizzazione degli annunci. Puoi modificare o revocare le
+          scelte tramite le impostazioni privacy disponibili nell'app; la revoca non pregiudica la liceità dei trattamenti già effettuati.
         </p>
       </PolicySection>
 
@@ -222,8 +237,8 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
           I dati possono essere trattati, nei limiti necessari alle finalità descritte, dai partecipanti alle leghe private per i dati
           di gioco e i contenuti condivisi nella lega, da Supabase per backend, autenticazione e archiviazione nella regione Europa
           centrale (Francoforte), da Google e Apple per l'autenticazione federata scelta dall'utente,
-          Functional Software, Inc. (Sentry) per la diagnostica, Google e i relativi fornitori autorizzati per Firebase Cloud Messaging
-          e Google Mobile Ads e da Resend per le email transazionali, compresi l'indirizzo email del destinatario, il contenuto del
+          Functional Software, Inc. (Sentry) per la diagnostica, Google e i relativi fornitori autorizzati per Firebase Cloud Messaging,
+          Google Analytics for Firebase e Google Mobile Ads, inclusa la misurazione delle entrate per impressione, e da Resend per le email transazionali, compresi l'indirizzo email del destinatario, il contenuto del
           messaggio e i metadati di consegna. Sportmonks fornisce a OneFanta i dati sportivi: OneFanta li recupera lato server e non
           invia intenzionalmente a Sportmonks dati dell'account o dati di gioco degli utenti. Sentry tratta gli eventi nella regione
           Unione europea. Qualora i
@@ -248,7 +263,8 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
           finché necessari a gestire la scelta dell'utente e vengono rimossi quando non sono più necessari o quando l'account viene
           eliminato. I log tecnici e di sicurezza sono conservati per un massimo di 12 mesi; se l'account viene eliminato, i log ancora
           necessari vengono anonimizzati e non sono più associati all'utente. I dati diagnostici restano in Sentry per 30 giorni. I
-          dati pubblicitari sono conservati secondo le impostazioni di consenso e i periodi applicati dai fornitori coinvolti. Le
+          dati analytics e pubblicitari, inclusi gli eventi relativi ai ricavi per impressione, sono conservati secondo le impostazioni
+          di consenso, le impostazioni di conservazione configurate in Google Analytics e i periodi applicati dai fornitori coinvolti. Le
           richieste di assistenza sono conservate fino alla loro definizione e, se necessario, per il periodo successivo richiesto da
           obblighi di legge o dalla tutela dei diritti.
         </p>
@@ -270,7 +286,7 @@ export function AppPrivacyPolicy({ locale }: { locale: Locale }) {
       <PolicySection title="12. Conferimento dei dati e funzioni facoltative">
         <p>
           Email o identità fornita dal provider, informazioni di autenticazione e dati di gioco necessari sono indispensabili per creare l'account e fornire le relative funzionalità;
-          senza di essi non è possibile usare le aree riservate. Il caricamento di immagini, le notifiche e i trattamenti
+          senza di essi non è possibile usare le aree riservate. Il caricamento di immagini, le notifiche e i trattamenti analytics e
           pubblicitari basati sul consenso sono facoltativi. Il loro mancato conferimento o la revoca del consenso non impediscono
           l'uso delle altre funzioni dell'app, salvo quelle che dipendono direttamente dal dato o dal permesso rifiutato. L'invio di
           una richiesta di assistenza è facoltativo, ma senza i dati necessari non potremo rispondere.

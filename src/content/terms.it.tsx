@@ -149,7 +149,8 @@ function TermsIt({ locale }: { locale: Locale }) {
 
       <PolicySection title="11. Servizi di terzi, store, pubblicità e acquisti">
         <p className="mb-3">
-            L'app è attualmente distribuita esclusivamente tramite Apple App Store e Google Play Store. Alcune funzioni possono
+            L'app è distribuita tramite Apple App Store e, in base alla disponibilità, tramite Google Play Store o download diretto
+            dell'APK Android dal sito ufficiale. Alcune funzioni possono
             dipendere da servizi di terzi, tra cui Supabase per database, autenticazione e archiviazione, Sportmonks per i dati
             sportivi, Sentry per la diagnostica dei malfunzionamenti, Firebase Cloud Messaging per le notifiche abilitate dall'utente
             e Google Mobile Ads per la pubblicità. Il sito usa inoltre Cloudflare per hosting, storage, distribuzione e sicurezza.
@@ -171,7 +172,7 @@ function TermsIt({ locale }: { locale: Locale }) {
         <PolicySection title="12. Disponibilità territoriale">
           <p>
             OneFanta non prevede attualmente un limite territoriale generale. La possibilità concreta di scaricare o usare l'app può
-            dipendere dalla disponibilità su Apple App Store e Google Play Store nel Paese dell'utente, dalla compatibilità del
+            dipendere dalla disponibilità su Apple App Store, Google Play Store o sul sito ufficiale nel Paese dell'utente, dalla compatibilità del
             dispositivo, dai servizi di terzi e dalle leggi locali. È responsabilità dell'utente verificare che l'uso del Servizio
             sia consentito nel luogo in cui si trova.
           </p>
