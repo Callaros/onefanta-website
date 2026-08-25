@@ -20,17 +20,18 @@ import { CookiePolicyEn } from '../content/legal.en';
 import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
 
-const APP_STORE_URL = 'https://apps.apple.com/it/app/onefanta-fantasy-football/id6781030562';
+const APP_STORE_URL = 'https://apple.onefanta.com';
+const ANDROID_DOWNLOAD_URL = 'https://android.onefanta.com';
 
 function LandingPage({ locale }: { locale: Locale }) {
   const isItalian = locale === 'it';
   const shared = getMessages(locale).footer;
   const t = isItalian ? {
-    available: 'Ora disponibile su iOS', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
+    available: 'Ora disponibile su iOS e Android', iosAvailable: 'Disponibile su iOS', androidAvailable: 'Download diretto', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
     intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
     competitionFocus: 'Al lancio, OneFanta supporta il fantacalcio basato sulla Premier League.',
     affiliationNotice: 'OneFanta è un servizio indipendente e non è affiliato, approvato, sponsorizzato o autorizzato da The Football Association Premier League Limited. Il nome “Premier League” identifica esclusivamente la competizione attualmente supportata.',
-    soon: 'Prossimamente', featuresLabel: 'Vai alle funzionalità', featuresBefore: 'Tutto ciò che ti serve per ', featuresAccent: 'vincere',
+    featuresLabel: 'Vai alle funzionalità', featuresBefore: 'Tutto ciò che ti serve per ', featuresAccent: 'vincere',
     featuresIntro: 'Costruito da appassionati di fantacalcio, per appassionati di fantacalcio. Ogni funzione pensata per darti il vantaggio decisivo.',
     liveTitle: 'Voti Live', liveBody: 'Segui i voti dei tuoi giocatori in tempo reale, aggiornati minuto per minuto durante le partite.',
     leaguesTitle: 'Leghe Private', leaguesBody: 'Crea la tua lega, invita gli amici e sfidatevi nella vostra competizione personalizzata.',
@@ -40,11 +41,11 @@ function LandingPage({ locale }: { locale: Locale }) {
     terms: 'Termini e condizioni', deleteAccount: 'Cancella account', rights: 'Tutti i diritti riservati.',
     homeAriaLabel: 'Home OneFanta',
   } : {
-    available: 'Now available on iOS', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
+    available: 'Now available on iOS and Android', iosAvailable: 'Available on iOS', androidAvailable: 'Direct download', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
     intro: 'Live ratings, private leagues with friends and real-time standings.', introAccent: ' Fantasy football done right.',
     competitionFocus: 'At launch, OneFanta supports fantasy football based on the Premier League.',
     affiliationNotice: 'OneFanta is an independent service and is not affiliated with, endorsed, sponsored or authorised by The Football Association Premier League Limited. The name “Premier League” is used solely to identify the competition currently supported.',
-    soon: 'Coming soon', featuresLabel: 'Go to features', featuresBefore: 'Everything you need to ', featuresAccent: 'win',
+    featuresLabel: 'Go to features', featuresBefore: 'Everything you need to ', featuresAccent: 'win',
     featuresIntro: 'Built by fantasy football fans, for fantasy football fans. Every feature is designed to give you the winning edge.',
     liveTitle: 'Live Ratings', liveBody: 'Follow your players’ ratings in real time, updated minute by minute during matches.',
     leaguesTitle: 'Private Leagues', leaguesBody: 'Create your league, invite friends and compete in your own custom competition.',
@@ -124,19 +125,24 @@ function LandingPage({ locale }: { locale: Locale }) {
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
               <div className="text-left">
-                <div className="text-xs text-dark-400">{t.available}</div>
+                <div className="text-xs text-dark-400">{t.iosAvailable}</div>
                 <div className="font-semibold">App Store</div>
               </div>
             </a>
-            <button className="flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 hover:scale-105">
+            <a
+              href={ANDROID_DOWNLOAD_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 hover:scale-105"
+            >
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
               </svg>
               <div className="text-left">
-                <div className="text-xs text-dark-400">{t.soon}</div>
-                <div className="font-semibold">Google Play</div>
+                <div className="text-xs text-dark-400">{t.androidAvailable}</div>
+                <div className="font-semibold">Android APK</div>
               </div>
-            </button>
+            </a>
           </div>
 
           <button
