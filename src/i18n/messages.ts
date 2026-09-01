@@ -9,6 +9,7 @@ const messages = {
       switchToEnglish: 'Passa all\'inglese',
       switchToItalian: 'Passa all\'italiano',
       lastUpdated: 'Ultimo aggiornamento',
+      playerList: 'Lista giocatori',
     },
     footer: {
       appPrivacy: 'Privacy app',
@@ -116,6 +117,10 @@ const messages = {
         title: 'Reimposta password - OneFanta',
         description: 'Imposta una nuova password per il tuo account OneFanta.',
       },
+      players: {
+        title: 'Lista giocatori Premier League - OneFanta',
+        description: 'Cerca, filtra e scarica in Excel la lista dei giocatori Premier League disponibili su OneFanta.',
+      },
     },
   },
   en: {
@@ -126,6 +131,7 @@ const messages = {
       switchToEnglish: 'Switch to English',
       switchToItalian: 'Switch to Italian',
       lastUpdated: 'Last updated',
+      playerList: 'Player list',
     },
     footer: {
       appPrivacy: 'App Privacy',
@@ -233,6 +239,10 @@ const messages = {
         title: 'Reset password - OneFanta',
         description: 'Set a new password for your OneFanta account.',
       },
+      players: {
+        title: 'Premier League player list - OneFanta',
+        description: 'Search, filter and download the Premier League players available on OneFanta.',
+      },
     },
   },
 } as const;
@@ -251,7 +261,8 @@ export type SeoRoute =
   | 'deleteAccount'
   | 'terms'
   | 'authConfirmed'
-  | 'resetPassword';
+  | 'resetPassword'
+  | 'players';
 
 export function getSeoForRoute(locale: Locale, route: SeoRoute) {
   return getMessages(locale).seo[route];
@@ -261,6 +272,9 @@ export function pathToSeoRoute(path: string): SeoRoute {
   switch (path) {
     case '/support':
       return 'support';
+    case '/players':
+    case '/giocatori':
+      return 'players';
     case '/privacy':
       return 'privacy';
     case '/website-privacy':

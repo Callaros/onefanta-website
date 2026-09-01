@@ -7,6 +7,7 @@ import AuthConfirmedPage from './pages/AuthConfirmedPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import TermsPage from './pages/TermsPage';
 import SupportPage from './pages/SupportPage';
+import PlayersPage from './pages/PlayersPage';
 import { getSeoForRoute, pathToSeoRoute } from './i18n/messages';
 import { detectPreferredLocale, getLocaleFromPath, localizedPath, rememberLocale, stripLocaleFromPath } from './lib/i18n';
 
@@ -67,6 +68,10 @@ function App() {
 
   if (path === '/support') {
     return <SupportPage locale={locale} />;
+  }
+
+  if (path === '/players' || path === '/giocatori') {
+    return <PlayersPage locale={locale} />;
   }
 
   if (path === '/terms') {

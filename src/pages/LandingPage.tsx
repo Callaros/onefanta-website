@@ -14,7 +14,7 @@ import {
 import Background from '../components/Background';
 import FeatureCard from '../components/FeatureCard';
 import LegalModal from '../components/LegalModal';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+import SiteHeader from '../components/SiteHeader';
 import { CookiePolicy } from '../content/legal.it';
 import { CookiePolicyEn } from '../content/legal.en';
 import { getMessages } from '../i18n/messages';
@@ -26,6 +26,7 @@ const ANDROID_DOWNLOAD_URL = 'https://android.onefanta.com';
 function LandingPage({ locale }: { locale: Locale }) {
   const isItalian = locale === 'it';
   const shared = getMessages(locale).footer;
+  const common = getMessages(locale).common;
   const t = isItalian ? {
     available: 'Ora disponibile su iOS e Android', iosAvailable: 'Disponibile su iOS', androidAvailable: 'Download diretto', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
     intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
@@ -75,18 +76,7 @@ function LandingPage({ locale }: { locale: Locale }) {
     <div className="min-h-screen bg-dark-950 text-white overflow-x-hidden">
       <Background />
 
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-950/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href={localizedPath(locale, '/')} className="flex items-center" aria-label={t.homeAriaLabel}>
-            <img
-              src="/onefanta-logo.png"
-              alt="OneFanta"
-              className="h-10 w-auto rounded-xl"
-            />
-          </a>
-          <LanguageSwitcher locale={locale} compact />
-        </div>
-      </nav>
+      <SiteHeader locale={locale} />
 
       <section id="signup" className="min-h-screen flex flex-col items-center justify-center pt-20 pb-8 px-6">
         <div className="max-w-3xl mx-auto text-center w-full">
@@ -216,6 +206,10 @@ function LandingPage({ locale }: { locale: Locale }) {
             </a>
 
             <div className="flex flex-wrap items-center justify-center gap-5 text-dark-400 text-sm">
+              <a href={localizedPath(locale, '/players')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                {common.playerList}
+              </a>
               <a href={localizedPath(locale, '/terms')} className="hover:text-electric-400 transition-colors flex items-center gap-2">
                 <ScrollText className="w-4 h-4" />
                 {t.terms}
