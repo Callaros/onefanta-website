@@ -22,6 +22,7 @@ import type { SheetData } from 'write-excel-file/browser';
 
 type Player = {
   id: string;
+  common_name: string;
   first_name: string;
   second_name: string;
   role: string;
@@ -89,11 +90,11 @@ const roleClass = (role: string) => {
   return 'bg-white/5 text-dark-200 border-white/10';
 };
 
-const playerName = (player: Player) => `${player.first_name} ${player.second_name}`.trim();
+const playerName = (player: Player) => player.common_name.trim() || `${player.first_name} ${player.second_name}`.trim();
 
 function PlayerAvatar({ player }: { player: Player }) {
   const [failed, setFailed] = useState(false);
-  const initials = `${player.first_name[0] ?? ''}${player.second_name[0] ?? ''}`.toUpperCase();
+  const initials = playerName(player).split(/\s+/).slice(0, 2).map((part) => part[0] ?? '').join('').toUpperCase();
   return (
     <div className="h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-electric-500/25 to-dark-800">
       {player.image && !failed ? (
@@ -144,7 +145,7 @@ function PlayersPage({ locale }: { locale: Locale }) {
         .map((player) => ({
           ...player,
           player_value: Number(player.player_value) || 0,
-          first_name: player.first_name ?? '', second_name: player.second_name ?? '',
+          common_name: player.common_name ?? '', first_name: player.first_name ?? '', second_name: player.second_name ?? '',
           role: player.role ?? '', team_name: player.team_name ?? '',
         }))
         .filter((player) => Boolean(player.team_id && player.team_name));
