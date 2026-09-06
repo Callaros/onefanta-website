@@ -27,12 +27,13 @@ type Player = {
   second_name: string;
   role: string;
   player_value: number;
+  average_rating: number | null;
   image: string | null;
   team_id: string;
   team_name: string;
 };
 
-type SortKey = 'name' | 'team' | 'role' | 'value';
+type SortKey = 'name' | 'team' | 'role' | 'value' | 'averageRating';
 type SortDirection = 'asc' | 'desc';
 
 const PAGE_SIZE = 50;
@@ -46,6 +47,7 @@ const copy = {
     minValue: 'Valore minimo', maxValue: 'Valore massimo', filters: 'Filtri', reset: 'Azzera filtri',
     results: 'giocatori', download: 'Scarica Excel', downloading: 'Creazione Excel…',
     player: 'Giocatore', value: 'Valore', noResults: 'Nessun giocatore trovato',
+    averageRating: 'Fanta media',
     noResultsBody: 'Prova a modificare o azzerare i filtri selezionati.',
     loading: 'Caricamento giocatori…', errorTitle: 'Non riusciamo a caricare i giocatori',
     errorBody: 'Riprova tra poco. Se il problema continua, verifica che la funzione Supabase pubblica sia stata installata.', retry: 'Riprova',
@@ -60,6 +62,7 @@ const copy = {
     minValue: 'Minimum value', maxValue: 'Maximum value', filters: 'Filters', reset: 'Reset filters',
     results: 'players', download: 'Download Excel', downloading: 'Creating Excel…',
     player: 'Player', value: 'Value', noResults: 'No players found',
+    averageRating: 'Fantasy average',
     noResultsBody: 'Try changing or clearing the selected filters.',
     loading: 'Loading players…', errorTitle: 'We could not load the players',
     errorBody: 'Try again shortly. If the issue persists, check that the public Supabase function has been installed.', retry: 'Try again',
@@ -69,6 +72,13 @@ const copy = {
 } as const;
 
 const normalise = (value: string) => value.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const parseAverageRating = (value: unknown): number | null => {
+  if (value == null || (typeof value === 'string' && value.trim() === '')) return null;
+  if (typeof value !== 'number' && typeof value !== 'string') return null;
+  const rating = Number(value);
+  return Number.isFinite(rating) ? rating : null;
+};
+const formatAverageRating = (value: number | null, locale: Locale) => value === null ? '—' : value.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 const roleLabel = (role: string, locale: Locale) => {
   const key = normalise(role);
@@ -91,6 +101,21 @@ const roleClass = (role: string) => {
 };
 
 const playerName = (player: Player) => player.common_name.trim() || `${player.first_name} ${player.second_name}`.trim();
+
+const playerSortName = (player: Player) => normalise(playerName(player).trim().replace(/^(?:\p{L}\p{M}*|\?)\./u, '').trim());
+const compareText = (left: string, right: string) => left < right ? -1 : left > right ? 1 : 0;
+const comparePlayersByName = (a: Player, b: Player) => compareText(playerSortName(a), playerSortName(b)) || compareText(a.id, b.id);
+
+const roleValue = (role: string) => {
+  const roles = [
+    ['1', 'gk', 'goalkeeper', 'portiere', 'p'],
+    ['2', 'def', 'defender', 'difensore', 'd'],
+    ['3', 'mid', 'midfielder', 'centrocampista', 'c'],
+    ['4', 'fwd', 'forward', 'attacker', 'attaccante', 'a'],
+  ];
+  const index = roles.findIndex((aliases) => aliases.includes(normalise(role)));
+  return index === -1 ? roles.length + 1 : index + 1;
+};
 
 function PlayerAvatar({ player }: { player: Player }) {
   const [failed, setFailed] = useState(false);
@@ -145,6 +170,7 @@ function PlayersPage({ locale }: { locale: Locale }) {
         .map((player) => ({
           ...player,
           player_value: Number(player.player_value) || 0,
+          average_rating: parseAverageRating(player.average_rating),
           common_name: player.common_name ?? '', first_name: player.first_name ?? '', second_name: player.second_name ?? '',
           role: player.role ?? '', team_name: player.team_name ?? '',
         }))
@@ -171,15 +197,22 @@ function PlayersPage({ locale }: { locale: Locale }) {
       return true;
     });
     return rows.sort((a, b) => {
+      // Unavailable ratings stay last in either direction.
+      if (sortKey === 'averageRating' && (a.average_rating === null || b.average_rating === null)) {
+        if (a.average_rating === b.average_rating) return comparePlayersByName(a, b);
+        return a.average_rating === null ? 1 : -1;
+      }
       const values: Record<SortKey, [string | number, string | number]> = {
-        name: [playerName(a), playerName(b)], team: [a.team_name, b.team_name], role: [roleLabel(a.role, locale), roleLabel(b.role, locale)],
+        name: [playerSortName(a), playerSortName(b)], team: [a.team_name, b.team_name], role: [roleValue(a.role), roleValue(b.role)],
         value: [a.player_value, b.player_value],
+        averageRating: [a.average_rating ?? 0, b.average_rating ?? 0],
       };
       const [left, right] = values[sortKey];
-      const result = typeof left === 'number' && typeof right === 'number' ? left - right : String(left).localeCompare(String(right), locale);
-      return sortDirection === 'asc' ? result : -result;
+      const result = typeof left === 'number' && typeof right === 'number' ? left - right : compareText(String(left), String(right));
+      if (result !== 0) return sortDirection === 'asc' ? result : -result;
+      return comparePlayersByName(a, b);
     });
-  }, [players, search, team, role, minValue, maxValue, sortKey, sortDirection, locale]);
+  }, [players, search, team, role, minValue, maxValue, sortKey, sortDirection]);
 
   useEffect(() => { setPage(1); }, [search, team, role, minValue, maxValue, sortKey, sortDirection]);
 
@@ -190,7 +223,7 @@ function PlayersPage({ locale }: { locale: Locale }) {
   const resetFilters = () => { setSearch(''); setTeam(''); setRole(''); setMinValue(''); setMaxValue(''); };
   const changeSort = (key: SortKey) => {
     if (sortKey === key) setSortDirection((current) => current === 'asc' ? 'desc' : 'asc');
-    else { setSortKey(key); setSortDirection(key === 'value' ? 'desc' : 'asc'); }
+    else { setSortKey(key); setSortDirection(key === 'value' || key === 'averageRating' ? 'desc' : 'asc'); }
   };
 
   const exportExcel = async () => {
@@ -202,10 +235,11 @@ function PlayersPage({ locale }: { locale: Locale }) {
         value, fontWeight: 'bold' as const, textColor: '#ffffff', backgroundColor: '#1a6eea', align: 'center' as const,
       });
       const sheetData: SheetData = [
-        [header(t.player), header(t.team), header(t.role), header(t.value)],
+        [header(t.player), header(t.team), header(t.role), header(t.value), header(t.averageRating)],
         ...filteredPlayers.map((player) => [
           playerName(player), player.team_name, roleLabel(player.role, locale),
           { value: player.player_value, type: Number, format: '0.00', align: 'right' as const },
+          player.average_rating === null ? null : { value: player.average_rating, type: Number, format: '0.00', align: 'right' as const },
         ]),
         [],
         [`${t.exportedPlayers}: ${filteredPlayers.length}`],
@@ -213,7 +247,7 @@ function PlayersPage({ locale }: { locale: Locale }) {
       ];
       await writeXlsxFile(sheetData, {
         sheet: t.exportSheet,
-        columns: [{ width: 30 }, { width: 24 }, { width: 20 }, { width: 14 }],
+        columns: [{ width: 30 }, { width: 24 }, { width: 20 }, { width: 14 }, { width: 18 }],
         stickyRowsCount: 1,
       }, { fontFamily: 'Arial', fontSize: 11 }).toFile(
         `onefanta-${locale === 'it' ? 'giocatori' : 'players'}-${new Date().toISOString().slice(0, 10)}.xlsx`,
@@ -277,18 +311,20 @@ function PlayersPage({ locale }: { locale: Locale }) {
                     <th className="px-5 py-4"><SortButton label={t.team} sortKey="team" activeKey={sortKey} direction={sortDirection} onSort={changeSort} /></th>
                     <th className="px-5 py-4"><SortButton label={t.role} sortKey="role" activeKey={sortKey} direction={sortDirection} onSort={changeSort} /></th>
                     <th className="px-5 py-4 text-right"><SortButton label={t.value} sortKey="value" activeKey={sortKey} direction={sortDirection} onSort={changeSort} /></th>
+                    <th className="px-5 py-4 text-right" title={t.averageRating}><SortButton label="FM" sortKey="averageRating" activeKey={sortKey} direction={sortDirection} onSort={changeSort} /></th>
                   </tr></thead>
                   <tbody className="divide-y divide-white/5">{visiblePlayers.map((player) => <tr key={player.id} className="transition hover:bg-white/[0.035]">
                     <td className="px-5 py-3"><div className="flex items-center gap-3"><PlayerAvatar player={player} /><span className="font-semibold">{playerName(player)}</span></div></td>
                     <td className="px-5 py-3 text-sm text-dark-200">{player.team_name || '—'}</td>
                     <td className="px-5 py-3"><span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${roleClass(player.role)}`}>{roleLabel(player.role, locale) || '—'}</span></td>
                     <td className="px-5 py-3 text-right font-mono font-bold text-electric-300">{player.player_value.toLocaleString(locale)}</td>
+                    <td className="px-5 py-3 text-right font-mono text-dark-200">{formatAverageRating(player.average_rating, locale)}</td>
                   </tr>)}</tbody>
                 </table>
               </div>
               <div className="divide-y divide-white/5 md:hidden">{visiblePlayers.map((player) => <article key={player.id} className="p-4">
                 <div className="mb-3 flex items-center gap-3"><PlayerAvatar player={player} /><div className="min-w-0 flex-1"><h2 className="truncate font-semibold">{playerName(player)}</h2><p className="truncate text-sm text-dark-400">{player.team_name || '—'}</p></div><span className="font-mono text-lg font-bold text-electric-300">{player.player_value.toLocaleString(locale)}</span></div>
-                <div><span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${roleClass(player.role)}`}>{roleLabel(player.role, locale) || '—'}</span></div>
+                <div className="flex items-center justify-between gap-3"><span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${roleClass(player.role)}`}>{roleLabel(player.role, locale) || '—'}</span><span className="text-sm text-dark-200" title={t.averageRating}>FM <strong className="font-mono">{formatAverageRating(player.average_rating, locale)}</strong></span></div>
               </article>)}</div>
             </>
           )}
