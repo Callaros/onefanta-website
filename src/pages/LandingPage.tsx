@@ -21,7 +21,7 @@ import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
 
 const APP_STORE_URL = 'https://apple.onefanta.com';
-const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.callaros.onefanta';
+const GOOGLE_PLAY_URL = 'https://android.onefanta.com';
 
 function LandingPage({ locale }: { locale: Locale }) {
   const isItalian = locale === 'it';
