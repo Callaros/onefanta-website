@@ -21,14 +21,14 @@ import { getMessages } from '../i18n/messages';
 import { localizedPath, type Locale } from '../lib/i18n';
 
 const APP_STORE_URL = 'https://apple.onefanta.com';
-const ANDROID_DOWNLOAD_URL = 'https://android.onefanta.com';
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.callaros.onefanta';
 
 function LandingPage({ locale }: { locale: Locale }) {
   const isItalian = locale === 'it';
   const shared = getMessages(locale).footer;
   const common = getMessages(locale).common;
   const t = isItalian ? {
-    available: 'Ora disponibile su iOS e Android', iosAvailable: 'Disponibile su iOS', androidAvailable: 'Download diretto', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
+    available: 'Ora disponibile su iOS e Android', iosAvailable: 'Disponibile su iOS', androidAvailable: 'Disponibile su Android', heroTop: 'Domina la tua', heroBottom: 'Lega di Fantacalcio',
     intro: 'Voti live, leghe private con gli amici e classifiche in tempo reale.', introAccent: ' Il fantacalcio fatto bene.',
     competitionFocus: 'Al lancio, OneFanta supporta il fantacalcio basato sulla Premier League.',
     affiliationNotice: 'OneFanta è un servizio indipendente e non è affiliato, approvato, sponsorizzato o autorizzato da The Football Association Premier League Limited. Il nome “Premier League” identifica esclusivamente la competizione attualmente supportata.',
@@ -42,7 +42,7 @@ function LandingPage({ locale }: { locale: Locale }) {
     terms: 'Termini e condizioni', deleteAccount: 'Cancella account', rights: 'Tutti i diritti riservati.',
     homeAriaLabel: 'Home OneFanta',
   } : {
-    available: 'Now available on iOS and Android', iosAvailable: 'Available on iOS', androidAvailable: 'Direct download', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
+    available: 'Now available on iOS and Android', iosAvailable: 'Available on iOS', androidAvailable: 'Available on Android', heroTop: 'Rule your', heroBottom: 'Fantasy Football League',
     intro: 'Live ratings, private leagues with friends and real-time standings.', introAccent: ' Fantasy football done right.',
     competitionFocus: 'At launch, OneFanta supports fantasy football based on the Premier League.',
     affiliationNotice: 'OneFanta is an independent service and is not affiliated with, endorsed, sponsored or authorised by The Football Association Premier League Limited. The name “Premier League” is used solely to identify the competition currently supported.',
@@ -120,7 +120,7 @@ function LandingPage({ locale }: { locale: Locale }) {
               </div>
             </a>
             <a
-              href={ANDROID_DOWNLOAD_URL}
+              href={GOOGLE_PLAY_URL}
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 hover:scale-105"
@@ -130,7 +130,7 @@ function LandingPage({ locale }: { locale: Locale }) {
               </svg>
               <div className="text-left">
                 <div className="text-xs text-dark-400">{t.androidAvailable}</div>
-                <div className="font-semibold">Android APK</div>
+                <div className="font-semibold">Google Play</div>
               </div>
             </a>
           </div>
